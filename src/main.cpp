@@ -202,7 +202,7 @@ int main() {
     Camera camera(camera_id);
     
     // Initialize camera with 720p (or lower if not supported)
-    if (!camera.initialize(1280, 720, 30)) {
+    if (!camera.initialize(640, 480, 60)) {
         std::cerr << "Error: Could not initialize camera with preferred settings" << std::endl;
         std::cerr << "Trying with default settings..." << std::endl;
         
