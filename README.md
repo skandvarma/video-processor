@@ -182,10 +182,7 @@ The system automatically detects if CUDA is available and enables GPU accelerati
 - The timer component helps identify performance bottlenecks
 - GPU acceleration provides significant speedup for compute-intensive operations
 
-## Future Enhancements
+## Notes:
 
-- Full implementation of the display module
-- Additional processing algorithms (edge detection, motion tracking, etc.)
-- More comprehensive testing suite
-- Configuration file support
-- Recording functionality
+- Execute each test_phase file instead of full application i dont know why those run better 
+- ./bin/test_phase2 , does the same work but with more efficiency
