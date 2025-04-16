@@ -1,4 +1,3 @@
-// camera.cpp (simplified version)
 #include "camera.h"
 #include <iostream>
 #include <thread>
@@ -34,17 +33,17 @@ std::vector<int> Camera::listAvailableCameras() {
 }
 
 bool Camera::initialize(int w, int h, int framerate) {
-    // Open the camera directly with the simplest approach
+    // Create a fresh capture object
     cap = std::make_unique<cv::VideoCapture>(camera_index);
     
     if (!cap->isOpened()) {
-        std::cerr << "Failed to open camera with default backend" << std::endl;
+        std::cerr << "Failed to open camera with index " << camera_index << std::endl;
         return false;
     }
     
     std::cout << "Camera opened successfully" << std::endl;
     
-    // Get actual camera capabilities
+    // Get native properties
     width = static_cast<int>(cap->get(cv::CAP_PROP_FRAME_WIDTH));
     height = static_cast<int>(cap->get(cv::CAP_PROP_FRAME_HEIGHT));
     fps = static_cast<int>(cap->get(cv::CAP_PROP_FPS));
@@ -52,9 +51,6 @@ bool Camera::initialize(int w, int h, int framerate) {
     std::cout << "Camera native resolution: " 
               << width << "x" << height 
               << " @ " << fps << " FPS" << std::endl;
-    
-    // Don't try to set properties that may not be supported
-    // Just use whatever we get natively
     
     // Verify we can get a frame
     cv::Mat test_frame;
@@ -81,7 +77,7 @@ bool Camera::getFrame(cv::Mat& frame) {
 }
 
 bool Camera::isOpened() const {
-    return (cap != nullptr);
+    return (cap && cap->isOpened());
 }
 
 double Camera::getFPS() const {
