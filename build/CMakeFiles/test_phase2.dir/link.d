@@ -4,9 +4,9 @@
   /usr/lib/gcc/x86_64-linux-gnu/13/crtbeginS.o \
   CMakeFiles/test_phase2.dir/src/test_phase2.cpp.o \
   CMakeFiles/test_phase2.dir/src/camera.cpp.o \
+  CMakeFiles/test_phase2.dir/src/timer.cpp.o \
   CMakeFiles/test_phase2.dir/src/frame_buffer.cpp.o \
   CMakeFiles/test_phase2.dir/src/upscaler.cpp.o \
-  CMakeFiles/test_phase2.dir/src/timer.cpp.o \
   /usr/local/lib/libopencv_gapi.so.4.12.0 \
   /usr/local/lib/libopencv_stitching.so.4.12.0 \
   /usr/local/lib/libopencv_alphamat.so.4.12.0 \
@@ -365,11 +365,11 @@ CMakeFiles/test_phase2.dir/src/test_phase2.cpp.o:
 
 CMakeFiles/test_phase2.dir/src/camera.cpp.o:
 
+CMakeFiles/test_phase2.dir/src/timer.cpp.o:
+
 CMakeFiles/test_phase2.dir/src/frame_buffer.cpp.o:
 
 CMakeFiles/test_phase2.dir/src/upscaler.cpp.o:
-
-CMakeFiles/test_phase2.dir/src/timer.cpp.o:
 
 /usr/local/lib/libopencv_gapi.so.4.12.0:
 

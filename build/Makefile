@@ -130,19 +130,6 @@ video_processor/fast:
 .PHONY : video_processor/fast
 
 #=============================================================================
-# Target rules for targets named test_phase2
-
-# Build rule for target.
-test_phase2: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test_phase2
-.PHONY : test_phase2
-
-# fast build rule for target.
-test_phase2/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_phase2.dir/build.make CMakeFiles/test_phase2.dir/build
-.PHONY : test_phase2/fast
-
-#=============================================================================
 # Target rules for targets named opencv_test
 
 # Build rule for target.
@@ -168,6 +155,32 @@ simple_camera_test/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/simple_camera_test.dir/build.make CMakeFiles/simple_camera_test.dir/build
 .PHONY : simple_camera_test/fast
 
+#=============================================================================
+# Target rules for targets named test_phase2
+
+# Build rule for target.
+test_phase2: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test_phase2
+.PHONY : test_phase2
+
+# fast build rule for target.
+test_phase2/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_phase2.dir/build.make CMakeFiles/test_phase2.dir/build
+.PHONY : test_phase2/fast
+
+#=============================================================================
+# Target rules for targets named test_phase4
+
+# Build rule for target.
+test_phase4: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test_phase4
+.PHONY : test_phase4
+
+# fast build rule for target.
+test_phase4/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_phase4.dir/build.make CMakeFiles/test_phase4.dir/build
+.PHONY : test_phase4/fast
+
 src/camera.o: src/camera.cpp.o
 .PHONY : src/camera.o
 
@@ -175,6 +188,7 @@ src/camera.o: src/camera.cpp.o
 src/camera.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/video_processor.dir/build.make CMakeFiles/video_processor.dir/src/camera.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_phase2.dir/build.make CMakeFiles/test_phase2.dir/src/camera.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_phase4.dir/build.make CMakeFiles/test_phase4.dir/src/camera.cpp.o
 .PHONY : src/camera.cpp.o
 
 src/camera.i: src/camera.cpp.i
@@ -184,6 +198,7 @@ src/camera.i: src/camera.cpp.i
 src/camera.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/video_processor.dir/build.make CMakeFiles/video_processor.dir/src/camera.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_phase2.dir/build.make CMakeFiles/test_phase2.dir/src/camera.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_phase4.dir/build.make CMakeFiles/test_phase4.dir/src/camera.cpp.i
 .PHONY : src/camera.cpp.i
 
 src/camera.s: src/camera.cpp.s
@@ -193,14 +208,44 @@ src/camera.s: src/camera.cpp.s
 src/camera.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/video_processor.dir/build.make CMakeFiles/video_processor.dir/src/camera.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_phase2.dir/build.make CMakeFiles/test_phase2.dir/src/camera.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_phase4.dir/build.make CMakeFiles/test_phase4.dir/src/camera.cpp.s
 .PHONY : src/camera.cpp.s
+
+src/display.o: src/display.cpp.o
+.PHONY : src/display.o
+
+# target to build an object file
+src/display.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/video_processor.dir/build.make CMakeFiles/video_processor.dir/src/display.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_phase4.dir/build.make CMakeFiles/test_phase4.dir/src/display.cpp.o
+.PHONY : src/display.cpp.o
+
+src/display.i: src/display.cpp.i
+.PHONY : src/display.i
+
+# target to preprocess a source file
+src/display.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/video_processor.dir/build.make CMakeFiles/video_processor.dir/src/display.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_phase4.dir/build.make CMakeFiles/test_phase4.dir/src/display.cpp.i
+.PHONY : src/display.cpp.i
+
+src/display.s: src/display.cpp.s
+.PHONY : src/display.s
+
+# target to generate assembly for a file
+src/display.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/video_processor.dir/build.make CMakeFiles/video_processor.dir/src/display.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_phase4.dir/build.make CMakeFiles/test_phase4.dir/src/display.cpp.s
+.PHONY : src/display.cpp.s
 
 src/frame_buffer.o: src/frame_buffer.cpp.o
 .PHONY : src/frame_buffer.o
 
 # target to build an object file
 src/frame_buffer.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/video_processor.dir/build.make CMakeFiles/video_processor.dir/src/frame_buffer.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_phase2.dir/build.make CMakeFiles/test_phase2.dir/src/frame_buffer.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_phase4.dir/build.make CMakeFiles/test_phase4.dir/src/frame_buffer.cpp.o
 .PHONY : src/frame_buffer.cpp.o
 
 src/frame_buffer.i: src/frame_buffer.cpp.i
@@ -208,7 +253,9 @@ src/frame_buffer.i: src/frame_buffer.cpp.i
 
 # target to preprocess a source file
 src/frame_buffer.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/video_processor.dir/build.make CMakeFiles/video_processor.dir/src/frame_buffer.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_phase2.dir/build.make CMakeFiles/test_phase2.dir/src/frame_buffer.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_phase4.dir/build.make CMakeFiles/test_phase4.dir/src/frame_buffer.cpp.i
 .PHONY : src/frame_buffer.cpp.i
 
 src/frame_buffer.s: src/frame_buffer.cpp.s
@@ -216,7 +263,9 @@ src/frame_buffer.s: src/frame_buffer.cpp.s
 
 # target to generate assembly for a file
 src/frame_buffer.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/video_processor.dir/build.make CMakeFiles/video_processor.dir/src/frame_buffer.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_phase2.dir/build.make CMakeFiles/test_phase2.dir/src/frame_buffer.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_phase4.dir/build.make CMakeFiles/test_phase4.dir/src/frame_buffer.cpp.s
 .PHONY : src/frame_buffer.cpp.s
 
 src/main.o: src/main.cpp.o
@@ -267,6 +316,60 @@ src/opencv_test.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/opencv_test.dir/build.make CMakeFiles/opencv_test.dir/src/opencv_test.cpp.s
 .PHONY : src/opencv_test.cpp.s
 
+src/pipeline.o: src/pipeline.cpp.o
+.PHONY : src/pipeline.o
+
+# target to build an object file
+src/pipeline.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/video_processor.dir/build.make CMakeFiles/video_processor.dir/src/pipeline.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_phase4.dir/build.make CMakeFiles/test_phase4.dir/src/pipeline.cpp.o
+.PHONY : src/pipeline.cpp.o
+
+src/pipeline.i: src/pipeline.cpp.i
+.PHONY : src/pipeline.i
+
+# target to preprocess a source file
+src/pipeline.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/video_processor.dir/build.make CMakeFiles/video_processor.dir/src/pipeline.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_phase4.dir/build.make CMakeFiles/test_phase4.dir/src/pipeline.cpp.i
+.PHONY : src/pipeline.cpp.i
+
+src/pipeline.s: src/pipeline.cpp.s
+.PHONY : src/pipeline.s
+
+# target to generate assembly for a file
+src/pipeline.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/video_processor.dir/build.make CMakeFiles/video_processor.dir/src/pipeline.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_phase4.dir/build.make CMakeFiles/test_phase4.dir/src/pipeline.cpp.s
+.PHONY : src/pipeline.cpp.s
+
+src/processor.o: src/processor.cpp.o
+.PHONY : src/processor.o
+
+# target to build an object file
+src/processor.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/video_processor.dir/build.make CMakeFiles/video_processor.dir/src/processor.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_phase4.dir/build.make CMakeFiles/test_phase4.dir/src/processor.cpp.o
+.PHONY : src/processor.cpp.o
+
+src/processor.i: src/processor.cpp.i
+.PHONY : src/processor.i
+
+# target to preprocess a source file
+src/processor.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/video_processor.dir/build.make CMakeFiles/video_processor.dir/src/processor.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_phase4.dir/build.make CMakeFiles/test_phase4.dir/src/processor.cpp.i
+.PHONY : src/processor.cpp.i
+
+src/processor.s: src/processor.cpp.s
+.PHONY : src/processor.s
+
+# target to generate assembly for a file
+src/processor.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/video_processor.dir/build.make CMakeFiles/video_processor.dir/src/processor.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_phase4.dir/build.make CMakeFiles/test_phase4.dir/src/processor.cpp.s
+.PHONY : src/processor.cpp.s
+
 src/simple_camera_test.o: src/simple_camera_test.cpp.o
 .PHONY : src/simple_camera_test.o
 
@@ -315,6 +418,30 @@ src/test_phase2.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_phase2.dir/build.make CMakeFiles/test_phase2.dir/src/test_phase2.cpp.s
 .PHONY : src/test_phase2.cpp.s
 
+src/test_phase4.o: src/test_phase4.cpp.o
+.PHONY : src/test_phase4.o
+
+# target to build an object file
+src/test_phase4.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_phase4.dir/build.make CMakeFiles/test_phase4.dir/src/test_phase4.cpp.o
+.PHONY : src/test_phase4.cpp.o
+
+src/test_phase4.i: src/test_phase4.cpp.i
+.PHONY : src/test_phase4.i
+
+# target to preprocess a source file
+src/test_phase4.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_phase4.dir/build.make CMakeFiles/test_phase4.dir/src/test_phase4.cpp.i
+.PHONY : src/test_phase4.cpp.i
+
+src/test_phase4.s: src/test_phase4.cpp.s
+.PHONY : src/test_phase4.s
+
+# target to generate assembly for a file
+src/test_phase4.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_phase4.dir/build.make CMakeFiles/test_phase4.dir/src/test_phase4.cpp.s
+.PHONY : src/test_phase4.cpp.s
+
 src/timer.o: src/timer.cpp.o
 .PHONY : src/timer.o
 
@@ -322,6 +449,7 @@ src/timer.o: src/timer.cpp.o
 src/timer.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/video_processor.dir/build.make CMakeFiles/video_processor.dir/src/timer.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_phase2.dir/build.make CMakeFiles/test_phase2.dir/src/timer.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_phase4.dir/build.make CMakeFiles/test_phase4.dir/src/timer.cpp.o
 .PHONY : src/timer.cpp.o
 
 src/timer.i: src/timer.cpp.i
@@ -331,6 +459,7 @@ src/timer.i: src/timer.cpp.i
 src/timer.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/video_processor.dir/build.make CMakeFiles/video_processor.dir/src/timer.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_phase2.dir/build.make CMakeFiles/test_phase2.dir/src/timer.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_phase4.dir/build.make CMakeFiles/test_phase4.dir/src/timer.cpp.i
 .PHONY : src/timer.cpp.i
 
 src/timer.s: src/timer.cpp.s
@@ -340,6 +469,7 @@ src/timer.s: src/timer.cpp.s
 src/timer.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/video_processor.dir/build.make CMakeFiles/video_processor.dir/src/timer.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_phase2.dir/build.make CMakeFiles/test_phase2.dir/src/timer.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_phase4.dir/build.make CMakeFiles/test_phase4.dir/src/timer.cpp.s
 .PHONY : src/timer.cpp.s
 
 src/upscaler.o: src/upscaler.cpp.o
@@ -347,7 +477,9 @@ src/upscaler.o: src/upscaler.cpp.o
 
 # target to build an object file
 src/upscaler.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/video_processor.dir/build.make CMakeFiles/video_processor.dir/src/upscaler.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_phase2.dir/build.make CMakeFiles/test_phase2.dir/src/upscaler.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_phase4.dir/build.make CMakeFiles/test_phase4.dir/src/upscaler.cpp.o
 .PHONY : src/upscaler.cpp.o
 
 src/upscaler.i: src/upscaler.cpp.i
@@ -355,7 +487,9 @@ src/upscaler.i: src/upscaler.cpp.i
 
 # target to preprocess a source file
 src/upscaler.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/video_processor.dir/build.make CMakeFiles/video_processor.dir/src/upscaler.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_phase2.dir/build.make CMakeFiles/test_phase2.dir/src/upscaler.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_phase4.dir/build.make CMakeFiles/test_phase4.dir/src/upscaler.cpp.i
 .PHONY : src/upscaler.cpp.i
 
 src/upscaler.s: src/upscaler.cpp.s
@@ -363,7 +497,9 @@ src/upscaler.s: src/upscaler.cpp.s
 
 # target to generate assembly for a file
 src/upscaler.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/video_processor.dir/build.make CMakeFiles/video_processor.dir/src/upscaler.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_phase2.dir/build.make CMakeFiles/test_phase2.dir/src/upscaler.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_phase4.dir/build.make CMakeFiles/test_phase4.dir/src/upscaler.cpp.s
 .PHONY : src/upscaler.cpp.s
 
 # Help Target
@@ -377,10 +513,14 @@ help:
 	@echo "... opencv_test"
 	@echo "... simple_camera_test"
 	@echo "... test_phase2"
+	@echo "... test_phase4"
 	@echo "... video_processor"
 	@echo "... src/camera.o"
 	@echo "... src/camera.i"
 	@echo "... src/camera.s"
+	@echo "... src/display.o"
+	@echo "... src/display.i"
+	@echo "... src/display.s"
 	@echo "... src/frame_buffer.o"
 	@echo "... src/frame_buffer.i"
 	@echo "... src/frame_buffer.s"
@@ -390,12 +530,21 @@ help:
 	@echo "... src/opencv_test.o"
 	@echo "... src/opencv_test.i"
 	@echo "... src/opencv_test.s"
+	@echo "... src/pipeline.o"
+	@echo "... src/pipeline.i"
+	@echo "... src/pipeline.s"
+	@echo "... src/processor.o"
+	@echo "... src/processor.i"
+	@echo "... src/processor.s"
 	@echo "... src/simple_camera_test.o"
 	@echo "... src/simple_camera_test.i"
 	@echo "... src/simple_camera_test.s"
 	@echo "... src/test_phase2.o"
 	@echo "... src/test_phase2.i"
 	@echo "... src/test_phase2.s"
+	@echo "... src/test_phase4.o"
+	@echo "... src/test_phase4.i"
+	@echo "... src/test_phase4.s"
 	@echo "... src/timer.o"
 	@echo "... src/timer.i"
 	@echo "... src/timer.s"

@@ -43,6 +43,7 @@
   /usr/local/lib/libopencv_xfeatures2d.so.4.12.0 \
   /usr/local/lib/libopencv_xobjdetect.so.4.12.0 \
   /usr/local/lib/libopencv_xphoto.so.4.12.0 \
+  /usr/local/cuda-12.6/lib64/libcudart.so \
   /usr/local/lib/libopencv_shape.so.4.12.0 \
   /usr/local/lib/libopencv_highgui.so.4.12.0 \
   /usr/local/lib/libopencv_datasets.so.4.12.0 \
@@ -71,6 +72,8 @@
   /usr/local/lib/libopencv_cudaarithm.so.4.12.0 \
   /usr/local/lib/libopencv_core.so.4.12.0 \
   /usr/local/lib/libopencv_cudev.so.4.12.0 \
+  /usr/lib/gcc/x86_64-linux-gnu/13/../../../x86_64-linux-gnu/libdl.a \
+  /usr/lib/x86_64-linux-gnu/librt.a \
   /usr/lib/gcc/x86_64-linux-gnu/13/libstdc++.so \
   /usr/lib/gcc/x86_64-linux-gnu/13/../../../x86_64-linux-gnu/libm.so \
   /usr/lib/gcc/x86_64-linux-gnu/13/../../../x86_64-linux-gnu/libm.so \
@@ -412,6 +415,8 @@ CMakeFiles/opencv_test.dir/src/opencv_test.cpp.o:
 
 /usr/local/lib/libopencv_xphoto.so.4.12.0:
 
+/usr/local/cuda-12.6/lib64/libcudart.so:
+
 /usr/local/lib/libopencv_shape.so.4.12.0:
 
 /usr/local/lib/libopencv_highgui.so.4.12.0:
@@ -467,6 +472,10 @@ CMakeFiles/opencv_test.dir/src/opencv_test.cpp.o:
 /usr/local/lib/libopencv_core.so.4.12.0:
 
 /usr/local/lib/libopencv_cudev.so.4.12.0:
+
+/usr/lib/gcc/x86_64-linux-gnu/13/../../../x86_64-linux-gnu/libdl.a:
+
+/usr/lib/x86_64-linux-gnu/librt.a:
 
 /usr/lib/gcc/x86_64-linux-gnu/13/libstdc++.so:
 

@@ -23,6 +23,26 @@ public:
     explicit FrameBuffer(size_t capacity = 10);
     
     /**
+     * @brief Delete copy constructor
+     */
+    FrameBuffer(const FrameBuffer&) = delete;
+    
+    /**
+     * @brief Delete copy assignment operator
+     */
+    FrameBuffer& operator=(const FrameBuffer&) = delete;
+    
+    /**
+     * @brief Delete move constructor
+     */
+    FrameBuffer(FrameBuffer&&) = delete;
+    
+    /**
+     * @brief Delete move assignment operator
+     */
+    FrameBuffer& operator=(FrameBuffer&&) = delete;
+    
+    /**
      * @brief Add a frame to the buffer (producer)
      * 
      * This function is called by the producer thread to add a new frame
