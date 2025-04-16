@@ -1,154 +1,193 @@
-#include "pipeline.h"
-#include "camera.h"  // We still need this include for the Camera class
+#include "camera.h"
+#include "frame_buffer.h"
+#include "upscaler.h"
+#include "timer.h"
 #include <iostream>
-#include <string>
 #include <thread>
-#include <csignal>
-#include <algorithm>
+#include <atomic>
+#include <opencv2/opencv.hpp>
+#include <chrono>
 
-// Global flag for signal handling
-volatile std::sig_atomic_t g_shutdown_requested = 0;
+// Global control flag
+std::atomic<bool> g_running(true);
 
-// Signal handler
-void signal_handler(int signal) {
-    g_shutdown_requested = 1;
-}
+// Global statistics
+std::atomic<int> g_frames_captured(0);
+std::atomic<int> g_frames_processed(0);
+std::atomic<int> g_frames_displayed(0);
+std::atomic<int> g_frames_dropped(0);
 
-// Function to display help
-void display_help(const char* program_name) {
-    std::cout << "Usage: " << program_name << " [OPTIONS]" << std::endl;
-    std::cout << "Options:" << std::endl;
-    std::cout << "  -h, --help               Display this help message" << std::endl;
-    std::cout << "  -c, --camera INDEX       Specify camera index (default: 0)" << std::endl;
-    std::cout << "  -r, --resolution WxH     Set camera resolution (default: 1280x720)" << std::endl;
-    std::cout << "  -t, --target WxH         Set target resolution (default: 1920x1080)" << std::endl;
-    std::cout << "  -a, --algorithm ALGO     Set upscale algorithm (nearest, bilinear, bicubic, lanczos)" << std::endl;
-    std::cout << "  -g, --gpu [on|off]       Enable/disable GPU acceleration" << std::endl;
-    std::cout << "  -b, --buffer SIZE        Set buffer size (default: 5)" << std::endl;
-    std::cout << "  -v, --vsync [on|off]     Enable/disable VSync" << std::endl;
-    std::cout << "  -f, --fps FPS            Set maximum display FPS (default: 60)" << std::endl;
-    std::cout << "  -m, --metrics [on|off]   Show/hide performance metrics" << std::endl;
-}
-
-// Function to parse resolution string (e.g., "1920x1080")
-bool parse_resolution(const std::string& res_str, int& width, int& height) {
-    size_t pos = res_str.find('x');
-    if (pos == std::string::npos) {
-        return false;
-    }
+// Capture thread function - optimized to prevent buffer overflow
+void capture_thread(Camera& camera, FrameBuffer& buffer, Timer& timer) {
+    std::cout << "Capture thread started" << std::endl;
+    cv::Mat frame;
     
-    try {
-        width = std::stoi(res_str.substr(0, pos));
-        height = std::stoi(res_str.substr(pos + 1));
-        return true;
-    }
-    catch (const std::exception&) {
-        return false;
-    }
-}
-
-// Function to parse algorithm string
-Upscaler::Algorithm parse_algorithm(const std::string& algo_str) {
-    if (algo_str == "nearest") return Upscaler::NEAREST;
-    if (algo_str == "bilinear") return Upscaler::BILINEAR;
-    if (algo_str == "bicubic") return Upscaler::BICUBIC;
-    if (algo_str == "lanczos") return Upscaler::LANCZOS;
-    if (algo_str == "superres") return Upscaler::SUPER_RES;
+    // For measuring real capture rate
+    auto start_time = std::chrono::high_resolution_clock::now();
+    int frame_counter = 0;
+    double fps = 0;
     
-    // Default to bilinear
-    return Upscaler::BILINEAR;
-}
-
-// Parse boolean option (on/off, true/false, 1/0)
-bool parse_bool_option(const std::string& value, bool default_value) {
-    if (value == "on" || value == "true" || value == "1") return true;
-    if (value == "off" || value == "false" || value == "0") return false;
-    return default_value;
-}
-
-int main(int argc, char* argv[]) {
-    std::cout << "Low-Latency Video Processing System - Phase 4" << std::endl;
-    
-    // Install signal handler for clean shutdown
-    std::signal(SIGINT, signal_handler);
-    
-    // Check for help flag
-    for (int i = 1; i < argc; i++) {
-        std::string arg = argv[i];
-        if (arg == "-h" || arg == "--help") {
-            display_help(argv[0]);
-            return 0;
-        }
-    }
-    
-    // Create default pipeline configuration
-    Pipeline::Config config;
-    
-    // Parse command line arguments
-    for (int i = 1; i < argc; i++) {
-        std::string arg = argv[i];
+    while (g_running) {
+        // Time the frame acquisition
+        timer.start("acquisition");
+        bool success = camera.getFrame(frame);
+        timer.stop("acquisition");
         
-        if (arg == "-c" || arg == "--camera") {
-            if (i + 1 < argc) {
-                config.camera_index = std::stoi(argv[++i]);
-            }
+        if (!success || frame.empty()) {
+            std::cerr << "Failed to get frame from camera" << std::endl;
+            std::this_thread::sleep_for(std::chrono::milliseconds(5));
+            continue;
         }
-        else if (arg == "-r" || arg == "--resolution") {
-            if (i + 1 < argc) {
-                if (parse_resolution(argv[++i], config.camera_width, config.camera_height)) {
-                    std::cout << "Camera resolution set to: " 
-                              << config.camera_width << "x" << config.camera_height << std::endl;
+        
+        // Calculate actual camera FPS
+        frame_counter++;
+        auto current_time = std::chrono::high_resolution_clock::now();
+        auto elapsed = std::chrono::duration<double>(current_time - start_time).count();
+        
+        if (elapsed >= 1.0) {
+            fps = frame_counter / elapsed;
+            std::cout << "Camera capture rate: " << fps << " FPS" << std::endl;
+            frame_counter = 0;
+            start_time = current_time;
+        }
+        
+        // Adaptive frame dropping - only push if buffer isn't almost full
+        if (buffer.size() < buffer.capacity() * 0.8) {
+            // Push frame to buffer (non-blocking)
+            timer.start("buffer_push");
+            bool pushed = buffer.pushFrame(frame, false);
+            timer.stop("buffer_push");
+            
+            if (pushed) {
+                g_frames_captured++;
+            } else {
+                g_frames_dropped++;
+                if (g_frames_dropped % 10 == 0) {
+                    std::cout << "Warning: Dropped " << g_frames_dropped << " frames due to full buffer" << std::endl;
                 }
             }
-        }
-        else if (arg == "-t" || arg == "--target") {
-            if (i + 1 < argc) {
-                if (parse_resolution(argv[++i], config.target_width, config.target_height)) {
-                    std::cout << "Target resolution set to: " 
-                              << config.target_width << "x" << config.target_height << std::endl;
-                }
+        } else {
+            // Skip frame due to buffer pressure
+            g_frames_dropped++;
+            if (g_frames_dropped % 10 == 0) {
+                std::cout << "Warning: Dropped " << g_frames_dropped << " frames due to full buffer" << std::endl;
             }
-        }
-        else if (arg == "-a" || arg == "--algorithm") {
-            if (i + 1 < argc) {
-                config.upscale_algorithm = parse_algorithm(argv[++i]);
-                std::cout << "Upscaling algorithm set" << std::endl;
-            }
-        }
-        else if (arg == "-g" || arg == "--gpu") {
-            if (i + 1 < argc) {
-                config.use_gpu = parse_bool_option(argv[++i], true);
-                std::cout << "GPU acceleration: " << (config.use_gpu ? "enabled" : "disabled") << std::endl;
-            }
-        }
-        else if (arg == "-b" || arg == "--buffer") {
-            if (i + 1 < argc) {
-                config.buffer_size = std::stoi(argv[++i]);
-                std::cout << "Buffer size set to: " << config.buffer_size << std::endl;
-            }
-        }
-        else if (arg == "-v" || arg == "--vsync") {
-            if (i + 1 < argc) {
-                config.enable_vsync = parse_bool_option(argv[++i], false);
-                std::cout << "VSync: " << (config.enable_vsync ? "enabled" : "disabled") << std::endl;
-            }
-        }
-        else if (arg == "-f" || arg == "--fps") {
-            if (i + 1 < argc) {
-                config.max_display_fps = std::stoi(argv[++i]);
-                std::cout << "Max display FPS set to: " << config.max_display_fps << std::endl;
-            }
-        }
-        else if (arg == "-m" || arg == "--metrics") {
-            if (i + 1 < argc) {
-                config.show_metrics = parse_bool_option(argv[++i], true);
-                std::cout << "Performance metrics: " << (config.show_metrics ? "shown" : "hidden") << std::endl;
-            }
+            
+            // Add short delay to allow consumer to catch up
+            std::this_thread::sleep_for(std::chrono::milliseconds(5));
         }
     }
+    
+    std::cout << "Capture thread finished" << std::endl;
+}
+
+// Processing thread function - separate from display
+void processing_thread(FrameBuffer& input_buffer, FrameBuffer& output_buffer, 
+                        Upscaler& upscaler, Timer& timer) {
+    std::cout << "Processing thread started" << std::endl;
+    cv::Mat input_frame, processed_frame;
+    
+    while (g_running) {
+        // Get frame from input buffer
+        timer.start("buffer_pop");
+        bool success = input_buffer.popFrame(input_frame, false);
+        timer.stop("buffer_pop");
+        
+        if (!success) {
+            // No frame available, yield time slice
+            std::this_thread::sleep_for(std::chrono::milliseconds(1));
+            continue;
+        }
+        
+        // Process the frame - time each major operation separately
+        timer.start("upscale");
+        bool upscale_success = upscaler.upscale(input_frame, processed_frame);
+        timer.stop("upscale");
+        
+        if (!upscale_success) {
+            std::cerr << "Failed to upscale frame" << std::endl;
+            continue;
+        }
+        
+        // Add performance metrics text to the frame
+        timer.start("text_overlay");
+        std::string fps_text = "FPS: " + std::to_string(static_cast<int>(1000.0 / 
+                            (timer.getAverageDuration("upscale"))));
+        
+        std::string buffer_text = "Buffer: " + std::to_string(input_buffer.size()) + 
+                                "/" + std::to_string(input_buffer.capacity());
+        
+        std::string dropped_text = "Dropped: " + std::to_string(g_frames_dropped);
+        
+        // Add text with lightweight method
+        cv::putText(processed_frame, fps_text, cv::Point(20, 30), 
+                    cv::FONT_HERSHEY_SIMPLEX, 0.7, cv::Scalar(0, 255, 0), 2);
+        cv::putText(processed_frame, buffer_text, cv::Point(20, 60), 
+                    cv::FONT_HERSHEY_SIMPLEX, 0.7, cv::Scalar(0, 255, 0), 2);
+        cv::putText(processed_frame, dropped_text, cv::Point(20, 90), 
+                    cv::FONT_HERSHEY_SIMPLEX, 0.7, cv::Scalar(0, 255, 0), 2);
+        timer.stop("text_overlay");
+        
+        // Push to output buffer
+        timer.start("output_push");
+        output_buffer.pushFrame(processed_frame, false);
+        timer.stop("output_push");
+        
+        g_frames_processed++;
+        
+        // Print detailed stats periodically
+        if (g_frames_processed % 100 == 0) {
+            std::cout << "\nProcessed " << g_frames_processed << " frames" << std::endl;
+            timer.printStats();
+        }
+    }
+    
+    std::cout << "Processing thread finished" << std::endl;
+}
+
+// Display thread function - minimal work, just showing frames
+void display_thread(FrameBuffer& buffer, Timer& timer) {
+    std::cout << "Display thread started" << std::endl;
+    cv::Mat frame;
+    
+    // Create window with a consistent size
+    cv::namedWindow("Video Feed", cv::WINDOW_NORMAL);
+    cv::resizeWindow("Video Feed", 1280, 720);
+    
+    while (g_running) {
+        // Get processed frame
+        timer.start("display_pop");
+        bool success = buffer.popFrame(frame, false);
+        timer.stop("display_pop");
+        
+        if (!success) {
+            // No frame available, wait a bit
+            std::this_thread::sleep_for(std::chrono::milliseconds(1));
+            continue;
+        }
+        
+        // Display frame with minimal processing
+        timer.start("display_show");
+        cv::imshow("Video Feed", frame);
+        timer.stop("display_show");
+        
+        g_frames_displayed++;
+        
+        // Check for quit command - use shorter wait time
+        if (cv::waitKey(1) == 'q') {
+            g_running = false;
+            break;
+        }
+    }
+    
+    cv::destroyAllWindows();
+    std::cout << "Display thread finished" << std::endl;
+}
+
+int main() {
+    std::cout << "Low-Latency Video Processing System" << std::endl;
     
     // List available cameras
-    std::cout << "Checking available cameras..." << std::endl;
     auto available_cameras = Camera::listAvailableCameras();
     
     if (available_cameras.empty()) {
@@ -156,56 +195,73 @@ int main(int argc, char* argv[]) {
         return -1;
     }
     
-    // Use the first available camera if specified camera is not available
-    if (std::find(available_cameras.begin(), available_cameras.end(), config.camera_index) 
-        == available_cameras.end()) {
-        std::cout << "Camera index " << config.camera_index << " not available." << std::endl;
-        config.camera_index = available_cameras[0];
-        std::cout << "Using camera index " << config.camera_index << " instead." << std::endl;
+    // Use the first available camera
+    int camera_id = available_cameras[0];
+    
+    // Create camera with selected device
+    Camera camera(camera_id);
+    
+    // Initialize camera with 720p (or lower if not supported)
+    if (!camera.initialize(1280, 720, 30)) {
+        std::cerr << "Error: Could not initialize camera with preferred settings" << std::endl;
+        std::cerr << "Trying with default settings..." << std::endl;
+        
+        if (!camera.initialize()) {
+            std::cerr << "Error: Could not initialize camera with default settings" << std::endl;
+            return -1;
+        }
     }
     
-    // Create pipeline with configuration
-    Pipeline pipeline(config);
+    std::cout << "Camera initialized successfully at " 
+              << camera.getWidth() << "x" << camera.getHeight()
+              << " @ " << camera.getFPS() << " FPS" << std::endl;
     
-    // Initialize pipeline
-    if (!pipeline.initialize()) {
-        std::cerr << "Failed to initialize pipeline" << std::endl;
+    // Create upscaler with target Full HD resolution
+    // Using bilinear for better performance
+    Upscaler upscaler(Upscaler::BILINEAR, true);
+    if (!upscaler.initialize(1920, 1080)) {
+        std::cerr << "Error: Could not initialize upscaler" << std::endl;
         return -1;
     }
     
-    // Start pipeline
-    if (!pipeline.start()) {
-        std::cerr << "Failed to start pipeline" << std::endl;
-        return -1;
-    }
+    std::cout << "Upscaler initialized with algorithm: " 
+              << upscaler.getAlgorithmName()
+              << ", using " << (upscaler.isUsingGPU() ? "GPU" : "CPU") << std::endl;
     
-    std::cout << "Pipeline running. Press 'q' to quit." << std::endl;
+    // Create frame buffers with increased capacity
+    // Buffer between capture and processing threads
+    FrameBuffer raw_buffer(20);
+    // Buffer between processing and display threads
+    FrameBuffer processed_buffer(10);
     
-    // Wait for quit signal
-    bool quit_requested = false;
-    while (!quit_requested && !g_shutdown_requested) {
-        // Check for 'q' key press
-        if (pipeline.waitForKey('q')) {
-            quit_requested = true;
-        }
-        
-        // Print performance stats every 5 seconds
-        static auto last_stats_time = std::chrono::steady_clock::now();
-        auto now = std::chrono::steady_clock::now();
-        if (std::chrono::duration_cast<std::chrono::seconds>(now - last_stats_time).count() >= 5) {
-            pipeline.printPerformanceStats();
-            last_stats_time = now;
-        }
-        
-        // Small delay to avoid hammering the CPU
-        std::this_thread::sleep_for(std::chrono::milliseconds(100));
-    }
+    std::cout << "Frame buffers initialized with sizes 20 and 10" << std::endl;
     
-    // Stop the pipeline
-    pipeline.stop();
+    // Create timer for performance measurement
+    Timer timer;
     
-    std::cout << "Pipeline shutdown complete. Final statistics:" << std::endl;
-    pipeline.printPerformanceStats();
+    // Start all threads
+    std::cout << "Starting pipeline threads..." << std::endl;
+    
+    std::thread capture(capture_thread, std::ref(camera), std::ref(raw_buffer), std::ref(timer));
+    std::thread processor(processing_thread, std::ref(raw_buffer), std::ref(processed_buffer), 
+                         std::ref(upscaler), std::ref(timer));
+    std::thread display(display_thread, std::ref(processed_buffer), std::ref(timer));
+    
+    std::cout << "Pipeline running. Press 'q' in the video window to quit." << std::endl;
+    
+    // Wait for threads to be done
+    capture.join();
+    processor.join();
+    display.join();
+    
+    // Print final statistics
+    std::cout << "\n=== Final Statistics ===" << std::endl;
+    std::cout << "Total frames captured:  " << g_frames_captured << std::endl;
+    std::cout << "Total frames processed: " << g_frames_processed << std::endl;
+    std::cout << "Total frames displayed: " << g_frames_displayed << std::endl;
+    std::cout << "Total frames dropped:   " << g_frames_dropped << std::endl;
+    
+    timer.printStats();
     
     return 0;
 }
