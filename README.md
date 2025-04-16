@@ -186,3 +186,4 @@ The system automatically detects if CUDA is available and enables GPU accelerati
 
 - Execute each test_phase file instead of full application i dont know why those run better 
 - ./bin/test_phase2 , does the same work but with more efficiency
+- test main.cpp with different params please
