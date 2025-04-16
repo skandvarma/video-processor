@@ -1,0 +1,3 @@
+/home/skand/video-processor/build/CMakeFiles/video_processor.dir
+/home/skand/video-processor/build/CMakeFiles/edit_cache.dir
+/home/skand/video-processor/build/CMakeFiles/rebuild_cache.dir
