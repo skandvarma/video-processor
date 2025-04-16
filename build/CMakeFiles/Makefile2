@@ -64,10 +64,16 @@ CMAKE_BINARY_DIR = /home/skand/video-processor/build
 
 # The main recursive "all" target.
 all: CMakeFiles/video_processor.dir/all
+all: CMakeFiles/test_phase2.dir/all
+all: CMakeFiles/opencv_test.dir/all
+all: CMakeFiles/simple_camera_test.dir/all
 .PHONY : all
 
 # The main recursive "codegen" target.
 codegen: CMakeFiles/video_processor.dir/codegen
+codegen: CMakeFiles/test_phase2.dir/codegen
+codegen: CMakeFiles/opencv_test.dir/codegen
+codegen: CMakeFiles/simple_camera_test.dir/codegen
 .PHONY : codegen
 
 # The main recursive "preinstall" target.
@@ -76,6 +82,9 @@ preinstall:
 
 # The main recursive "clean" target.
 clean: CMakeFiles/video_processor.dir/clean
+clean: CMakeFiles/test_phase2.dir/clean
+clean: CMakeFiles/opencv_test.dir/clean
+clean: CMakeFiles/simple_camera_test.dir/clean
 .PHONY : clean
 
 #=============================================================================
@@ -85,7 +94,7 @@ clean: CMakeFiles/video_processor.dir/clean
 CMakeFiles/video_processor.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/video_processor.dir/build.make CMakeFiles/video_processor.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/video_processor.dir/build.make CMakeFiles/video_processor.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/skand/video-processor/build/CMakeFiles --progress-num=1,2,3,4 "Built target video_processor"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/skand/video-processor/build/CMakeFiles --progress-num=11,12,13,14 "Built target video_processor"
 .PHONY : CMakeFiles/video_processor.dir/all
 
 # Build rule for subdir invocation for target.
@@ -102,13 +111,109 @@ video_processor: CMakeFiles/video_processor.dir/rule
 # codegen rule for target.
 CMakeFiles/video_processor.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/video_processor.dir/build.make CMakeFiles/video_processor.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/skand/video-processor/build/CMakeFiles --progress-num=1,2,3,4 "Finished codegen for target video_processor"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/skand/video-processor/build/CMakeFiles --progress-num=11,12,13,14 "Finished codegen for target video_processor"
 .PHONY : CMakeFiles/video_processor.dir/codegen
 
 # clean rule for target.
 CMakeFiles/video_processor.dir/clean:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/video_processor.dir/build.make CMakeFiles/video_processor.dir/clean
 .PHONY : CMakeFiles/video_processor.dir/clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/test_phase2.dir
+
+# All Build rule for target.
+CMakeFiles/test_phase2.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_phase2.dir/build.make CMakeFiles/test_phase2.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_phase2.dir/build.make CMakeFiles/test_phase2.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/skand/video-processor/build/CMakeFiles --progress-num=5,6,7,8,9,10 "Built target test_phase2"
+.PHONY : CMakeFiles/test_phase2.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/test_phase2.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/skand/video-processor/build/CMakeFiles 6
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/test_phase2.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/skand/video-processor/build/CMakeFiles 0
+.PHONY : CMakeFiles/test_phase2.dir/rule
+
+# Convenience name for target.
+test_phase2: CMakeFiles/test_phase2.dir/rule
+.PHONY : test_phase2
+
+# codegen rule for target.
+CMakeFiles/test_phase2.dir/codegen:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_phase2.dir/build.make CMakeFiles/test_phase2.dir/codegen
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/skand/video-processor/build/CMakeFiles --progress-num=5,6,7,8,9,10 "Finished codegen for target test_phase2"
+.PHONY : CMakeFiles/test_phase2.dir/codegen
+
+# clean rule for target.
+CMakeFiles/test_phase2.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_phase2.dir/build.make CMakeFiles/test_phase2.dir/clean
+.PHONY : CMakeFiles/test_phase2.dir/clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/opencv_test.dir
+
+# All Build rule for target.
+CMakeFiles/opencv_test.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/opencv_test.dir/build.make CMakeFiles/opencv_test.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/opencv_test.dir/build.make CMakeFiles/opencv_test.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/skand/video-processor/build/CMakeFiles --progress-num=1,2 "Built target opencv_test"
+.PHONY : CMakeFiles/opencv_test.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/opencv_test.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/skand/video-processor/build/CMakeFiles 2
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/opencv_test.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/skand/video-processor/build/CMakeFiles 0
+.PHONY : CMakeFiles/opencv_test.dir/rule
+
+# Convenience name for target.
+opencv_test: CMakeFiles/opencv_test.dir/rule
+.PHONY : opencv_test
+
+# codegen rule for target.
+CMakeFiles/opencv_test.dir/codegen:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/opencv_test.dir/build.make CMakeFiles/opencv_test.dir/codegen
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/skand/video-processor/build/CMakeFiles --progress-num=1,2 "Finished codegen for target opencv_test"
+.PHONY : CMakeFiles/opencv_test.dir/codegen
+
+# clean rule for target.
+CMakeFiles/opencv_test.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/opencv_test.dir/build.make CMakeFiles/opencv_test.dir/clean
+.PHONY : CMakeFiles/opencv_test.dir/clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/simple_camera_test.dir
+
+# All Build rule for target.
+CMakeFiles/simple_camera_test.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/simple_camera_test.dir/build.make CMakeFiles/simple_camera_test.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/simple_camera_test.dir/build.make CMakeFiles/simple_camera_test.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/skand/video-processor/build/CMakeFiles --progress-num=3,4 "Built target simple_camera_test"
+.PHONY : CMakeFiles/simple_camera_test.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/simple_camera_test.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/skand/video-processor/build/CMakeFiles 2
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/simple_camera_test.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/skand/video-processor/build/CMakeFiles 0
+.PHONY : CMakeFiles/simple_camera_test.dir/rule
+
+# Convenience name for target.
+simple_camera_test: CMakeFiles/simple_camera_test.dir/rule
+.PHONY : simple_camera_test
+
+# codegen rule for target.
+CMakeFiles/simple_camera_test.dir/codegen:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/simple_camera_test.dir/build.make CMakeFiles/simple_camera_test.dir/codegen
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/skand/video-processor/build/CMakeFiles --progress-num=3,4 "Finished codegen for target simple_camera_test"
+.PHONY : CMakeFiles/simple_camera_test.dir/codegen
+
+# clean rule for target.
+CMakeFiles/simple_camera_test.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/simple_camera_test.dir/build.make CMakeFiles/simple_camera_test.dir/clean
+.PHONY : CMakeFiles/simple_camera_test.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.
