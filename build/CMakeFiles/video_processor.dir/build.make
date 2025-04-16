@@ -114,11 +114,86 @@ CMakeFiles/video_processor.dir/src/timer.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/video_processor.dir/src/timer.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/skand/video-processor/src/timer.cpp -o CMakeFiles/video_processor.dir/src/timer.cpp.s
 
+CMakeFiles/video_processor.dir/src/frame_buffer.cpp.o: CMakeFiles/video_processor.dir/flags.make
+CMakeFiles/video_processor.dir/src/frame_buffer.cpp.o: /home/skand/video-processor/src/frame_buffer.cpp
+CMakeFiles/video_processor.dir/src/frame_buffer.cpp.o: CMakeFiles/video_processor.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/skand/video-processor/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/video_processor.dir/src/frame_buffer.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/video_processor.dir/src/frame_buffer.cpp.o -MF CMakeFiles/video_processor.dir/src/frame_buffer.cpp.o.d -o CMakeFiles/video_processor.dir/src/frame_buffer.cpp.o -c /home/skand/video-processor/src/frame_buffer.cpp
+
+CMakeFiles/video_processor.dir/src/frame_buffer.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/video_processor.dir/src/frame_buffer.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/skand/video-processor/src/frame_buffer.cpp > CMakeFiles/video_processor.dir/src/frame_buffer.cpp.i
+
+CMakeFiles/video_processor.dir/src/frame_buffer.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/video_processor.dir/src/frame_buffer.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/skand/video-processor/src/frame_buffer.cpp -o CMakeFiles/video_processor.dir/src/frame_buffer.cpp.s
+
+CMakeFiles/video_processor.dir/src/upscaler.cpp.o: CMakeFiles/video_processor.dir/flags.make
+CMakeFiles/video_processor.dir/src/upscaler.cpp.o: /home/skand/video-processor/src/upscaler.cpp
+CMakeFiles/video_processor.dir/src/upscaler.cpp.o: CMakeFiles/video_processor.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/skand/video-processor/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/video_processor.dir/src/upscaler.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/video_processor.dir/src/upscaler.cpp.o -MF CMakeFiles/video_processor.dir/src/upscaler.cpp.o.d -o CMakeFiles/video_processor.dir/src/upscaler.cpp.o -c /home/skand/video-processor/src/upscaler.cpp
+
+CMakeFiles/video_processor.dir/src/upscaler.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/video_processor.dir/src/upscaler.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/skand/video-processor/src/upscaler.cpp > CMakeFiles/video_processor.dir/src/upscaler.cpp.i
+
+CMakeFiles/video_processor.dir/src/upscaler.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/video_processor.dir/src/upscaler.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/skand/video-processor/src/upscaler.cpp -o CMakeFiles/video_processor.dir/src/upscaler.cpp.s
+
+CMakeFiles/video_processor.dir/src/display.cpp.o: CMakeFiles/video_processor.dir/flags.make
+CMakeFiles/video_processor.dir/src/display.cpp.o: /home/skand/video-processor/src/display.cpp
+CMakeFiles/video_processor.dir/src/display.cpp.o: CMakeFiles/video_processor.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/skand/video-processor/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/video_processor.dir/src/display.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/video_processor.dir/src/display.cpp.o -MF CMakeFiles/video_processor.dir/src/display.cpp.o.d -o CMakeFiles/video_processor.dir/src/display.cpp.o -c /home/skand/video-processor/src/display.cpp
+
+CMakeFiles/video_processor.dir/src/display.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/video_processor.dir/src/display.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/skand/video-processor/src/display.cpp > CMakeFiles/video_processor.dir/src/display.cpp.i
+
+CMakeFiles/video_processor.dir/src/display.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/video_processor.dir/src/display.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/skand/video-processor/src/display.cpp -o CMakeFiles/video_processor.dir/src/display.cpp.s
+
+CMakeFiles/video_processor.dir/src/processor.cpp.o: CMakeFiles/video_processor.dir/flags.make
+CMakeFiles/video_processor.dir/src/processor.cpp.o: /home/skand/video-processor/src/processor.cpp
+CMakeFiles/video_processor.dir/src/processor.cpp.o: CMakeFiles/video_processor.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/skand/video-processor/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/video_processor.dir/src/processor.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/video_processor.dir/src/processor.cpp.o -MF CMakeFiles/video_processor.dir/src/processor.cpp.o.d -o CMakeFiles/video_processor.dir/src/processor.cpp.o -c /home/skand/video-processor/src/processor.cpp
+
+CMakeFiles/video_processor.dir/src/processor.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/video_processor.dir/src/processor.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/skand/video-processor/src/processor.cpp > CMakeFiles/video_processor.dir/src/processor.cpp.i
+
+CMakeFiles/video_processor.dir/src/processor.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/video_processor.dir/src/processor.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/skand/video-processor/src/processor.cpp -o CMakeFiles/video_processor.dir/src/processor.cpp.s
+
+CMakeFiles/video_processor.dir/src/pipeline.cpp.o: CMakeFiles/video_processor.dir/flags.make
+CMakeFiles/video_processor.dir/src/pipeline.cpp.o: /home/skand/video-processor/src/pipeline.cpp
+CMakeFiles/video_processor.dir/src/pipeline.cpp.o: CMakeFiles/video_processor.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/skand/video-processor/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/video_processor.dir/src/pipeline.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/video_processor.dir/src/pipeline.cpp.o -MF CMakeFiles/video_processor.dir/src/pipeline.cpp.o.d -o CMakeFiles/video_processor.dir/src/pipeline.cpp.o -c /home/skand/video-processor/src/pipeline.cpp
+
+CMakeFiles/video_processor.dir/src/pipeline.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/video_processor.dir/src/pipeline.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/skand/video-processor/src/pipeline.cpp > CMakeFiles/video_processor.dir/src/pipeline.cpp.i
+
+CMakeFiles/video_processor.dir/src/pipeline.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/video_processor.dir/src/pipeline.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/skand/video-processor/src/pipeline.cpp -o CMakeFiles/video_processor.dir/src/pipeline.cpp.s
+
 # Object files for target video_processor
 video_processor_OBJECTS = \
 "CMakeFiles/video_processor.dir/src/main.cpp.o" \
 "CMakeFiles/video_processor.dir/src/camera.cpp.o" \
-"CMakeFiles/video_processor.dir/src/timer.cpp.o"
+"CMakeFiles/video_processor.dir/src/timer.cpp.o" \
+"CMakeFiles/video_processor.dir/src/frame_buffer.cpp.o" \
+"CMakeFiles/video_processor.dir/src/upscaler.cpp.o" \
+"CMakeFiles/video_processor.dir/src/display.cpp.o" \
+"CMakeFiles/video_processor.dir/src/processor.cpp.o" \
+"CMakeFiles/video_processor.dir/src/pipeline.cpp.o"
 
 # External object files for target video_processor
 video_processor_EXTERNAL_OBJECTS =
@@ -126,6 +201,11 @@ video_processor_EXTERNAL_OBJECTS =
 /home/skand/video-processor/bin/video_processor: CMakeFiles/video_processor.dir/src/main.cpp.o
 /home/skand/video-processor/bin/video_processor: CMakeFiles/video_processor.dir/src/camera.cpp.o
 /home/skand/video-processor/bin/video_processor: CMakeFiles/video_processor.dir/src/timer.cpp.o
+/home/skand/video-processor/bin/video_processor: CMakeFiles/video_processor.dir/src/frame_buffer.cpp.o
+/home/skand/video-processor/bin/video_processor: CMakeFiles/video_processor.dir/src/upscaler.cpp.o
+/home/skand/video-processor/bin/video_processor: CMakeFiles/video_processor.dir/src/display.cpp.o
+/home/skand/video-processor/bin/video_processor: CMakeFiles/video_processor.dir/src/processor.cpp.o
+/home/skand/video-processor/bin/video_processor: CMakeFiles/video_processor.dir/src/pipeline.cpp.o
 /home/skand/video-processor/bin/video_processor: CMakeFiles/video_processor.dir/build.make
 /home/skand/video-processor/bin/video_processor: CMakeFiles/video_processor.dir/compiler_depend.ts
 /home/skand/video-processor/bin/video_processor: /usr/local/lib/libopencv_gapi.so.4.12.0
@@ -199,7 +279,7 @@ video_processor_EXTERNAL_OBJECTS =
 /home/skand/video-processor/bin/video_processor: /usr/local/lib/libopencv_cudev.so.4.12.0
 /home/skand/video-processor/bin/video_processor: /usr/lib/x86_64-linux-gnu/librt.a
 /home/skand/video-processor/bin/video_processor: CMakeFiles/video_processor.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/skand/video-processor/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX executable /home/skand/video-processor/bin/video_processor"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/skand/video-processor/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Linking CXX executable /home/skand/video-processor/bin/video_processor"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/video_processor.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

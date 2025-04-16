@@ -5,6 +5,11 @@
   CMakeFiles/video_processor.dir/src/main.cpp.o \
   CMakeFiles/video_processor.dir/src/camera.cpp.o \
   CMakeFiles/video_processor.dir/src/timer.cpp.o \
+  CMakeFiles/video_processor.dir/src/frame_buffer.cpp.o \
+  CMakeFiles/video_processor.dir/src/upscaler.cpp.o \
+  CMakeFiles/video_processor.dir/src/display.cpp.o \
+  CMakeFiles/video_processor.dir/src/processor.cpp.o \
+  CMakeFiles/video_processor.dir/src/pipeline.cpp.o \
   /usr/local/lib/libopencv_gapi.so.4.12.0 \
   /usr/local/lib/libopencv_stitching.so.4.12.0 \
   /usr/local/lib/libopencv_alphamat.so.4.12.0 \
@@ -121,10 +126,12 @@
   /lib/x86_64-linux-gnu/libavformat.so.60 \
   /lib/x86_64-linux-gnu/libavutil.so.58 \
   /lib/x86_64-linux-gnu/libswscale.so.7 \
+  /usr/local/cuda-12.6/lib64/libnppc.so.12 \
+  /usr/local/cuda-12.6/lib64/libnppig.so.12 \
+  /lib64/ld-linux-x86-64.so.2 \
   /lib/i386-linux-gnu/libz.so.1 \
   /usr/lib/i386-linux-gnu/libz.so.1 \
   /lib/x86_64-linux-gnu/libz.so.1 \
-  /lib64/ld-linux-x86-64.so.2 \
   /lib/x86_64-linux-gnu/libjpeg.so.8 \
   /lib/x86_64-linux-gnu/libwebp.so.7 \
   /lib/x86_64-linux-gnu/libwebpmux.so.3 \
@@ -233,6 +240,15 @@
   /usr/lib/i386-linux-gnu/libdrm.so.2 \
   /lib/x86_64-linux-gnu/libdrm.so.2 \
   /usr/local/cuda-12.6/lib64/libOpenCL.so.1 \
+  /lib/i386-linux-gnu/libpthread.so.0 \
+  /usr/lib/i386-linux-gnu/libpthread.so.0 \
+  /lib/x86_64-linux-gnu/libpthread.so.0 \
+  /lib/i386-linux-gnu/librt.so.1 \
+  /usr/lib/i386-linux-gnu/librt.so.1 \
+  /lib/x86_64-linux-gnu/librt.so.1 \
+  /lib/i386-linux-gnu/libdl.so.2 \
+  /usr/lib/i386-linux-gnu/libdl.so.2 \
+  /lib/x86_64-linux-gnu/libdl.so.2 \
   /lib/x86_64-linux-gnu/libsharpyuv.so.0 \
   /lib/i386-linux-gnu/libzstd.so.1 \
   /usr/lib/i386-linux-gnu/libzstd.so.1 \
@@ -310,12 +326,6 @@
   /lib/i386-linux-gnu/libxcb-dri3.so.0 \
   /usr/lib/i386-linux-gnu/libxcb-dri3.so.0 \
   /lib/x86_64-linux-gnu/libxcb-dri3.so.0 \
-  /lib/i386-linux-gnu/libdl.so.2 \
-  /usr/lib/i386-linux-gnu/libdl.so.2 \
-  /lib/x86_64-linux-gnu/libdl.so.2 \
-  /lib/i386-linux-gnu/libpthread.so.0 \
-  /usr/lib/i386-linux-gnu/libpthread.so.0 \
-  /lib/x86_64-linux-gnu/libpthread.so.0 \
   /lib/x86_64-linux-gnu/libblkid.so.1 \
   /lib/x86_64-linux-gnu/libdatrie.so.1 \
   /lib/x86_64-linux-gnu/libsystemd.so.0 \
@@ -359,6 +369,16 @@ CMakeFiles/video_processor.dir/src/main.cpp.o:
 CMakeFiles/video_processor.dir/src/camera.cpp.o:
 
 CMakeFiles/video_processor.dir/src/timer.cpp.o:
+
+CMakeFiles/video_processor.dir/src/frame_buffer.cpp.o:
+
+CMakeFiles/video_processor.dir/src/upscaler.cpp.o:
+
+CMakeFiles/video_processor.dir/src/display.cpp.o:
+
+CMakeFiles/video_processor.dir/src/processor.cpp.o:
+
+CMakeFiles/video_processor.dir/src/pipeline.cpp.o:
 
 /usr/local/lib/libopencv_gapi.so.4.12.0:
 
@@ -592,13 +612,17 @@ CMakeFiles/video_processor.dir/src/timer.cpp.o:
 
 /lib/x86_64-linux-gnu/libswscale.so.7:
 
+/usr/local/cuda-12.6/lib64/libnppc.so.12:
+
+/usr/local/cuda-12.6/lib64/libnppig.so.12:
+
+/lib64/ld-linux-x86-64.so.2:
+
 /lib/i386-linux-gnu/libz.so.1:
 
 /usr/lib/i386-linux-gnu/libz.so.1:
 
 /lib/x86_64-linux-gnu/libz.so.1:
-
-/lib64/ld-linux-x86-64.so.2:
 
 /lib/x86_64-linux-gnu/libjpeg.so.8:
 
@@ -816,6 +840,24 @@ CMakeFiles/video_processor.dir/src/timer.cpp.o:
 
 /usr/local/cuda-12.6/lib64/libOpenCL.so.1:
 
+/lib/i386-linux-gnu/libpthread.so.0:
+
+/usr/lib/i386-linux-gnu/libpthread.so.0:
+
+/lib/x86_64-linux-gnu/libpthread.so.0:
+
+/lib/i386-linux-gnu/librt.so.1:
+
+/usr/lib/i386-linux-gnu/librt.so.1:
+
+/lib/x86_64-linux-gnu/librt.so.1:
+
+/lib/i386-linux-gnu/libdl.so.2:
+
+/usr/lib/i386-linux-gnu/libdl.so.2:
+
+/lib/x86_64-linux-gnu/libdl.so.2:
+
 /lib/x86_64-linux-gnu/libsharpyuv.so.0:
 
 /lib/i386-linux-gnu/libzstd.so.1:
@@ -969,18 +1011,6 @@ CMakeFiles/video_processor.dir/src/timer.cpp.o:
 /usr/lib/i386-linux-gnu/libxcb-dri3.so.0:
 
 /lib/x86_64-linux-gnu/libxcb-dri3.so.0:
-
-/lib/i386-linux-gnu/libdl.so.2:
-
-/usr/lib/i386-linux-gnu/libdl.so.2:
-
-/lib/x86_64-linux-gnu/libdl.so.2:
-
-/lib/i386-linux-gnu/libpthread.so.0:
-
-/usr/lib/i386-linux-gnu/libpthread.so.0:
-
-/lib/x86_64-linux-gnu/libpthread.so.0:
 
 /lib/x86_64-linux-gnu/libblkid.so.1:
 

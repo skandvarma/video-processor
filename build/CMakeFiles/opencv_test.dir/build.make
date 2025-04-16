@@ -136,6 +136,7 @@ opencv_test_EXTERNAL_OBJECTS =
 /home/skand/video-processor/bin/opencv_test: /usr/local/lib/libopencv_xfeatures2d.so.4.12.0
 /home/skand/video-processor/bin/opencv_test: /usr/local/lib/libopencv_xobjdetect.so.4.12.0
 /home/skand/video-processor/bin/opencv_test: /usr/local/lib/libopencv_xphoto.so.4.12.0
+/home/skand/video-processor/bin/opencv_test: /usr/local/cuda-12.6/lib64/libcudart.so
 /home/skand/video-processor/bin/opencv_test: /usr/local/lib/libopencv_shape.so.4.12.0
 /home/skand/video-processor/bin/opencv_test: /usr/local/lib/libopencv_highgui.so.4.12.0
 /home/skand/video-processor/bin/opencv_test: /usr/local/lib/libopencv_datasets.so.4.12.0
@@ -164,6 +165,7 @@ opencv_test_EXTERNAL_OBJECTS =
 /home/skand/video-processor/bin/opencv_test: /usr/local/lib/libopencv_cudaarithm.so.4.12.0
 /home/skand/video-processor/bin/opencv_test: /usr/local/lib/libopencv_core.so.4.12.0
 /home/skand/video-processor/bin/opencv_test: /usr/local/lib/libopencv_cudev.so.4.12.0
+/home/skand/video-processor/bin/opencv_test: /usr/lib/x86_64-linux-gnu/librt.a
 /home/skand/video-processor/bin/opencv_test: CMakeFiles/opencv_test.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/skand/video-processor/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable /home/skand/video-processor/bin/opencv_test"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/opencv_test.dir/link.txt --verbose=$(VERBOSE)

@@ -71,7 +71,8 @@ set(CMAKE_MAKEFILE_PRODUCTS
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
   "CMakeFiles/video_processor.dir/DependInfo.cmake"
-  "CMakeFiles/test_phase2.dir/DependInfo.cmake"
   "CMakeFiles/opencv_test.dir/DependInfo.cmake"
   "CMakeFiles/simple_camera_test.dir/DependInfo.cmake"
+  "CMakeFiles/test_phase2.dir/DependInfo.cmake"
+  "CMakeFiles/test_phase4.dir/DependInfo.cmake"
   )

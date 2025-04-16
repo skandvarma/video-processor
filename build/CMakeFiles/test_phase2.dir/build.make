@@ -100,10 +100,24 @@ CMakeFiles/test_phase2.dir/src/camera.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/test_phase2.dir/src/camera.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/skand/video-processor/src/camera.cpp -o CMakeFiles/test_phase2.dir/src/camera.cpp.s
 
+CMakeFiles/test_phase2.dir/src/timer.cpp.o: CMakeFiles/test_phase2.dir/flags.make
+CMakeFiles/test_phase2.dir/src/timer.cpp.o: /home/skand/video-processor/src/timer.cpp
+CMakeFiles/test_phase2.dir/src/timer.cpp.o: CMakeFiles/test_phase2.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/skand/video-processor/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/test_phase2.dir/src/timer.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/test_phase2.dir/src/timer.cpp.o -MF CMakeFiles/test_phase2.dir/src/timer.cpp.o.d -o CMakeFiles/test_phase2.dir/src/timer.cpp.o -c /home/skand/video-processor/src/timer.cpp
+
+CMakeFiles/test_phase2.dir/src/timer.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/test_phase2.dir/src/timer.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/skand/video-processor/src/timer.cpp > CMakeFiles/test_phase2.dir/src/timer.cpp.i
+
+CMakeFiles/test_phase2.dir/src/timer.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/test_phase2.dir/src/timer.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/skand/video-processor/src/timer.cpp -o CMakeFiles/test_phase2.dir/src/timer.cpp.s
+
 CMakeFiles/test_phase2.dir/src/frame_buffer.cpp.o: CMakeFiles/test_phase2.dir/flags.make
 CMakeFiles/test_phase2.dir/src/frame_buffer.cpp.o: /home/skand/video-processor/src/frame_buffer.cpp
 CMakeFiles/test_phase2.dir/src/frame_buffer.cpp.o: CMakeFiles/test_phase2.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/skand/video-processor/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/test_phase2.dir/src/frame_buffer.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/skand/video-processor/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/test_phase2.dir/src/frame_buffer.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/test_phase2.dir/src/frame_buffer.cpp.o -MF CMakeFiles/test_phase2.dir/src/frame_buffer.cpp.o.d -o CMakeFiles/test_phase2.dir/src/frame_buffer.cpp.o -c /home/skand/video-processor/src/frame_buffer.cpp
 
 CMakeFiles/test_phase2.dir/src/frame_buffer.cpp.i: cmake_force
@@ -117,7 +131,7 @@ CMakeFiles/test_phase2.dir/src/frame_buffer.cpp.s: cmake_force
 CMakeFiles/test_phase2.dir/src/upscaler.cpp.o: CMakeFiles/test_phase2.dir/flags.make
 CMakeFiles/test_phase2.dir/src/upscaler.cpp.o: /home/skand/video-processor/src/upscaler.cpp
 CMakeFiles/test_phase2.dir/src/upscaler.cpp.o: CMakeFiles/test_phase2.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/skand/video-processor/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/test_phase2.dir/src/upscaler.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/skand/video-processor/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/test_phase2.dir/src/upscaler.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/test_phase2.dir/src/upscaler.cpp.o -MF CMakeFiles/test_phase2.dir/src/upscaler.cpp.o.d -o CMakeFiles/test_phase2.dir/src/upscaler.cpp.o -c /home/skand/video-processor/src/upscaler.cpp
 
 CMakeFiles/test_phase2.dir/src/upscaler.cpp.i: cmake_force
@@ -128,36 +142,22 @@ CMakeFiles/test_phase2.dir/src/upscaler.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/test_phase2.dir/src/upscaler.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/skand/video-processor/src/upscaler.cpp -o CMakeFiles/test_phase2.dir/src/upscaler.cpp.s
 
-CMakeFiles/test_phase2.dir/src/timer.cpp.o: CMakeFiles/test_phase2.dir/flags.make
-CMakeFiles/test_phase2.dir/src/timer.cpp.o: /home/skand/video-processor/src/timer.cpp
-CMakeFiles/test_phase2.dir/src/timer.cpp.o: CMakeFiles/test_phase2.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/skand/video-processor/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/test_phase2.dir/src/timer.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/test_phase2.dir/src/timer.cpp.o -MF CMakeFiles/test_phase2.dir/src/timer.cpp.o.d -o CMakeFiles/test_phase2.dir/src/timer.cpp.o -c /home/skand/video-processor/src/timer.cpp
-
-CMakeFiles/test_phase2.dir/src/timer.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/test_phase2.dir/src/timer.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/skand/video-processor/src/timer.cpp > CMakeFiles/test_phase2.dir/src/timer.cpp.i
-
-CMakeFiles/test_phase2.dir/src/timer.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/test_phase2.dir/src/timer.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/skand/video-processor/src/timer.cpp -o CMakeFiles/test_phase2.dir/src/timer.cpp.s
-
 # Object files for target test_phase2
 test_phase2_OBJECTS = \
 "CMakeFiles/test_phase2.dir/src/test_phase2.cpp.o" \
 "CMakeFiles/test_phase2.dir/src/camera.cpp.o" \
+"CMakeFiles/test_phase2.dir/src/timer.cpp.o" \
 "CMakeFiles/test_phase2.dir/src/frame_buffer.cpp.o" \
-"CMakeFiles/test_phase2.dir/src/upscaler.cpp.o" \
-"CMakeFiles/test_phase2.dir/src/timer.cpp.o"
+"CMakeFiles/test_phase2.dir/src/upscaler.cpp.o"
 
 # External object files for target test_phase2
 test_phase2_EXTERNAL_OBJECTS =
 
 /home/skand/video-processor/bin/test_phase2: CMakeFiles/test_phase2.dir/src/test_phase2.cpp.o
 /home/skand/video-processor/bin/test_phase2: CMakeFiles/test_phase2.dir/src/camera.cpp.o
+/home/skand/video-processor/bin/test_phase2: CMakeFiles/test_phase2.dir/src/timer.cpp.o
 /home/skand/video-processor/bin/test_phase2: CMakeFiles/test_phase2.dir/src/frame_buffer.cpp.o
 /home/skand/video-processor/bin/test_phase2: CMakeFiles/test_phase2.dir/src/upscaler.cpp.o
-/home/skand/video-processor/bin/test_phase2: CMakeFiles/test_phase2.dir/src/timer.cpp.o
 /home/skand/video-processor/bin/test_phase2: CMakeFiles/test_phase2.dir/build.make
 /home/skand/video-processor/bin/test_phase2: CMakeFiles/test_phase2.dir/compiler_depend.ts
 /home/skand/video-processor/bin/test_phase2: /usr/local/lib/libopencv_gapi.so.4.12.0
