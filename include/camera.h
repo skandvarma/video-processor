@@ -4,6 +4,9 @@
 #include <string>
 #include <memory>
 #include <vector>
+#include <thread>
+#include <mutex>
+#include <atomic>
 
 class Camera {
 public:
@@ -41,4 +44,14 @@ private:
     int camera_index;
     std::string video_source;
     bool is_file;
+    
+    // New private members for threaded capture
+    std::thread grab_thread;
+    std::mutex frame_mutex;
+    cv::Mat latest_frame;
+    std::atomic<bool> has_new_frame{false};
+    std::atomic<bool> thread_running{false};
+    
+    // Background frame grabbing method
+    void grabLoop();
 };

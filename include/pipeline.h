@@ -22,6 +22,7 @@ public:
     struct Config {
         // Camera options
         int camera_index = 0;
+        std::string video_source = ""; // Empty means use camera_index instead
         int camera_width = 1280;
         int camera_height = 720;
         int camera_fps = 60;
@@ -67,6 +68,13 @@ public:
      * @return true if initialization was successful
      */
     bool initialize(int camera_index = 0);
+    
+    /**
+     * @brief Initialize all pipeline components with a video file
+     * @param video_path Path to the video file
+     * @return true if initialization was successful
+     */
+    bool initialize(const std::string& video_path);
     
     /**
      * @brief Start the pipeline processing

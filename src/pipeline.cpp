@@ -37,38 +37,58 @@ public:
         // Update camera index if provided
         if (camera_index >= 0) {
             m_config.camera_index = camera_index;
+            m_config.video_source = ""; // Clear video source to use camera
         }
         
-        // Initialize camera - improved with direct access to camera index
+        return initializeCommon();
+    }
+    
+    bool initialize(const std::string& video_path) {
+        // Set video source and clear camera index
+        m_config.video_source = video_path;
+        
+        return initializeCommon();
+    }
+    
+    bool initializeCommon() {
+        // Initialize camera or video source
         try {
-            // First verify the camera index is valid
-            auto available_cameras = Camera::listAvailableCameras();
-            
-            if (available_cameras.empty()) {
-                std::cerr << "No cameras detected!" << std::endl;
-                return false;
+            if (!m_config.video_source.empty()) {
+                // Create camera with video file
+                std::cout << "Using video file: " << m_config.video_source << std::endl;
+                m_camera = std::make_unique<Camera>(m_config.video_source);
+            } else {
+                // First verify the camera index is valid
+                auto available_cameras = Camera::listAvailableCameras();
+                
+                if (available_cameras.empty()) {
+                    std::cerr << "No cameras detected!" << std::endl;
+                    return false;
+                }
+                
+                // Make sure we use a valid camera index
+                if (std::find(available_cameras.begin(), available_cameras.end(), m_config.camera_index) 
+                    == available_cameras.end()) {
+                    std::cout << "Camera index " << m_config.camera_index << " not available." << std::endl;
+                    m_config.camera_index = available_cameras[0];
+                    std::cout << "Using camera index " << m_config.camera_index << " instead." << std::endl;
+                }
+                
+                // Create and initialize the camera with the validated index
+                m_camera = std::make_unique<Camera>(m_config.camera_index);
             }
             
-            // Make sure we use a valid camera index
-            if (std::find(available_cameras.begin(), available_cameras.end(), m_config.camera_index) 
-                == available_cameras.end()) {
-                std::cout << "Camera index " << m_config.camera_index << " not available." << std::endl;
-                m_config.camera_index = available_cameras[0];
-                std::cout << "Using camera index " << m_config.camera_index << " instead." << std::endl;
-            }
-            
-            // Now create and initialize the camera with the validated index
-            m_camera = std::make_unique<Camera>(m_config.camera_index);
+            // Initialize the camera or video with the specified parameters
             if (!m_camera->initialize(m_config.camera_width, m_config.camera_height, m_config.camera_fps)) {
-                std::cerr << "Failed to initialize camera with index " << m_config.camera_index << std::endl;
+                std::cerr << "Failed to initialize camera/video source" << std::endl;
                 return false;
             }
             
-            std::cout << "Camera initialized successfully at " 
+            std::cout << "Source initialized successfully at " 
                       << m_camera->getWidth() << "x" << m_camera->getHeight() 
                       << " @ " << m_camera->getFPS() << " FPS" << std::endl;
         } catch (const std::exception& e) {
-            std::cerr << "Error creating camera: " << e.what() << std::endl;
+            std::cerr << "Error creating camera/video source: " << e.what() << std::endl;
             return false;
         }
         
@@ -280,6 +300,14 @@ private:
             
             if (!success || frame.empty()) {
                 std::cerr << "Failed to capture frame" << std::endl;
+                
+                // Check if we've reached the end of a video file
+                if (!m_camera->isOpened()) {
+                    std::cout << "End of video file reached" << std::endl;
+                    m_running.store(false);
+                    break;
+                }
+                
                 std::this_thread::sleep_for(std::chrono::milliseconds(1));
                 continue;
             }
@@ -409,6 +437,10 @@ Pipeline::~Pipeline() = default;
 
 bool Pipeline::initialize(int camera_index) {
     return m_impl->initialize(camera_index);
+}
+
+bool Pipeline::initialize(const std::string& video_path) {
+    return m_impl->initialize(video_path);
 }
 
 bool Pipeline::start() {

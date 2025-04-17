@@ -107,7 +107,6 @@
   /usr/lib/gcc/x86_64-linux-gnu/13/libgcc.a \
   /usr/lib/gcc/x86_64-linux-gnu/13/crtendS.o \
   /usr/lib/gcc/x86_64-linux-gnu/13/../../../x86_64-linux-gnu/crtn.o \
-  /usr/local/lib/libopencv_imgcodecs.so.4.12.0 \
   /lib/x86_64-linux-gnu/libgtk-3.so.0 \
   /lib/x86_64-linux-gnu/libgdk-3.so.0 \
   /lib/x86_64-linux-gnu/libcairo.so.2 \
@@ -129,14 +128,14 @@
   /usr/local/cuda-12.6/lib64/libnppc.so.12 \
   /usr/local/cuda-12.6/lib64/libnppig.so.12 \
   /lib64/ld-linux-x86-64.so.2 \
-  /lib/i386-linux-gnu/libz.so.1 \
-  /usr/lib/i386-linux-gnu/libz.so.1 \
-  /lib/x86_64-linux-gnu/libz.so.1 \
   /lib/x86_64-linux-gnu/libjpeg.so.8 \
   /lib/x86_64-linux-gnu/libwebp.so.7 \
   /lib/x86_64-linux-gnu/libwebpmux.so.3 \
   /lib/x86_64-linux-gnu/libwebpdemux.so.2 \
   /lib/x86_64-linux-gnu/libpng16.so.16 \
+  /lib/i386-linux-gnu/libz.so.1 \
+  /usr/lib/i386-linux-gnu/libz.so.1 \
+  /lib/x86_64-linux-gnu/libz.so.1 \
   /lib/x86_64-linux-gnu/libtiff.so.6 \
   /lib/x86_64-linux-gnu/libopenjp2.so.7 \
   /lib/x86_64-linux-gnu/libOpenEXR-3_1.so.30 \
@@ -574,8 +573,6 @@ CMakeFiles/video_processor.dir/src/pipeline.cpp.o:
 
 /usr/lib/gcc/x86_64-linux-gnu/13/../../../x86_64-linux-gnu/crtn.o:
 
-/usr/local/lib/libopencv_imgcodecs.so.4.12.0:
-
 /lib/x86_64-linux-gnu/libgtk-3.so.0:
 
 /lib/x86_64-linux-gnu/libgdk-3.so.0:
@@ -618,12 +615,6 @@ CMakeFiles/video_processor.dir/src/pipeline.cpp.o:
 
 /lib64/ld-linux-x86-64.so.2:
 
-/lib/i386-linux-gnu/libz.so.1:
-
-/usr/lib/i386-linux-gnu/libz.so.1:
-
-/lib/x86_64-linux-gnu/libz.so.1:
-
 /lib/x86_64-linux-gnu/libjpeg.so.8:
 
 /lib/x86_64-linux-gnu/libwebp.so.7:
@@ -633,6 +624,12 @@ CMakeFiles/video_processor.dir/src/pipeline.cpp.o:
 /lib/x86_64-linux-gnu/libwebpdemux.so.2:
 
 /lib/x86_64-linux-gnu/libpng16.so.16:
+
+/lib/i386-linux-gnu/libz.so.1:
+
+/usr/lib/i386-linux-gnu/libz.so.1:
+
+/lib/x86_64-linux-gnu/libz.so.1:
 
 /lib/x86_64-linux-gnu/libtiff.so.6:
 
