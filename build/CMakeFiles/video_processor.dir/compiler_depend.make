@@ -1836,12 +1836,14 @@ CMakeFiles/video_processor.dir/src/main.cpp.o: /home/skand/video-processor/src/m
   /usr/include/features.h \
   /usr/include/libintl.h \
   /usr/include/limits.h \
+  /usr/include/linux/close_range.h \
   /usr/include/linux/errno.h \
   /usr/include/linux/limits.h \
   /usr/include/locale.h \
   /usr/include/math.h \
   /usr/include/pthread.h \
   /usr/include/sched.h \
+  /usr/include/signal.h \
   /usr/include/stdc-predef.h \
   /usr/include/stdint.h \
   /usr/include/stdio.h \
@@ -1849,20 +1851,25 @@ CMakeFiles/video_processor.dir/src/main.cpp.o: /home/skand/video-processor/src/m
   /usr/include/string.h \
   /usr/include/strings.h \
   /usr/include/time.h \
+  /usr/include/unistd.h \
   /usr/include/wchar.h \
   /usr/include/wctype.h \
   /usr/include/x86_64-linux-gnu/asm/errno.h \
   /usr/include/x86_64-linux-gnu/bits/atomic_wide_counter.h \
   /usr/include/x86_64-linux-gnu/bits/byteswap.h \
+  /usr/include/x86_64-linux-gnu/bits/confname.h \
   /usr/include/x86_64-linux-gnu/bits/cpu-set.h \
   /usr/include/x86_64-linux-gnu/bits/endian.h \
   /usr/include/x86_64-linux-gnu/bits/endianness.h \
+  /usr/include/x86_64-linux-gnu/bits/environments.h \
   /usr/include/x86_64-linux-gnu/bits/errno.h \
   /usr/include/x86_64-linux-gnu/bits/floatn-common.h \
   /usr/include/x86_64-linux-gnu/bits/floatn.h \
   /usr/include/x86_64-linux-gnu/bits/flt-eval-method.h \
   /usr/include/x86_64-linux-gnu/bits/fp-fast.h \
   /usr/include/x86_64-linux-gnu/bits/fp-logb.h \
+  /usr/include/x86_64-linux-gnu/bits/getopt_core.h \
+  /usr/include/x86_64-linux-gnu/bits/getopt_posix.h \
   /usr/include/x86_64-linux-gnu/bits/iscanonical.h \
   /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
   /usr/include/x86_64-linux-gnu/bits/libm-simd-decl-stubs.h \
@@ -1875,12 +1882,26 @@ CMakeFiles/video_processor.dir/src/main.cpp.o: /home/skand/video-processor/src/m
   /usr/include/x86_64-linux-gnu/bits/mathcalls.h \
   /usr/include/x86_64-linux-gnu/bits/posix1_lim.h \
   /usr/include/x86_64-linux-gnu/bits/posix2_lim.h \
+  /usr/include/x86_64-linux-gnu/bits/posix_opt.h \
   /usr/include/x86_64-linux-gnu/bits/pthread_stack_min-dynamic.h \
   /usr/include/x86_64-linux-gnu/bits/pthreadtypes-arch.h \
   /usr/include/x86_64-linux-gnu/bits/pthreadtypes.h \
   /usr/include/x86_64-linux-gnu/bits/sched.h \
   /usr/include/x86_64-linux-gnu/bits/select.h \
   /usr/include/x86_64-linux-gnu/bits/setjmp.h \
+  /usr/include/x86_64-linux-gnu/bits/sigaction.h \
+  /usr/include/x86_64-linux-gnu/bits/sigcontext.h \
+  /usr/include/x86_64-linux-gnu/bits/sigevent-consts.h \
+  /usr/include/x86_64-linux-gnu/bits/siginfo-arch.h \
+  /usr/include/x86_64-linux-gnu/bits/siginfo-consts-arch.h \
+  /usr/include/x86_64-linux-gnu/bits/siginfo-consts.h \
+  /usr/include/x86_64-linux-gnu/bits/signal_ext.h \
+  /usr/include/x86_64-linux-gnu/bits/signum-arch.h \
+  /usr/include/x86_64-linux-gnu/bits/signum-generic.h \
+  /usr/include/x86_64-linux-gnu/bits/sigstack.h \
+  /usr/include/x86_64-linux-gnu/bits/sigstksz.h \
+  /usr/include/x86_64-linux-gnu/bits/sigthread.h \
+  /usr/include/x86_64-linux-gnu/bits/ss_flags.h \
   /usr/include/x86_64-linux-gnu/bits/stdint-intn.h \
   /usr/include/x86_64-linux-gnu/bits/stdint-least.h \
   /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h \
@@ -1901,17 +1922,24 @@ CMakeFiles/video_processor.dir/src/main.cpp.o: /home/skand/video-processor/src/m
   /usr/include/x86_64-linux-gnu/bits/types/__locale_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/__mbstate_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/__sigset_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/__sigval_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/clock_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/clockid_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/cookie_io_functions_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/error_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/locale_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/mbstate_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/sig_atomic_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/sigevent_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/siginfo_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/sigset_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/sigval_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/stack_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h \
   /usr/include/x86_64-linux-gnu/bits/types/struct___jmp_buf_tag.h \
   /usr/include/x86_64-linux-gnu/bits/types/struct_itimerspec.h \
   /usr/include/x86_64-linux-gnu/bits/types/struct_sched_param.h \
+  /usr/include/x86_64-linux-gnu/bits/types/struct_sigstack.h \
   /usr/include/x86_64-linux-gnu/bits/types/struct_timespec.h \
   /usr/include/x86_64-linux-gnu/bits/types/struct_timeval.h \
   /usr/include/x86_64-linux-gnu/bits/types/struct_tm.h \
@@ -1921,6 +1949,7 @@ CMakeFiles/video_processor.dir/src/main.cpp.o: /home/skand/video-processor/src/m
   /usr/include/x86_64-linux-gnu/bits/typesizes.h \
   /usr/include/x86_64-linux-gnu/bits/uintn-identity.h \
   /usr/include/x86_64-linux-gnu/bits/uio_lim.h \
+  /usr/include/x86_64-linux-gnu/bits/unistd_ext.h \
   /usr/include/x86_64-linux-gnu/bits/waitflags.h \
   /usr/include/x86_64-linux-gnu/bits/waitstatus.h \
   /usr/include/x86_64-linux-gnu/bits/wchar.h \
@@ -1946,6 +1975,7 @@ CMakeFiles/video_processor.dir/src/main.cpp.o: /home/skand/video-processor/src/m
   /usr/include/x86_64-linux-gnu/sys/select.h \
   /usr/include/x86_64-linux-gnu/sys/single_threaded.h \
   /usr/include/x86_64-linux-gnu/sys/types.h \
+  /usr/include/x86_64-linux-gnu/sys/ucontext.h \
   /usr/lib/gcc/x86_64-linux-gnu/13/include/emmintrin.h \
   /usr/lib/gcc/x86_64-linux-gnu/13/include/float.h \
   /usr/lib/gcc/x86_64-linux-gnu/13/include/limits.h \
@@ -3594,11 +3624,45 @@ CMakeFiles/video_processor.dir/src/upscaler.cpp.o: /home/skand/video-processor/s
   /usr/local/include/opencv4/opencv2/videoio.hpp
 
 
-/home/skand/video-processor/src/upscaler.cpp:
-
 /usr/include/c++/13/pstl/glue_numeric_defs.h:
 
 /usr/include/c++/13/bits/stl_numeric.h:
+
+/usr/include/x86_64-linux-gnu/bits/unistd_ext.h:
+
+/usr/include/x86_64-linux-gnu/bits/types/siginfo_t.h:
+
+/usr/include/x86_64-linux-gnu/bits/types/sig_atomic_t.h:
+
+/usr/include/x86_64-linux-gnu/bits/types/__sigval_t.h:
+
+/usr/include/x86_64-linux-gnu/bits/ss_flags.h:
+
+/usr/include/x86_64-linux-gnu/bits/sigthread.h:
+
+/usr/include/x86_64-linux-gnu/bits/sigstack.h:
+
+/usr/include/x86_64-linux-gnu/bits/signum-arch.h:
+
+/usr/include/x86_64-linux-gnu/bits/siginfo-consts-arch.h:
+
+/usr/include/x86_64-linux-gnu/bits/siginfo-arch.h:
+
+/usr/include/x86_64-linux-gnu/bits/sigevent-consts.h:
+
+/usr/include/x86_64-linux-gnu/bits/sigcontext.h:
+
+/usr/include/x86_64-linux-gnu/bits/sigaction.h:
+
+/usr/include/x86_64-linux-gnu/bits/environments.h:
+
+/home/skand/video-processor/src/upscaler.cpp:
+
+/usr/include/x86_64-linux-gnu/bits/confname.h:
+
+/usr/include/unistd.h:
+
+/usr/include/linux/close_range.h:
 
 /usr/include/c++/13/filesystem:
 
@@ -3641,6 +3705,8 @@ CMakeFiles/video_processor.dir/src/upscaler.cpp.o: /home/skand/video-processor/s
 /usr/local/include/opencv4/opencv2/stitching/detail/blenders.hpp:
 
 /usr/local/include/opencv4/opencv2/photo.hpp:
+
+/usr/include/x86_64-linux-gnu/bits/signum-generic.h:
 
 /usr/local/include/opencv4/opencv2/opencv.hpp:
 
@@ -3693,6 +3759,8 @@ CMakeFiles/video_processor.dir/src/upscaler.cpp.o: /home/skand/video-processor/s
 /usr/local/include/opencv4/opencv2/flann/flann_base.hpp:
 
 /usr/local/include/opencv4/opencv2/flann/dynamic_bitset.h:
+
+/usr/include/x86_64-linux-gnu/bits/types/stack_t.h:
 
 /usr/local/include/opencv4/opencv2/flann/autotuned_index.h:
 
@@ -3827,6 +3895,8 @@ CMakeFiles/video_processor.dir/src/upscaler.cpp.o: /home/skand/video-processor/s
 /usr/include/x86_64-linux-gnu/bits/types/time_t.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/FILE.h:
+
+/usr/include/x86_64-linux-gnu/bits/signal_ext.h:
 
 /usr/include/x86_64-linux-gnu/bits/types.h:
 
@@ -3978,6 +4048,8 @@ CMakeFiles/video_processor.dir/src/frame_buffer.cpp.o:
 
 /lib/x86_64-linux-gnu/libxcb.so.1:
 
+/usr/include/x86_64-linux-gnu/bits/types/struct_sigstack.h:
+
 /lib/x86_64-linux-gnu/libxcb-shm.so.0:
 
 /lib/x86_64-linux-gnu/libxcb-dri3.so.0:
@@ -4032,6 +4104,8 @@ CMakeFiles/video_processor.dir/src/pipeline.cpp.o:
 
 /lib/x86_64-linux-gnu/libva-drm.so.2:
 
+/usr/include/x86_64-linux-gnu/bits/siginfo-consts.h:
+
 /lib/x86_64-linux-gnu/libgsm.so.1:
 
 /usr/include/c++/13/bits/string_view.tcc:
@@ -4041,6 +4115,8 @@ CMakeFiles/video_processor.dir/src/pipeline.cpp.o:
 /usr/lib/gcc/x86_64-linux-gnu/13/include/stdint.h:
 
 /lib/x86_64-linux-gnu/libtheoradec.so.1:
+
+/usr/include/x86_64-linux-gnu/bits/types/sigevent_t.h:
 
 /usr/lib/i386-linux-gnu/libX11.so.6:
 
@@ -4078,6 +4154,8 @@ CMakeFiles/video_processor.dir/src/pipeline.cpp.o:
 
 /usr/include/c++/13/bits/basic_ios.h:
 
+/usr/include/x86_64-linux-gnu/sys/ucontext.h:
+
 /lib/x86_64-linux-gnu/libshine.so.3:
 
 /lib/x86_64-linux-gnu/libsharpyuv.so.0:
@@ -4111,6 +4189,8 @@ CMakeFiles/video_processor.dir/src/pipeline.cpp.o:
 /lib/x86_64-linux-gnu/libgmp.so.10:
 
 /usr/include/c++/13/bits/alloc_traits.h:
+
+/usr/include/x86_64-linux-gnu/bits/types/sigval_t.h:
 
 /lib/x86_64-linux-gnu/libwayland-cursor.so.0:
 
@@ -4321,6 +4401,8 @@ CMakeFiles/video_processor.dir/src/pipeline.cpp.o:
 /lib/i386-linux-gnu/libcom_err.so.2:
 
 /usr/include/c++/13/bits/range_access.h:
+
+/usr/include/signal.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/wint_t.h:
 
@@ -4604,6 +4686,8 @@ CMakeFiles/video_processor.dir/src/timer.cpp.o:
 
 /lib/x86_64-linux-gnu/libgstvideo-1.0.so.0:
 
+/usr/include/x86_64-linux-gnu/bits/getopt_posix.h:
+
 /usr/include/c++/13/bits/stl_map.h:
 
 /usr/include/c++/13/locale:
@@ -4669,6 +4753,8 @@ CMakeFiles/video_processor.dir/src/timer.cpp.o:
 /lib/i386-linux-gnu/libX11.so.6:
 
 /usr/include/c++/13/bits/shared_ptr.h:
+
+/usr/include/x86_64-linux-gnu/bits/sigstksz.h:
 
 /usr/local/lib/libopencv_cudabgsegm.so.4.12.0:
 
@@ -5008,6 +5094,8 @@ CMakeFiles/video_processor.dir/src/upscaler.cpp.o:
 
 /usr/include/c++/13/bits/stl_tempbuf.h:
 
+/usr/include/x86_64-linux-gnu/bits/getopt_core.h:
+
 /usr/include/c++/13/bits/stl_vector.h:
 
 /usr/include/x86_64-linux-gnu/bits/waitstatus.h:
@@ -5127,6 +5215,8 @@ CMakeFiles/video_processor.dir/src/upscaler.cpp.o:
 /lib/x86_64-linux-gnu/libgobject-2.0.so.0:
 
 /usr/include/c++/13/stdlib.h:
+
+/usr/include/x86_64-linux-gnu/bits/posix_opt.h:
 
 /usr/include/c++/13/thread:
 

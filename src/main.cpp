@@ -44,8 +44,8 @@ void signalHandler(int signum) {
     exit(signum);
 }
 
-// Capture thread function - optimized to prevent buffer overflow
-void capture_thread(Camera& camera, FrameBuffer& buffer, Timer& timer) {
+// Capture thread function - with frame rate control for video files
+void capture_thread(Camera& camera, FrameBuffer& buffer, Timer& timer, bool is_video_file, double target_fps) {
     std::cout << "Capture thread started" << std::endl;
     cv::Mat frame;
     
@@ -54,7 +54,30 @@ void capture_thread(Camera& camera, FrameBuffer& buffer, Timer& timer) {
     int frame_counter = 0;
     double fps = 0;
     
+    // For frame rate control
+    auto last_frame_time = std::chrono::high_resolution_clock::now();
+    std::chrono::microseconds frame_interval(0);
+    
+    // Calculate frame interval if we have a valid FPS
+    if (is_video_file && target_fps > 0) {
+        frame_interval = std::chrono::microseconds(static_cast<long long>(1000000.0 / target_fps));
+        std::cout << "Video frame rate control enabled: Target " << target_fps 
+                  << " FPS (interval: " << frame_interval.count() << "µs)" << std::endl;
+    }
+    
     while (g_running) {
+        // For video files, control frame rate to match source
+        if (is_video_file && frame_interval.count() > 0) {
+            auto now = std::chrono::high_resolution_clock::now();
+            auto elapsed = now - last_frame_time;
+            
+            if (elapsed < frame_interval) {
+                // Wait until it's time for the next frame
+                std::this_thread::sleep_for(frame_interval - elapsed);
+            }
+            last_frame_time = std::chrono::high_resolution_clock::now();
+        }
+        
         // Time the frame acquisition
         timer.start("acquisition");
         bool success = camera.getFrame(frame);
@@ -200,7 +223,7 @@ void display_thread(FrameBuffer& buffer, Timer& timer,
     cv::resizeWindow("Video Feed", 1280, 720);
 
     // VideoWriter parameters
-    int codec = cv::VideoWriter::fourcc('X', '2', '6', '4'); // H.264 codec
+    int codec = cv::VideoWriter::fourcc('a', 'v', 'c', '1'); // H.264 codec - use the one that actually works
     double output_fps = (fps > 0) ? fps : 30.0; // Use source fps or default to 30
     
     while (g_running) {
@@ -315,6 +338,7 @@ int main(int argc, char* argv[]) {
     // Check if a video file path is provided as a command-line argument
     std::string video_source;
     bool use_video_file = false;
+    bool simulate_realtime = true; // New flag to control frame rate simulation
     
     // Process command line arguments
     for (int i = 1; i < argc; i++) {
@@ -328,6 +352,9 @@ int main(int argc, char* argv[]) {
         } else if (arg == "--record" || arg == "-r") {
             g_save_video = true;
             std::cout << "Recording will start automatically" << std::endl;
+        } else if (arg == "--fast" || arg == "-f") {
+            simulate_realtime = false;
+            std::cout << "Fast processing mode enabled (no frame rate control)" << std::endl;
         } else {
             // Assume this is the input source (file or camera index)
             video_source = arg;
@@ -363,7 +390,7 @@ int main(int argc, char* argv[]) {
         
         if (available_cameras.empty()) {
             std::cerr << "No cameras detected! Please connect a camera or provide a video file path." << std::endl;
-            std::cerr << "Usage: " << argv[0] << " [camera_index|video_file_path] [--output filename] [--record]" << std::endl;
+            std::cerr << "Usage: " << argv[0] << " [camera_index|video_file_path] [--output filename] [--record] [--fast]" << std::endl;
             return -1;
         }
         
@@ -402,7 +429,7 @@ int main(int argc, char* argv[]) {
     
     // Create upscaler with target Full HD resolution
     // Using bilinear for better performance
-    Upscaler upscaler(Upscaler::BILINEAR, true);
+    Upscaler upscaler(Upscaler::SUPER_RES, true);
     if (!upscaler.initialize(1920, 1080)) {
         std::cerr << "Error: Could not initialize upscaler" << std::endl;
         return -1;
@@ -423,10 +450,14 @@ int main(int argc, char* argv[]) {
     // Create timer for performance measurement
     Timer timer;
     
+    // If using a video file and simulate_realtime is enabled, pass the source FPS for frame rate control
+    double target_fps = (use_video_file && simulate_realtime) ? source_fps : 0.0;
+    
     // Start all threads
     std::cout << "Starting pipeline threads..." << std::endl;
     
-    std::thread capture(capture_thread, std::ref(*source), std::ref(raw_buffer), std::ref(timer));
+    std::thread capture(capture_thread, std::ref(*source), std::ref(raw_buffer), 
+                         std::ref(timer), use_video_file, target_fps);
     std::thread processor(processing_thread, std::ref(raw_buffer), std::ref(processed_buffer), 
                          std::ref(upscaler), std::ref(timer));
     std::thread display(display_thread, std::ref(processed_buffer), std::ref(timer), 
