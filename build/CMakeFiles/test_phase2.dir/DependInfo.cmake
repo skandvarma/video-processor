@@ -9,6 +9,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/skand/video-processor/src/camera.cpp" "CMakeFiles/test_phase2.dir/src/camera.cpp.o" "gcc" "CMakeFiles/test_phase2.dir/src/camera.cpp.o.d"
+  "/home/skand/video-processor/src/dnn_super_res.cpp" "CMakeFiles/test_phase2.dir/src/dnn_super_res.cpp.o" "gcc" "CMakeFiles/test_phase2.dir/src/dnn_super_res.cpp.o.d"
   "/home/skand/video-processor/src/frame_buffer.cpp" "CMakeFiles/test_phase2.dir/src/frame_buffer.cpp.o" "gcc" "CMakeFiles/test_phase2.dir/src/frame_buffer.cpp.o.d"
   "/home/skand/video-processor/src/test_phase2.cpp" "CMakeFiles/test_phase2.dir/src/test_phase2.cpp.o" "gcc" "CMakeFiles/test_phase2.dir/src/test_phase2.cpp.o.d"
   "/home/skand/video-processor/src/timer.cpp" "CMakeFiles/test_phase2.dir/src/timer.cpp.o" "gcc" "CMakeFiles/test_phase2.dir/src/timer.cpp.o.d"

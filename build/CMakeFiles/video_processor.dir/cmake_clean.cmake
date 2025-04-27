@@ -6,6 +6,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/video_processor.dir/src/camera.cpp.o.d"
   "CMakeFiles/video_processor.dir/src/display.cpp.o"
   "CMakeFiles/video_processor.dir/src/display.cpp.o.d"
+  "CMakeFiles/video_processor.dir/src/dnn_super_res.cpp.o"
+  "CMakeFiles/video_processor.dir/src/dnn_super_res.cpp.o.d"
   "CMakeFiles/video_processor.dir/src/frame_buffer.cpp.o"
   "CMakeFiles/video_processor.dir/src/frame_buffer.cpp.o.d"
   "CMakeFiles/video_processor.dir/src/main.cpp.o"

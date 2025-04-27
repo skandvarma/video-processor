@@ -10,6 +10,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/skand/video-processor/src/camera.cpp" "CMakeFiles/video_processor.dir/src/camera.cpp.o" "gcc" "CMakeFiles/video_processor.dir/src/camera.cpp.o.d"
   "/home/skand/video-processor/src/display.cpp" "CMakeFiles/video_processor.dir/src/display.cpp.o" "gcc" "CMakeFiles/video_processor.dir/src/display.cpp.o.d"
+  "/home/skand/video-processor/src/dnn_super_res.cpp" "CMakeFiles/video_processor.dir/src/dnn_super_res.cpp.o" "gcc" "CMakeFiles/video_processor.dir/src/dnn_super_res.cpp.o.d"
   "/home/skand/video-processor/src/frame_buffer.cpp" "CMakeFiles/video_processor.dir/src/frame_buffer.cpp.o" "gcc" "CMakeFiles/video_processor.dir/src/frame_buffer.cpp.o.d"
   "/home/skand/video-processor/src/main.cpp" "CMakeFiles/video_processor.dir/src/main.cpp.o" "gcc" "CMakeFiles/video_processor.dir/src/main.cpp.o.d"
   "/home/skand/video-processor/src/pipeline.cpp" "CMakeFiles/video_processor.dir/src/pipeline.cpp.o" "gcc" "CMakeFiles/video_processor.dir/src/pipeline.cpp.o.d"

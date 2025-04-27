@@ -142,10 +142,24 @@ CMakeFiles/test_phase4.dir/src/upscaler.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/test_phase4.dir/src/upscaler.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/skand/video-processor/src/upscaler.cpp -o CMakeFiles/test_phase4.dir/src/upscaler.cpp.s
 
+CMakeFiles/test_phase4.dir/src/dnn_super_res.cpp.o: CMakeFiles/test_phase4.dir/flags.make
+CMakeFiles/test_phase4.dir/src/dnn_super_res.cpp.o: /home/skand/video-processor/src/dnn_super_res.cpp
+CMakeFiles/test_phase4.dir/src/dnn_super_res.cpp.o: CMakeFiles/test_phase4.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/skand/video-processor/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/test_phase4.dir/src/dnn_super_res.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/test_phase4.dir/src/dnn_super_res.cpp.o -MF CMakeFiles/test_phase4.dir/src/dnn_super_res.cpp.o.d -o CMakeFiles/test_phase4.dir/src/dnn_super_res.cpp.o -c /home/skand/video-processor/src/dnn_super_res.cpp
+
+CMakeFiles/test_phase4.dir/src/dnn_super_res.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/test_phase4.dir/src/dnn_super_res.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/skand/video-processor/src/dnn_super_res.cpp > CMakeFiles/test_phase4.dir/src/dnn_super_res.cpp.i
+
+CMakeFiles/test_phase4.dir/src/dnn_super_res.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/test_phase4.dir/src/dnn_super_res.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/skand/video-processor/src/dnn_super_res.cpp -o CMakeFiles/test_phase4.dir/src/dnn_super_res.cpp.s
+
 CMakeFiles/test_phase4.dir/src/display.cpp.o: CMakeFiles/test_phase4.dir/flags.make
 CMakeFiles/test_phase4.dir/src/display.cpp.o: /home/skand/video-processor/src/display.cpp
 CMakeFiles/test_phase4.dir/src/display.cpp.o: CMakeFiles/test_phase4.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/skand/video-processor/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/test_phase4.dir/src/display.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/skand/video-processor/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/test_phase4.dir/src/display.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/test_phase4.dir/src/display.cpp.o -MF CMakeFiles/test_phase4.dir/src/display.cpp.o.d -o CMakeFiles/test_phase4.dir/src/display.cpp.o -c /home/skand/video-processor/src/display.cpp
 
 CMakeFiles/test_phase4.dir/src/display.cpp.i: cmake_force
@@ -159,7 +173,7 @@ CMakeFiles/test_phase4.dir/src/display.cpp.s: cmake_force
 CMakeFiles/test_phase4.dir/src/processor.cpp.o: CMakeFiles/test_phase4.dir/flags.make
 CMakeFiles/test_phase4.dir/src/processor.cpp.o: /home/skand/video-processor/src/processor.cpp
 CMakeFiles/test_phase4.dir/src/processor.cpp.o: CMakeFiles/test_phase4.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/skand/video-processor/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/test_phase4.dir/src/processor.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/skand/video-processor/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/test_phase4.dir/src/processor.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/test_phase4.dir/src/processor.cpp.o -MF CMakeFiles/test_phase4.dir/src/processor.cpp.o.d -o CMakeFiles/test_phase4.dir/src/processor.cpp.o -c /home/skand/video-processor/src/processor.cpp
 
 CMakeFiles/test_phase4.dir/src/processor.cpp.i: cmake_force
@@ -173,7 +187,7 @@ CMakeFiles/test_phase4.dir/src/processor.cpp.s: cmake_force
 CMakeFiles/test_phase4.dir/src/pipeline.cpp.o: CMakeFiles/test_phase4.dir/flags.make
 CMakeFiles/test_phase4.dir/src/pipeline.cpp.o: /home/skand/video-processor/src/pipeline.cpp
 CMakeFiles/test_phase4.dir/src/pipeline.cpp.o: CMakeFiles/test_phase4.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/skand/video-processor/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/test_phase4.dir/src/pipeline.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/skand/video-processor/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/test_phase4.dir/src/pipeline.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/test_phase4.dir/src/pipeline.cpp.o -MF CMakeFiles/test_phase4.dir/src/pipeline.cpp.o.d -o CMakeFiles/test_phase4.dir/src/pipeline.cpp.o -c /home/skand/video-processor/src/pipeline.cpp
 
 CMakeFiles/test_phase4.dir/src/pipeline.cpp.i: cmake_force
@@ -191,6 +205,7 @@ test_phase4_OBJECTS = \
 "CMakeFiles/test_phase4.dir/src/timer.cpp.o" \
 "CMakeFiles/test_phase4.dir/src/frame_buffer.cpp.o" \
 "CMakeFiles/test_phase4.dir/src/upscaler.cpp.o" \
+"CMakeFiles/test_phase4.dir/src/dnn_super_res.cpp.o" \
 "CMakeFiles/test_phase4.dir/src/display.cpp.o" \
 "CMakeFiles/test_phase4.dir/src/processor.cpp.o" \
 "CMakeFiles/test_phase4.dir/src/pipeline.cpp.o"
@@ -203,83 +218,30 @@ test_phase4_EXTERNAL_OBJECTS =
 /home/skand/video-processor/bin/test_phase4: CMakeFiles/test_phase4.dir/src/timer.cpp.o
 /home/skand/video-processor/bin/test_phase4: CMakeFiles/test_phase4.dir/src/frame_buffer.cpp.o
 /home/skand/video-processor/bin/test_phase4: CMakeFiles/test_phase4.dir/src/upscaler.cpp.o
+/home/skand/video-processor/bin/test_phase4: CMakeFiles/test_phase4.dir/src/dnn_super_res.cpp.o
 /home/skand/video-processor/bin/test_phase4: CMakeFiles/test_phase4.dir/src/display.cpp.o
 /home/skand/video-processor/bin/test_phase4: CMakeFiles/test_phase4.dir/src/processor.cpp.o
 /home/skand/video-processor/bin/test_phase4: CMakeFiles/test_phase4.dir/src/pipeline.cpp.o
 /home/skand/video-processor/bin/test_phase4: CMakeFiles/test_phase4.dir/build.make
 /home/skand/video-processor/bin/test_phase4: CMakeFiles/test_phase4.dir/compiler_depend.ts
-/home/skand/video-processor/bin/test_phase4: /usr/local/lib/libopencv_gapi.so.4.12.0
-/home/skand/video-processor/bin/test_phase4: /usr/local/lib/libopencv_stitching.so.4.12.0
-/home/skand/video-processor/bin/test_phase4: /usr/local/lib/libopencv_alphamat.so.4.12.0
-/home/skand/video-processor/bin/test_phase4: /usr/local/lib/libopencv_aruco.so.4.12.0
-/home/skand/video-processor/bin/test_phase4: /usr/local/lib/libopencv_bgsegm.so.4.12.0
-/home/skand/video-processor/bin/test_phase4: /usr/local/lib/libopencv_bioinspired.so.4.12.0
-/home/skand/video-processor/bin/test_phase4: /usr/local/lib/libopencv_ccalib.so.4.12.0
-/home/skand/video-processor/bin/test_phase4: /usr/local/lib/libopencv_cudabgsegm.so.4.12.0
-/home/skand/video-processor/bin/test_phase4: /usr/local/lib/libopencv_cudafeatures2d.so.4.12.0
-/home/skand/video-processor/bin/test_phase4: /usr/local/lib/libopencv_cudaobjdetect.so.4.12.0
-/home/skand/video-processor/bin/test_phase4: /usr/local/lib/libopencv_cudastereo.so.4.12.0
-/home/skand/video-processor/bin/test_phase4: /usr/local/lib/libopencv_dnn_objdetect.so.4.12.0
-/home/skand/video-processor/bin/test_phase4: /usr/local/lib/libopencv_dnn_superres.so.4.12.0
-/home/skand/video-processor/bin/test_phase4: /usr/local/lib/libopencv_dpm.so.4.12.0
-/home/skand/video-processor/bin/test_phase4: /usr/local/lib/libopencv_face.so.4.12.0
-/home/skand/video-processor/bin/test_phase4: /usr/local/lib/libopencv_freetype.so.4.12.0
-/home/skand/video-processor/bin/test_phase4: /usr/local/lib/libopencv_fuzzy.so.4.12.0
-/home/skand/video-processor/bin/test_phase4: /usr/local/lib/libopencv_hdf.so.4.12.0
-/home/skand/video-processor/bin/test_phase4: /usr/local/lib/libopencv_hfs.so.4.12.0
-/home/skand/video-processor/bin/test_phase4: /usr/local/lib/libopencv_img_hash.so.4.12.0
-/home/skand/video-processor/bin/test_phase4: /usr/local/lib/libopencv_intensity_transform.so.4.12.0
-/home/skand/video-processor/bin/test_phase4: /usr/local/lib/libopencv_line_descriptor.so.4.12.0
-/home/skand/video-processor/bin/test_phase4: /usr/local/lib/libopencv_mcc.so.4.12.0
-/home/skand/video-processor/bin/test_phase4: /usr/local/lib/libopencv_quality.so.4.12.0
-/home/skand/video-processor/bin/test_phase4: /usr/local/lib/libopencv_rapid.so.4.12.0
-/home/skand/video-processor/bin/test_phase4: /usr/local/lib/libopencv_reg.so.4.12.0
-/home/skand/video-processor/bin/test_phase4: /usr/local/lib/libopencv_rgbd.so.4.12.0
-/home/skand/video-processor/bin/test_phase4: /usr/local/lib/libopencv_saliency.so.4.12.0
-/home/skand/video-processor/bin/test_phase4: /usr/local/lib/libopencv_sfm.so.4.12.0
-/home/skand/video-processor/bin/test_phase4: /usr/local/lib/libopencv_signal.so.4.12.0
-/home/skand/video-processor/bin/test_phase4: /usr/local/lib/libopencv_stereo.so.4.12.0
-/home/skand/video-processor/bin/test_phase4: /usr/local/lib/libopencv_structured_light.so.4.12.0
-/home/skand/video-processor/bin/test_phase4: /usr/local/lib/libopencv_superres.so.4.12.0
-/home/skand/video-processor/bin/test_phase4: /usr/local/lib/libopencv_surface_matching.so.4.12.0
-/home/skand/video-processor/bin/test_phase4: /usr/local/lib/libopencv_tracking.so.4.12.0
-/home/skand/video-processor/bin/test_phase4: /usr/local/lib/libopencv_videostab.so.4.12.0
-/home/skand/video-processor/bin/test_phase4: /usr/local/lib/libopencv_wechat_qrcode.so.4.12.0
-/home/skand/video-processor/bin/test_phase4: /usr/local/lib/libopencv_xfeatures2d.so.4.12.0
-/home/skand/video-processor/bin/test_phase4: /usr/local/lib/libopencv_xobjdetect.so.4.12.0
-/home/skand/video-processor/bin/test_phase4: /usr/local/lib/libopencv_xphoto.so.4.12.0
-/home/skand/video-processor/bin/test_phase4: /usr/local/cuda-12.6/lib64/libcudart.so
-/home/skand/video-processor/bin/test_phase4: /usr/local/lib/libopencv_shape.so.4.12.0
 /home/skand/video-processor/bin/test_phase4: /usr/local/lib/libopencv_highgui.so.4.12.0
-/home/skand/video-processor/bin/test_phase4: /usr/local/lib/libopencv_datasets.so.4.12.0
-/home/skand/video-processor/bin/test_phase4: /usr/local/lib/libopencv_plot.so.4.12.0
-/home/skand/video-processor/bin/test_phase4: /usr/local/lib/libopencv_text.so.4.12.0
-/home/skand/video-processor/bin/test_phase4: /usr/local/lib/libopencv_ml.so.4.12.0
-/home/skand/video-processor/bin/test_phase4: /usr/local/lib/libopencv_phase_unwrapping.so.4.12.0
-/home/skand/video-processor/bin/test_phase4: /usr/local/lib/libopencv_cudacodec.so.4.12.0
 /home/skand/video-processor/bin/test_phase4: /usr/local/lib/libopencv_videoio.so.4.12.0
-/home/skand/video-processor/bin/test_phase4: /usr/local/lib/libopencv_cudaoptflow.so.4.12.0
-/home/skand/video-processor/bin/test_phase4: /usr/local/lib/libopencv_cudalegacy.so.4.12.0
 /home/skand/video-processor/bin/test_phase4: /usr/local/lib/libopencv_cudawarping.so.4.12.0
-/home/skand/video-processor/bin/test_phase4: /usr/local/lib/libopencv_optflow.so.4.12.0
-/home/skand/video-processor/bin/test_phase4: /usr/local/lib/libopencv_ximgproc.so.4.12.0
-/home/skand/video-processor/bin/test_phase4: /usr/local/lib/libopencv_video.so.4.12.0
-/home/skand/video-processor/bin/test_phase4: /usr/local/lib/libopencv_imgcodecs.so.4.12.0
-/home/skand/video-processor/bin/test_phase4: /usr/local/lib/libopencv_objdetect.so.4.12.0
-/home/skand/video-processor/bin/test_phase4: /usr/local/lib/libopencv_calib3d.so.4.12.0
-/home/skand/video-processor/bin/test_phase4: /usr/local/lib/libopencv_dnn.so.4.12.0
-/home/skand/video-processor/bin/test_phase4: /usr/local/lib/libopencv_features2d.so.4.12.0
-/home/skand/video-processor/bin/test_phase4: /usr/local/lib/libopencv_flann.so.4.12.0
-/home/skand/video-processor/bin/test_phase4: /usr/local/lib/libopencv_photo.so.4.12.0
 /home/skand/video-processor/bin/test_phase4: /usr/local/lib/libopencv_cudaimgproc.so.4.12.0
+/home/skand/video-processor/bin/test_phase4: /usr/local/lib/libopencv_dnn_superres.so.4.12.0
+/home/skand/video-processor/bin/test_phase4: /usr/local/cuda-12.6/lib64/libcudart.so
+/home/skand/video-processor/bin/test_phase4: /usr/local/lib/libopencv_imgcodecs.so.4.12.0
 /home/skand/video-processor/bin/test_phase4: /usr/local/lib/libopencv_cudafilters.so.4.12.0
-/home/skand/video-processor/bin/test_phase4: /usr/local/lib/libopencv_imgproc.so.4.12.0
 /home/skand/video-processor/bin/test_phase4: /usr/local/lib/libopencv_cudaarithm.so.4.12.0
+/home/skand/video-processor/bin/test_phase4: /usr/local/lib/libopencv_dnn.so.4.12.0
+/home/skand/video-processor/bin/test_phase4: /usr/local/lib/libopencv_quality.so.4.12.0
+/home/skand/video-processor/bin/test_phase4: /usr/local/lib/libopencv_imgproc.so.4.12.0
+/home/skand/video-processor/bin/test_phase4: /usr/local/lib/libopencv_ml.so.4.12.0
 /home/skand/video-processor/bin/test_phase4: /usr/local/lib/libopencv_core.so.4.12.0
 /home/skand/video-processor/bin/test_phase4: /usr/local/lib/libopencv_cudev.so.4.12.0
 /home/skand/video-processor/bin/test_phase4: /usr/lib/x86_64-linux-gnu/librt.a
 /home/skand/video-processor/bin/test_phase4: CMakeFiles/test_phase4.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/skand/video-processor/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Linking CXX executable /home/skand/video-processor/bin/test_phase4"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/skand/video-processor/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Linking CXX executable /home/skand/video-processor/bin/test_phase4"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/test_phase4.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

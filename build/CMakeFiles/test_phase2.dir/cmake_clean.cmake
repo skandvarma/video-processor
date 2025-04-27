@@ -4,6 +4,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/test_phase2.dir/link.d"
   "CMakeFiles/test_phase2.dir/src/camera.cpp.o"
   "CMakeFiles/test_phase2.dir/src/camera.cpp.o.d"
+  "CMakeFiles/test_phase2.dir/src/dnn_super_res.cpp.o"
+  "CMakeFiles/test_phase2.dir/src/dnn_super_res.cpp.o.d"
   "CMakeFiles/test_phase2.dir/src/frame_buffer.cpp.o"
   "CMakeFiles/test_phase2.dir/src/frame_buffer.cpp.o.d"
   "CMakeFiles/test_phase2.dir/src/test_phase2.cpp.o"

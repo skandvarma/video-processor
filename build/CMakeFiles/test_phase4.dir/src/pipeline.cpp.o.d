@@ -368,6 +368,8 @@ CMakeFiles/test_phase4.dir/src/pipeline.cpp.o: \
  /usr/local/include/opencv4/opencv2/video.hpp \
  /usr/local/include/opencv4/opencv2/video/tracking.hpp \
  /usr/local/include/opencv4/opencv2/video/background_segm.hpp \
+ /home/skand/video-processor/include/dnn_super_res.h \
+ /usr/local/include/opencv4/opencv2/dnn_superres.hpp \
  /home/skand/video-processor/include/timer.h /usr/include/c++/13/atomic \
  /home/skand/video-processor/include/camera.h /usr/include/c++/13/thread \
  /usr/include/c++/13/bits/std_thread.h \

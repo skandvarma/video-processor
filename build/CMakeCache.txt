@@ -969,7 +969,7 @@ CUDA_run_nvcc:INTERNAL=/home/skand/miniconda3/lib/python3.12/site-packages/cmake
 //Details about finding CUDA
 FIND_PACKAGE_MESSAGE_DETAILS_CUDA:INTERNAL=[/usr/local/cuda-12.6][/usr/local/cuda-12.6/bin/nvcc][/usr/local/cuda-12.6/include][/usr/local/cuda-12.6/lib64/libcudart_static.a][v12.6(12.6)]
 //Details about finding OpenCV
-FIND_PACKAGE_MESSAGE_DETAILS_OpenCV:INTERNAL=[/usr/local][v4.12.0()]
+FIND_PACKAGE_MESSAGE_DETAILS_OpenCV:INTERNAL=[/usr/local][cfound components: core imgproc highgui videoio cudawarping cudaimgproc dnn dnn_superres ][v4.12.0()]
 //Details about finding Threads
 FIND_PACKAGE_MESSAGE_DETAILS_Threads:INTERNAL=[TRUE][v()]
 //linker supports push/pop state

@@ -238,6 +238,36 @@ src/display.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_phase4.dir/build.make CMakeFiles/test_phase4.dir/src/display.cpp.s
 .PHONY : src/display.cpp.s
 
+src/dnn_super_res.o: src/dnn_super_res.cpp.o
+.PHONY : src/dnn_super_res.o
+
+# target to build an object file
+src/dnn_super_res.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/video_processor.dir/build.make CMakeFiles/video_processor.dir/src/dnn_super_res.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_phase2.dir/build.make CMakeFiles/test_phase2.dir/src/dnn_super_res.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_phase4.dir/build.make CMakeFiles/test_phase4.dir/src/dnn_super_res.cpp.o
+.PHONY : src/dnn_super_res.cpp.o
+
+src/dnn_super_res.i: src/dnn_super_res.cpp.i
+.PHONY : src/dnn_super_res.i
+
+# target to preprocess a source file
+src/dnn_super_res.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/video_processor.dir/build.make CMakeFiles/video_processor.dir/src/dnn_super_res.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_phase2.dir/build.make CMakeFiles/test_phase2.dir/src/dnn_super_res.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_phase4.dir/build.make CMakeFiles/test_phase4.dir/src/dnn_super_res.cpp.i
+.PHONY : src/dnn_super_res.cpp.i
+
+src/dnn_super_res.s: src/dnn_super_res.cpp.s
+.PHONY : src/dnn_super_res.s
+
+# target to generate assembly for a file
+src/dnn_super_res.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/video_processor.dir/build.make CMakeFiles/video_processor.dir/src/dnn_super_res.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_phase2.dir/build.make CMakeFiles/test_phase2.dir/src/dnn_super_res.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_phase4.dir/build.make CMakeFiles/test_phase4.dir/src/dnn_super_res.cpp.s
+.PHONY : src/dnn_super_res.cpp.s
+
 src/frame_buffer.o: src/frame_buffer.cpp.o
 .PHONY : src/frame_buffer.o
 
@@ -521,6 +551,9 @@ help:
 	@echo "... src/display.o"
 	@echo "... src/display.i"
 	@echo "... src/display.s"
+	@echo "... src/dnn_super_res.o"
+	@echo "... src/dnn_super_res.i"
+	@echo "... src/dnn_super_res.s"
 	@echo "... src/frame_buffer.o"
 	@echo "... src/frame_buffer.i"
 	@echo "... src/frame_buffer.s"

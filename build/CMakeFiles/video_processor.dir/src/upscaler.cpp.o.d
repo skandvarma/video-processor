@@ -367,6 +367,8 @@ CMakeFiles/video_processor.dir/src/upscaler.cpp.o: \
  /usr/local/include/opencv4/opencv2/video.hpp \
  /usr/local/include/opencv4/opencv2/video/tracking.hpp \
  /usr/local/include/opencv4/opencv2/video/background_segm.hpp \
+ /home/skand/video-processor/include/dnn_super_res.h \
+ /usr/local/include/opencv4/opencv2/dnn_superres.hpp \
  /usr/local/include/opencv4/opencv2/cudawarping.hpp \
  /usr/local/include/opencv4/opencv2/cudaarithm.hpp \
  /usr/local/include/opencv4/opencv2/cudaimgproc.hpp \

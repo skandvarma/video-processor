@@ -1,6 +1,7 @@
 #pragma once
 
 #include <opencv2/opencv.hpp>
+#include "dnn_super_res.h"
 #include <memory>
 #include <string>
 
@@ -23,7 +24,7 @@ public:
         BILINEAR,     ///< Bilinear interpolation (good balance)
         BICUBIC,      ///< Bicubic interpolation (better quality)
         LANCZOS,      ///< Lanczos interpolation (highest quality, slowest)
-        SUPER_RES     ///< Super resolution (GPU only, highest quality)
+        SUPER_RES     ///< Super resolution with image enhancement (highest quality)
     };
     
     /**
@@ -94,6 +95,7 @@ private:
     
     // Implementation of upscaler (CPU or GPU depending on availability)
     std::unique_ptr<UpscalerImpl> m_impl;
+    std::unique_ptr<DnnSuperRes> m_dnn_sr;
     
     // Initialize the implementation based on current settings
     bool initializeImpl();

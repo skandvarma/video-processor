@@ -372,4 +372,6 @@ CMakeFiles/test_phase2.dir/src/test_phase2.cpp.o: \
  /home/skand/video-processor/include/frame_buffer.h \
  /usr/include/c++/13/condition_variable \
  /home/skand/video-processor/include/upscaler.h \
+ /home/skand/video-processor/include/dnn_super_res.h \
+ /usr/local/include/opencv4/opencv2/dnn_superres.hpp \
  /home/skand/video-processor/include/timer.h

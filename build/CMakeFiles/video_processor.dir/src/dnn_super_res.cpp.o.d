@@ -1,6 +1,7 @@
-CMakeFiles/test_phase2.dir/src/upscaler.cpp.o: \
- /home/skand/video-processor/src/upscaler.cpp /usr/include/stdc-predef.h \
- /home/skand/video-processor/include/upscaler.h \
+CMakeFiles/video_processor.dir/src/dnn_super_res.cpp.o: \
+ /home/skand/video-processor/src/dnn_super_res.cpp \
+ /usr/include/stdc-predef.h \
+ /home/skand/video-processor/include/dnn_super_res.h \
  /usr/local/include/opencv4/opencv2/opencv.hpp \
  /usr/local/include/opencv4/opencv2/opencv_modules.hpp \
  /usr/local/include/opencv4/opencv2/core.hpp \
@@ -367,9 +368,4 @@ CMakeFiles/test_phase2.dir/src/upscaler.cpp.o: \
  /usr/local/include/opencv4/opencv2/video.hpp \
  /usr/local/include/opencv4/opencv2/video/tracking.hpp \
  /usr/local/include/opencv4/opencv2/video/background_segm.hpp \
- /home/skand/video-processor/include/dnn_super_res.h \
- /usr/local/include/opencv4/opencv2/dnn_superres.hpp \
- /usr/local/include/opencv4/opencv2/cudawarping.hpp \
- /usr/local/include/opencv4/opencv2/cudaarithm.hpp \
- /usr/local/include/opencv4/opencv2/cudaimgproc.hpp \
- /usr/local/include/opencv4/opencv2/cudafilters.hpp
+ /usr/local/include/opencv4/opencv2/dnn_superres.hpp

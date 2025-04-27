@@ -9,8 +9,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(OpenCV_STATIC OFF)
 set(OpenCV_CUDA_VERSION "")
 
-# Find OpenCV package
-find_package(OpenCV REQUIRED)
+# Find OpenCV package with additional DNN module
+find_package(OpenCV REQUIRED COMPONENTS core imgproc highgui videoio cudawarping cudaimgproc dnn dnn_superres)
 message(STATUS "OpenCV library status:")
 message(STATUS "    version: ${OpenCV_VERSION}")
 message(STATUS "    libraries: ${OpenCV_LIBS}")
@@ -31,12 +31,16 @@ else()
     message(STATUS "CUDA not found, falling back to CPU implementation")
 endif()
 
+# Create models directory if it doesn't exist
+file(MAKE_DIRECTORY ${PROJECT_SOURCE_DIR}/models)
+
 # Common source files
 set(COMMON_SOURCES
     src/camera.cpp
     src/timer.cpp
     src/frame_buffer.cpp
     src/upscaler.cpp
+    src/dnn_super_res.cpp  # New file for DNN Super-Resolution
 )
 
 # Phase 4 additional sources
@@ -96,6 +100,16 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 # Output binary to bin directory
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
+
+# Copy model files to bin directory
+file(COPY ${PROJECT_SOURCE_DIR}/models DESTINATION ${EXECUTABLE_OUTPUT_PATH})
+
+# Add a message to remind about downloading models
+message(STATUS "")
+message(STATUS "NOTE: Remember to download ML models to the 'models' directory.")
+message(STATUS "You can download models from: https://github.com/opencv/opencv_contrib/tree/master/modules/dnn_superres/models")
+message(STATUS "Example: wget -P models https://github.com/opencv/opencv_contrib/raw/master/modules/dnn_superres/models/FSRCNN_x4.pb")
+message(STATUS "")
 
 # Print configuration summary
 message(STATUS "")
