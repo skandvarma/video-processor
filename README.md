@@ -17,7 +17,7 @@ Key features:
 - Automatic downscaling for large input frames
 
 ## Directory Structure
-
+```
 ├── .vscode/                # VSCode configuration
 ├── bin/                    # Compiled executables
 ├── include/                # Header files
@@ -48,7 +48,7 @@ Key features:
 │   └── video_enhancer.cpp  # Video enhancement implementation
 ├── test/                   # Test files
 └── CMakeLists.txt          # CMake build configuration
-
+```
 ## Performance Optimizations
 
 The system includes several key performance optimizations:
