@@ -90,7 +90,7 @@ make
 ```
 Command Line Options
 The application supports several command-line options:
-
+```
 ./bin/video_processor [options] [source]
 
 source          - Camera index (number) or video file path
@@ -101,7 +101,7 @@ source          - Camera index (number) or video file path
 
 # Process a video file with super-resolution and save the output
 ./bin/video_processor my_video.mp4 --output enhanced_video.mp4
-
+```
 
 Performance Tips
 
