@@ -1,25 +1,22 @@
-# Low-Latency Video Processing System
-
+Low-Latency Video Processing System
 A high-performance video processing system built with C++ and OpenCV, designed for low-latency video capture, processing, and display.
-
-## Project Overview
-
+Project Overview
 This project provides a framework for capturing video streams from cameras, processing frames with various algorithms including upscaling, and displaying the results with minimal latency. The system is designed with a multi-threaded architecture that separates capturing, processing, and display operations for maximum performance.
-
 Key features:
-- Camera capture with automatic camera detection
-- Thread-safe zero-copy frame buffer for efficient producer-consumer pattern
-- GPU-accelerated frame processing (when CUDA is available)
-- Performance timing and statistics
-- Upscaling algorithms with quality/performance options
-- Background super-resolution processing for maintaining quality without sacrificing frame rate
-- Adaptive frame skipping for smooth playback under load
-- Memory optimization to reduce allocations
-- Input downscaling for large frames to improve processing efficiency
 
-## Directory Structure
+Camera capture with automatic camera detection
+Thread-safe zero-copy frame buffer for efficient producer-consumer pattern
+GPU-accelerated frame processing (when CUDA is available)
+Performance timing and statistics
+Upscaling algorithms with quality/performance options
+Background super-resolution processing for maintaining quality without sacrificing frame rate
+Adaptive frame skipping for smooth playback under load
+Memory optimization to reduce allocations
+Input downscaling for large frames to improve processing efficiency
+
+Directory Structure
 ├── .vscode/                # VSCode configuration
-├── bin/                    # Compiled executables
+├── bin/                    # Compiled executables 
 ├── include/                # Header files
 │   ├── camera.h            # Camera capture interface
 │   ├── display.h           # Display interface
@@ -41,34 +38,26 @@ Key features:
 │   └── upscaler.cpp        # Upscaler implementation (CPU & GPU)
 ├── test/                   # Test files
 └── CMakeLists.txt          # CMake build configuration
-
-## Performance Optimizations
-
+Performance Optimizations
 The system includes several optimizations to maximize performance while maintaining high-quality output:
 
-1. **Background Super-Resolution**: Performs computationally intensive super-resolution in a separate thread to avoid blocking the main processing pipeline.
+Background Super-Resolution: Performs computationally intensive super-resolution in a separate thread to avoid blocking the main processing pipeline.
+Adaptive Frame Skipping: Intelligently skips frames when the buffer is filling up to maintain smooth playback.
+Input Downscaling: Automatically downscales large input frames before processing to reduce computational load.
+FP16 Precision: Uses half-precision floating point when available on CUDA devices to accelerate neural network inference.
+Memory Optimization: Reuses existing memory allocations when possible to reduce memory overhead.
+Quality/Performance Trade-offs: Implements dynamic quality adjustments based on system load.
 
-2. **Adaptive Frame Skipping**: Intelligently skips frames when the buffer is filling up to maintain smooth playback.
-
-3. **Input Downscaling**: Automatically downscales large input frames before processing to reduce computational load.
-
-4. **FP16 Precision**: Uses half-precision floating point when available on CUDA devices to accelerate neural network inference.
-
-5. **Memory Optimization**: Reuses existing memory allocations when possible to reduce memory overhead.
-
-6. **Quality/Performance Trade-offs**: Implements dynamic quality adjustments based on system load.
-
-## Building the Project
-
+Building the Project
 Prerequisites:
-- CMake 3.10 or higher
-- C++17 compatible compiler
-- OpenCV 4.x with DNN and optionally CUDA modules
-- CUDA Toolkit (for GPU acceleration)
+
+CMake 3.10 or higher
+C++17 compatible compiler
+OpenCV 4.x with DNN and optionally CUDA modules
+CUDA Toolkit (for GPU acceleration)
 
 Build steps:
-```bash
-# Create build directory
+bash# Create build directory
 mkdir build
 cd build
 
