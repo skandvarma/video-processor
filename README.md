@@ -12,139 +12,65 @@ Key features:
 - GPU-accelerated frame processing (when CUDA is available)
 - Performance timing and statistics
 - Upscaling algorithms with quality/performance options
+- Background Super-Resolution processing for high quality without compromising FPS
+- Adaptive frame skipping to maintain smooth playback
+- Automatic downscaling for large input frames
 
 ## Directory Structure
-
 ```
 ├── .vscode/                # VSCode configuration
-├── bin/                    # Compiled executables 
+├── bin/                    # Compiled executables
 ├── include/                # Header files
 │   ├── camera.h            # Camera capture interface
-│   ├── display.h           # Display interface (placeholder)
+│   ├── display.h           # Display interface
+│   ├── dnn_super_res.h     # Deep learning super-resolution
 │   ├── frame_buffer.h      # Thread-safe frame buffer
-│   ├── processor.h         # Frame processor interface (placeholder)
+│   ├── pipeline.h          # Processing pipeline coordinator
+│   ├── processor.h         # Frame processor interface
 │   ├── timer.h             # Performance timing utility
-│   └── upscaler.h          # Frame upscaling with CPU/GPU implementations
+│   ├── upscaler.h          # Frame upscaling with CPU/GPU implementations
+│   └── video_enhancer.h    # Video enhancement effects
+├── models/                 # ML models for super-resolution
 ├── src/                    # Source files
 │   ├── camera.cpp          # Camera implementation
-│   ├── display.cpp         # Display implementation (placeholder)
+│   ├── display.cpp         # Display implementation
+│   ├── dnn_super_res.cpp   # DNN-based super-resolution implementation
 │   ├── frame_buffer.cpp    # Frame buffer implementation
 │   ├── main.cpp            # Main application entry point
 │   ├── opencv_test.cpp     # OpenCV environment test utility
-│   ├── processor.cpp       # Processor implementation (placeholder)
+│   ├── pipeline.cpp        # Pipeline implementation
+│   ├── processor.cpp       # Processor implementation
 │   ├── simple_camera_test.cpp # Simple camera test utility
 │   ├── test_phase2.cpp     # Phase 2 testing (buffer + upscaler)
+│   ├── test_phase4.cpp     # Phase 4 testing (full pipeline)
 │   ├── timer.cpp           # Timer implementation
-│   └── upscaler.cpp        # Upscaler implementation (CPU & GPU)
-├── test/                   # Test files (placeholder)
+│   ├── upscaler.cpp        # Upscaler implementation
+│   └── video_enhancer.cpp  # Video enhancement implementation
+├── test/                   # Test files
 └── CMakeLists.txt          # CMake build configuration
 ```
+## Performance Optimizations
 
-## File Descriptions
+The system includes several key performance optimizations:
 
-### Configuration Files
+1. **Background Super-Resolution Processing**: Super-resolution is performed in a separate thread to avoid blocking the main pipeline, allowing smooth video playback while still benefiting from high-quality upscaling.
 
-- **.vscode/c_cpp_properties.json**: VSCode C/C++ extension configuration file that sets up include paths for OpenCV.
+2. **Adaptive Frame Skipping**: The system dynamically adjusts frame skipping based on buffer fullness to prevent overflow and maintain smooth playback.
 
-- **CMakeLists.txt**: CMake build system configuration that handles:
-  - Setting C++17 standard
-  - Finding and linking OpenCV dependencies
-  - Optional CUDA detection and linking
-  - Building multiple executables for testing and production
-  - Setting output paths
+3. **Input Downscaling**: Very large input frames are automatically downscaled before processing to reduce computational load.
 
-### Core Components
+4. **FP16 Precision for DNNs**: Uses half-precision floating-point (FP16) for neural network inference on compatible GPUs, significantly improving performance.
 
-#### Camera Module
+5. **Memory Optimization**: Reuses existing frame buffers to minimize memory allocations and reduce garbage collection overhead.
 
-- **include/camera.h**: Defines the `Camera` class interface for video capture, supporting:
-  - Camera index and video file sources
-  - Resolution and framerate configuration
-  - Camera detection and initialization
-  - Frame retrieval
-
-- **src/camera.cpp**: Implementation of the Camera class that abstracts OpenCV's VideoCapture functionality with:
-  - Support for detecting available cameras
-  - Automatic retrieval of camera properties
-  - Robust initialization and error handling
-
-#### Frame Buffer
-
-- **include/frame_buffer.h**: Defines a thread-safe ring buffer for passing frames between threads:
-  - Uses atomic operations and mutexes for thread safety
-  - Implements blocking and non-blocking operations
-  - Zero-copy design using OpenCV's reference counting
-  - Condition variables for producer/consumer coordination
-
-- **src/frame_buffer.cpp**: Implementation of the FrameBuffer class with:
-  - Efficient frame management
-  - Thread synchronization
-  - Overflow handling
-
-#### Upscaler
-
-- **include/upscaler.h**: Interface for frame upscaling with multiple algorithms:
-  - Multiple interpolation methods (Nearest, Bilinear, Bicubic, Lanczos)
-  - Super-resolution support
-  - Automatic GPU/CPU selection
-
-- **src/upscaler.cpp**: Implementation with:
-  - CPU implementation using OpenCV's resize functions
-  - Optional GPU implementation using CUDA when available
-  - Algorithm selection and switching
-  - Pimpl pattern for implementation details
-
-#### Timer
-
-- **include/timer.h**: Performance measurement utility for profiling:
-  - Named timing events
-  - Statistics collection (min, max, average)
-  - Multiple simultaneous timers
-
-- **src/timer.cpp**: Implementation with:
-  - High-resolution clock usage
-  - Statistical aggregation
-  - Formatted output
-
-### Application and Tests
-
-- **src/main.cpp**: Main application that:
-  - Detects and initializes a camera
-  - Captures and displays video frames
-  - Measures and displays performance metrics
-  - Provides an interactive UI
-
-- **src/test_phase2.cpp**: Test program for Phase 2 features:
-  - Separate producer and consumer threads
-  - Frame buffer for thread communication
-  - Upscaling processing step
-  - Performance measurement
-
-- **src/opencv_test.cpp**: Diagnostic utility to:
-  - Check OpenCV version
-  - Test available camera backends
-  - Verify device access
-  - Test V4L2 configuration
-
-- **src/simple_camera_test.cpp**: Minimal camera test that:
-  - Initializes a camera
-  - Captures a single frame
-  - Reports camera properties
-
-### Placeholder Files
-
-These files are empty or minimal placeholders for future implementation:
-
-- **include/display.h** and **src/display.cpp**: For dedicated display functionality
-- **include/processor.h** and **src/processor.cpp**: For additional frame processing
-- **test/** directory files: For future unit testing
+6. **Optimized GPU/CPU Switching**: Automatically selects the best processing method based on hardware availability and performance requirements.
 
 ## Building the Project
 
 Prerequisites:
 - CMake 3.10 or higher
 - C++17 compatible compiler
-- OpenCV 4.x
+- OpenCV 4.x with DNN and optionally CUDA modules
 - Optional: CUDA for GPU acceleration
 
 Build steps:
@@ -162,28 +88,32 @@ make
 # Run the main application
 ../bin/video_processor
 ```
+Command Line Options
+The application supports several command-line options:
+```
+./bin/video_processor [options] [source]
 
-## Testing
+source          - Camera index (number) or video file path
+--output, -o    - Specify output file for recording
+--record, -r    - Start recording immediately
+--fast-mode, -fm - Use faster algorithms for better performance
+--help, -h      - Show help information
 
-Several test programs are provided:
+# Process a video file with super-resolution and save the output
+./bin/video_processor my_video.mp4 --output enhanced_video.mp4
+```
 
-- **simple_camera_test**: Basic camera functionality test
-- **opencv_test**: OpenCV environment test
-- **test_phase2**: Tests the frame buffer and upscaler components
+Performance Tips
 
-## GPU Acceleration
+For maximum performance, run on a system with a CUDA-capable GPU
+Use lower resolution input sources for faster processing
+Try the --fast-mode option when highest quality isn't required
+Use test_phase2 or test_phase4 for optimized testing
+Adjust buffer sizes in the code for your specific hardware
 
-The system automatically detects if CUDA is available and enables GPU acceleration for compatible operations. The upscaler can use GPU acceleration for faster performance when processing high-resolution frames.
+Troubleshooting
 
-## Performance Considerations
-
-- The zero-copy frame buffer minimizes memory usage and copying overhead
-- Thread separation allows parallel execution of capture and processing
-- The timer component helps identify performance bottlenecks
-- GPU acceleration provides significant speedup for compute-intensive operations
-
-## Notes:
-
-- Execute each test_phase file instead of full application i dont know why those run better 
-- ./bin/test_phase2 , does the same work but with more efficiency
-- test main.cpp with different params please
+If you experience frame drops, your system might not be fast enough for super-resolution. Try the --fast-mode option.
+If no cameras are detected, ensure you have proper permissions for camera access
+Check CUDA availability with the opencv_test utility
+Monitor system resource usage during processing to identify bottlenecks
