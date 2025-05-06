@@ -1,119 +1,173 @@
-# Low-Latency Video Processing System
+Here’s a clean, professional, and well-structured version of your README optimized for GitHub:
 
-A high-performance video processing system built with C++ and OpenCV, designed for low-latency video capture, processing, and display.
+---
 
-## Project Overview
+# 🚀 Low-Latency Video Processing System
 
-This project provides a framework for capturing video streams from cameras, processing frames with various algorithms including upscaling, and displaying the results with minimal latency. The system is designed with a multi-threaded architecture that separates capturing, processing, and display operations for maximum performance.
+A high-performance C++ and OpenCV-based system for **real-time video capture, processing, and display** with **low latency** and **upscaling capabilities**.
 
-Key features:
-- Camera capture with automatic camera detection
-- Thread-safe zero-copy frame buffer for efficient producer-consumer pattern
-- GPU-accelerated frame processing (when CUDA is available)
-- Performance timing and statistics
-- Upscaling algorithms with quality/performance options
-- Background Super-Resolution processing for high quality without compromising FPS
-- Adaptive frame skipping to maintain smooth playback
-- Automatic downscaling for large input frames
+---
 
-## Directory Structure
-```
-├── .vscode/                # VSCode configuration
-├── bin/                    # Compiled executables
-├── include/                # Header files
-│   ├── camera.h            # Camera capture interface
-│   ├── display.h           # Display interface
-│   ├── dnn_super_res.h     # Deep learning super-resolution
-│   ├── frame_buffer.h      # Thread-safe frame buffer
-│   ├── pipeline.h          # Processing pipeline coordinator
-│   ├── processor.h         # Frame processor interface
-│   ├── timer.h             # Performance timing utility
-│   ├── upscaler.h          # Frame upscaling with CPU/GPU implementations
-│   └── video_enhancer.h    # Video enhancement effects
-├── models/                 # ML models for super-resolution
-├── src/                    # Source files
-│   ├── camera.cpp          # Camera implementation
-│   ├── display.cpp         # Display implementation
-│   ├── dnn_super_res.cpp   # DNN-based super-resolution implementation
-│   ├── frame_buffer.cpp    # Frame buffer implementation
-│   ├── main.cpp            # Main application entry point
-│   ├── opencv_test.cpp     # OpenCV environment test utility
-│   ├── pipeline.cpp        # Pipeline implementation
-│   ├── processor.cpp       # Processor implementation
-│   ├── simple_camera_test.cpp # Simple camera test utility
-│   ├── test_phase2.cpp     # Phase 2 testing (buffer + upscaler)
-│   ├── test_phase4.cpp     # Phase 4 testing (full pipeline)
-│   ├── timer.cpp           # Timer implementation
-│   ├── upscaler.cpp        # Upscaler implementation
-│   └── video_enhancer.cpp  # Video enhancement implementation
-├── test/                   # Test files
-└── CMakeLists.txt          # CMake build configuration
-```
-## Performance Optimizations
+## 📌 Project Overview
 
-The system includes several key performance optimizations:
+This project provides a modular, multi-threaded framework to:
 
-1. **Background Super-Resolution Processing**: Super-resolution is performed in a separate thread to avoid blocking the main pipeline, allowing smooth video playback while still benefiting from high-quality upscaling.
+* Capture live camera feeds or video files
+* Process frames using high-quality upscaling (bicubic or super-resolution)
+* Display and optionally record video with minimal delay
 
-2. **Adaptive Frame Skipping**: The system dynamically adjusts frame skipping based on buffer fullness to prevent overflow and maintain smooth playback.
+Built for speed, modularity, and extendability — optimized for **real-time performance**.
 
-3. **Input Downscaling**: Very large input frames are automatically downscaled before processing to reduce computational load.
+---
 
-4. **FP16 Precision for DNNs**: Uses half-precision floating-point (FP16) for neural network inference on compatible GPUs, significantly improving performance.
+## ✨ Features
 
-5. **Memory Optimization**: Reuses existing frame buffers to minimize memory allocations and reduce garbage collection overhead.
+* 🔍 **Camera detection & video file support**
+* ⚙️ **Thread-safe zero-copy frame buffer** (Producer–Consumer model)
+* ⚡ **Multi-threaded architecture** (Capture / Process / Display)
+* 🚀 **GPU acceleration** with CUDA (optional)
+* 🎞️ **Multiple upscaling algorithms**:
 
-6. **Optimized GPU/CPU Switching**: Automatically selects the best processing method based on hardware availability and performance requirements.
+  * **Bicubic** (fast, default)
+  * **Super-Resolution** (neural net, highest quality)
+* 💡 **Temporal smoothing** for FPS boost with visual consistency
+* 📷 **Screenshot capture**
+* 🎥 **Real-time video recording** with multiple formats
+* 📊 **Performance stats & diagnostics**
 
-## Building the Project
+---
 
-Prerequisites:
-- CMake 3.10 or higher
-- C++17 compatible compiler
-- OpenCV 4.x with DNN and optionally CUDA modules
-- Optional: CUDA for GPU acceleration
+## 🛠️ System Requirements
 
-Build steps:
+* C++17-compatible compiler
+* CMake ≥ 3.10
+* OpenCV 4.x (with CUDA support for GPU acceleration)
+* \[Optional] CUDA Toolkit
+
+---
+
+## 🧱 Build Instructions
+
 ```bash
-# Create build directory
-mkdir build
-cd build
+# Clone repository
+git clone https://github.com/yourusername/video-processor.git
+cd video-processor
 
-# Configure with CMake
+# Create and enter build directory
+mkdir build && cd build
+
+# Configure and build
 cmake ..
-
-# Build
 make
 
-# Run the main application
+# Run the application
 ../bin/video_processor
 ```
-Command Line Options
-The application supports several command-line options:
-```
-./bin/video_processor [options] [source]
 
-source          - Camera index (number) or video file path
---output, -o    - Specify output file for recording
---record, -r    - Start recording immediately
---fast-mode, -fm - Use faster algorithms for better performance
---help, -h      - Show help information
+---
 
-# Process a video file with super-resolution and save the output
-./bin/video_processor my_video.mp4 --output enhanced_video.mp4
+## 🚦 Usage
+
+```bash
+./bin/video_processor [camera_index | video_file_path] [options]
 ```
 
-Performance Tips
+### CLI Options:
 
-For maximum performance, run on a system with a CUDA-capable GPU
-Use lower resolution input sources for faster processing
-Try the --fast-mode option when highest quality isn't required
-Use test_phase2 or test_phase4 for optimized testing
-Adjust buffer sizes in the code for your specific hardware
+| Option                 | Description                                       |
+| ---------------------- | ------------------------------------------------- |
+| `--output`, `-o`       | Output file path                                  |
+| `--record`, `-r`       | Start recording immediately                       |
+| `--super-res`, `-sr`   | Use neural network super-resolution               |
+| `--format`, `-fmt`     | Output format: `mp4`, `h264`, `yuv`, `avi`, `mkv` |
+| `--resolution`, `-res` | Set output resolution: `width height`             |
+| `--fast`, `-f`         | Process as fast as possible (ignore frame rate)   |
 
-Troubleshooting
+---
 
-If you experience frame drops, your system might not be fast enough for super-resolution. Try the --fast-mode option.
-If no cameras are detected, ensure you have proper permissions for camera access
-Check CUDA availability with the opencv_test utility
-Monitor system resource usage during processing to identify bottlenecks
+## 📂 Example Commands
+
+```bash
+# Live webcam feed with bicubic (default)
+./bin/video_processor
+
+# Webcam with super-resolution
+./bin/video_processor --super-res
+
+# Process video file with super-res and save output
+./bin/video_processor video.mp4 --super-res --output output.mp4 --record
+
+# Record with specific format
+./bin/video_processor video.mp4 --output output.mp4 --format h264 --record
+
+# Custom resolution
+./bin/video_processor --resolution 1280 720
+```
+
+---
+
+## ⌨️ Keyboard Controls (Live Mode)
+
+| Key | Action               |
+| --- | -------------------- |
+| `q` | Quit the application |
+| `r` | Toggle recording     |
+| `s` | Save a screenshot    |
+
+---
+
+## 🔧 Performance Tips
+
+* ✅ **Use bicubic** for live video (best real-time quality/performance balance)
+* 🔍 **Use super-resolution** for post-processing (high quality, more compute)
+* 🎛️ Increase buffer size for smoother super-res (but adds latency)
+* 📉 Lower input resolution to speed up processing
+* ⚡ **Enable GPU** (OpenCV with CUDA) for significant performance gain
+
+---
+
+## 🧬 Architecture
+
+The system uses a 3-thread pipeline:
+
+```
+[Capture Thread] → [Processing Thread] → [Display Thread]
+       ↓                    ↓                    ↓
+   Raw Buffer         Processed Buffer       Output / Record
+```
+
+This design ensures non-blocking operation and smooth real-time performance.
+
+---
+
+## 💾 Output Formats
+
+| Format | Notes                               |
+| ------ | ----------------------------------- |
+| MP4    | Default, widely supported           |
+| H.264  | Efficient, high quality             |
+| YUV    | Raw format, large files             |
+| AVI    | Uses MJPG codec                     |
+| MKV    | Uses X264 codec, flexible container |
+
+> Format support may depend on your OpenCV build and installed codecs.
+
+---
+
+## 🛠 Troubleshooting
+
+| Issue            | Fix                                                        |
+| ---------------- | ---------------------------------------------------------- |
+| Dropped frames   | Increase buffer, reduce resolution, or use bicubic         |
+| Codec errors     | Try different format or check OpenCV codec support         |
+| Slow performance | Enable CUDA, reduce resolution, or avoid super-res in live |
+
+---
+
+## 📃 License
+
+[MIT License](LICENSE)
+
+---
+
+Let me know if you'd like me to auto-generate a `README.md` file for this that you can drop into your repo.
