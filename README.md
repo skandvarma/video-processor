@@ -1,4 +1,3 @@
-Here’s a clean, professional, and well-structured version of your README optimized for GitHub:
 
 ---
 
@@ -170,4 +169,3 @@ This design ensures non-blocking operation and smooth real-time performance.
 
 ---
 
-Let me know if you'd like me to auto-generate a `README.md` file for this that you can drop into your repo.
