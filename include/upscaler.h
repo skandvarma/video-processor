@@ -24,7 +24,8 @@ public:
         BILINEAR,     ///< Bilinear interpolation (good balance)
         BICUBIC,      ///< Bicubic interpolation (better quality)
         LANCZOS,      ///< Lanczos interpolation (highest quality, slowest)
-        SUPER_RES     ///< Super resolution with image enhancement (highest quality)
+        SUPER_RES,    ///< Super resolution with image enhancement (highest quality)
+        REAL_ESRGAN   ///< RealESRGAN model (best quality)
     };
     
     /**

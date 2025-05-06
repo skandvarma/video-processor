@@ -99,121 +99,121 @@ void signalHandler(int signum) {
 
 // Capture thread function - with frame rate control for video files
 void capture_thread(Camera& camera, FrameBuffer& buffer, Timer& timer, 
-    bool is_video_file, double target_fps, bool using_super_res) {
-std::cout << "Capture thread started" << std::endl;
-cv::Mat frame;
+                   bool is_video_file, double target_fps, bool using_super_res) {
+    std::cout << "Capture thread started" << std::endl;
+    cv::Mat frame;
 
-// For measuring real capture rate
-auto start_time = std::chrono::high_resolution_clock::now();
-int frame_counter = 0;
-double fps = 0;
+    // For measuring real capture rate
+    auto start_time = std::chrono::high_resolution_clock::now();
+    int frame_counter = 0;
+    double fps = 0;
 
-// For frame rate control
-auto last_frame_time = std::chrono::high_resolution_clock::now();
-std::chrono::microseconds frame_interval(0);
+    // For frame rate control
+    auto last_frame_time = std::chrono::high_resolution_clock::now();
+    std::chrono::microseconds frame_interval(0);
 
-// Calculate frame interval if we have a valid FPS
-if (is_video_file && target_fps > 0) {
-frame_interval = std::chrono::microseconds(static_cast<long long>(1000000.0 / target_fps));
-std::cout << "Video frame rate control enabled: Target " << target_fps 
-  << " FPS (interval: " << frame_interval.count() << "µs)" << std::endl;
-}
+    // Calculate frame interval if we have a valid FPS
+    if (is_video_file && target_fps > 0) {
+        frame_interval = std::chrono::microseconds(static_cast<long long>(1000000.0 / target_fps));
+        std::cout << "Video frame rate control enabled: Target " << target_fps 
+                  << " FPS (interval: " << frame_interval.count() << "µs)" << std::endl;
+    }
 
-// For controlled frame skipping
-int frame_skip = using_super_res ? (is_video_file ? 2 : 1) : 1;
-int frame_skip_counter = 0;
+    // For controlled frame skipping
+    int frame_skip = using_super_res ? (is_video_file ? 1 : 1) : 1;
+    int frame_skip_counter = 0;
 
-while (g_running) {
-// For video files, control frame rate to match source
-if (is_video_file && frame_interval.count() > 0) {
-auto now = std::chrono::high_resolution_clock::now();
-auto elapsed = now - last_frame_time;
+    while (g_running) {
+        // For video files, control frame rate to match source
+        if (is_video_file && frame_interval.count() > 0) {
+            auto now = std::chrono::high_resolution_clock::now();
+            auto elapsed = now - last_frame_time;
 
-if (elapsed < frame_interval) {
-// Wait until it's time for the next frame
-std::this_thread::sleep_for(frame_interval - elapsed);
-}
-last_frame_time = std::chrono::high_resolution_clock::now();
-}
+            if (elapsed < frame_interval) {
+                // Wait until it's time for the next frame
+                std::this_thread::sleep_for(frame_interval - elapsed);
+            }
+            last_frame_time = std::chrono::high_resolution_clock::now();
+        }
 
-// Controlled frame skipping for super-res
-frame_skip_counter++;
-if (using_super_res && frame_skip_counter % frame_skip != 0) {
-// For super-res, skip frames at regular intervals to allow processing to keep up
-// This is different from buffer pressure-based skipping
+        // Controlled frame skipping for super-res
+        frame_skip_counter++;
+        if (using_super_res && frame_skip_counter % frame_skip != 0) {
+            // For super-res, skip frames at regular intervals to allow processing to keep up
+            // This is different from buffer pressure-based skipping
 
-// We still need to read the frame to advance the video
-if (is_video_file) {
-cv::Mat temp_frame;
-camera.getFrame(temp_frame);
-}
+            // We still need to read the frame to advance the video
+            if (is_video_file) {
+                cv::Mat temp_frame;
+                camera.getFrame(temp_frame);
+            }
 
-continue;
-}
+            continue;
+        }
 
-// Time the frame acquisition
-timer.start("acquisition");
-bool success = camera.getFrame(frame);
-timer.stop("acquisition");
+        // Time the frame acquisition
+        timer.start("acquisition");
+        bool success = camera.getFrame(frame);
+        timer.stop("acquisition");
 
-if (!success || frame.empty()) {
-std::cerr << "Failed to get frame from source" << std::endl;
-std::this_thread::sleep_for(std::chrono::milliseconds(5));
+        if (!success || frame.empty()) {
+            std::cerr << "Failed to get frame from source" << std::endl;
+            std::this_thread::sleep_for(std::chrono::milliseconds(5));
 
-// Check if we've reached the end of a video file
-if (!camera.isOpened()) {
-std::cout << "End of video file reached" << std::endl;
-g_running = false;
-break;
-}
+            // Check if we've reached the end of a video file
+            if (!camera.isOpened()) {
+                std::cout << "End of video file reached" << std::endl;
+                g_running = false;
+                break;
+            }
 
-continue;
-}
+            continue;
+        }
 
-// Calculate actual camera FPS
-frame_counter++;
-auto current_time = std::chrono::high_resolution_clock::now();
-auto elapsed = std::chrono::duration<double>(current_time - start_time).count();
+        // Calculate actual camera FPS
+        frame_counter++;
+        auto current_time = std::chrono::high_resolution_clock::now();
+        auto elapsed = std::chrono::duration<double>(current_time - start_time).count();
 
-if (elapsed >= 1.0) {
-fps = frame_counter / elapsed;
-std::cout << "Source capture rate: " << fps << " FPS" << std::endl;
-frame_counter = 0;
-start_time = current_time;
-}
+        if (elapsed >= 1.0) {
+            fps = frame_counter / elapsed;
+            std::cout << "Source capture rate: " << fps << " FPS" << std::endl;
+            frame_counter = 0;
+            start_time = current_time;
+        }
 
-// Instead of pure buffer pressure-based frame dropping, use a more
-// sophisticated approach that considers both buffer state and processing method
+        // Instead of pure buffer pressure-based frame dropping, use a more
+        // sophisticated approach that considers both buffer state and processing method
 
-// Calculate buffer utilization
-double buffer_utilization = static_cast<double>(buffer.size()) / buffer.capacity();
+        // Calculate buffer utilization
+        double buffer_utilization = static_cast<double>(buffer.size()) / buffer.capacity();
 
-if (buffer_utilization < 0.9) {  // Only push if buffer isn't almost full
-// Push frame to buffer - use blocking for more consistent behavior
-timer.start("buffer_push");
-bool pushed = buffer.pushFrame(frame, true);
-timer.stop("buffer_push");
+        if (buffer_utilization < 0.9) {  // Only push if buffer isn't almost full
+            // Push frame to buffer - use blocking for more consistent behavior
+            timer.start("buffer_push");
+            bool pushed = buffer.pushFrame(frame, true);
+            timer.stop("buffer_push");
 
-if (pushed) {
-g_frames_captured++;
-} else {
-g_frames_dropped++;
-std::cerr << "Failed to push frame to buffer" << std::endl;
-}
-} else {
-// Buffer is too full, we must skip this frame
-g_frames_dropped++;
+            if (pushed) {
+                g_frames_captured++;
+            } else {
+                g_frames_dropped++;
+                std::cerr << "Failed to push frame to buffer" << std::endl;
+            }
+        } else {
+            // Buffer is too full, we must skip this frame
+            g_frames_dropped++;
 
-if (g_frames_dropped % 10 == 0) {
-std::cout << "Warning: Dropped " << g_frames_dropped << " frames due to full buffer" << std::endl;
-}
+            if (g_frames_dropped % 10 == 0) {
+                std::cout << "Warning: Dropped " << g_frames_dropped << " frames due to full buffer" << std::endl;
+            }
 
-// When buffer is almost full, add a longer delay to allow consumer to catch up
-std::this_thread::sleep_for(std::chrono::milliseconds(10 * using_super_res ? 30 : 10));
-}
-}
+            // When buffer is almost full, add a longer delay to allow consumer to catch up
+            std::this_thread::sleep_for(std::chrono::milliseconds(10 * using_super_res ? 30 : 10));
+        }
+    }
 
-std::cout << "Capture thread finished" << std::endl;
+    std::cout << "Capture thread finished" << std::endl;
 }
 
 void processing_thread(FrameBuffer& input_buffer, FrameBuffer& output_buffer, 
@@ -349,7 +349,7 @@ void display_thread(FrameBuffer& buffer, Timer& timer,
     
     // Create window with a consistent size
     cv::namedWindow("Video Feed", cv::WINDOW_NORMAL);
-    cv::resizeWindow("Video Feed", 1280, 720);
+    cv::resizeWindow("Video Feed", 1920, 1080);
 
     // Default video parameters
     int codec = cv::VideoWriter::fourcc('m', 'p', '4', 'v'); // Default MP4V codec
@@ -590,9 +590,12 @@ int main(int argc, char* argv[]) {
     bool use_video_file = false;
     bool simulate_realtime = true; // New flag to control frame rate simulation
     bool use_super_res = false;    // Default to bicubic upscaling
-    int target_width = 1280;       // Default output width (reduced from 1920)
-    int target_height = 720;       // Default output height (reduced from 1080)
+    int target_width = 1920;       // Default output width (reduced from 1920)
+    int target_height = 1080;       // Default output height (reduced from 1080)
     std::string g_output_format = "mp4"; // Default format
+    
+    // Declare algorithm variable before command-line parsing
+    Upscaler::Algorithm algorithm = Upscaler::BICUBIC; // Default algorithm
     
     // Process command line arguments
     for (int i = 1; i < argc; i++) {
@@ -611,7 +614,12 @@ int main(int argc, char* argv[]) {
             std::cout << "Fast processing mode enabled (no frame rate control)" << std::endl;
         } else if (arg == "--super-res" || arg == "-sr") {
             use_super_res = true;
+            algorithm = Upscaler::SUPER_RES; // Set algorithm here
             std::cout << "Super-resolution upscaling enabled" << std::endl;
+        } else if (arg == "--realesrgan") {
+            use_super_res = true;
+            algorithm = Upscaler::REAL_ESRGAN; // Set algorithm to REAL_ESRGAN
+            std::cout << "RealESRGAN super-resolution upscaling enabled" << std::endl;
         } else if (arg == "--resolution" || arg == "-res") {
             if (i + 2 < argc) {
                 target_width = std::stoi(argv[++i]);
@@ -660,7 +668,7 @@ int main(int argc, char* argv[]) {
         
         if (available_cameras.empty()) {
             std::cerr << "No cameras detected! Please connect a camera or provide a video file path." << std::endl;
-            std::cerr << "Usage: " << argv[0] << " [camera_index|video_file_path] [--output filename] [--record] [--fast] [--super-res] [--resolution width height] [--format format]" << std::endl;
+            std::cerr << "Usage: " << argv[0] << " [camera_index|video_file_path] [--output filename] [--record] [--fast] [--super-res] [--realesrgan] [--resolution width height] [--format format]" << std::endl;
             std::cerr << "Supported formats: mp4, h264, yuv, avi, mkv" << std::endl;
             return -1;
         }
@@ -702,9 +710,7 @@ int main(int argc, char* argv[]) {
               << source_width << "x" << source_height
               << " @ " << source_fps << " FPS" << std::endl;
     
-    // Choose algorithm based on user preference (default is bicubic)
-    Upscaler::Algorithm algorithm = use_super_res ? Upscaler::SUPER_RES : Upscaler::BICUBIC;
-    
+    // Use the algorithm variable we already set (don't redeclare it)
     std::cout << "Using " << (use_super_res ? "Super-Resolution" : "Bicubic") 
               << " upscaling algorithm" << std::endl;
     

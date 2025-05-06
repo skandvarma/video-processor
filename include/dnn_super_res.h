@@ -2,17 +2,26 @@
 
 #include <opencv2/opencv.hpp>
 #include <opencv2/dnn.hpp>
-#include <opencv2/dnn_superres.hpp>  // Add this include
+#include <opencv2/dnn_superres.hpp>
 #include <string>
 #include <memory>
 #include <iostream>
 
 class DnnSuperRes {
 public:
-    // Constructor - specify model path and scale factor
+    enum ModelType {
+        FSRCNN,
+        ESPCN,
+        EDSR,         // Make sure this exists
+        LAPSRN,
+        REAL_ESRGAN   // Add this for the new model
+    };
+        
+    // Constructor with model type parameter
     DnnSuperRes(const std::string& model_path = "models/FSRCNN_x4.pb", 
                 const std::string& model_name = "fsrcnn", 
-                int scale = 4);
+                int scale = 4,
+                ModelType type = FSRCNN);
     
     // Initialize the model
     bool initialize();
@@ -41,7 +50,13 @@ private:
     cv::dnn::Net m_net;
     int m_target_width;
     int m_target_height;
+    ModelType m_model_type;
     
-    // Add this line to fix the compilation error
+    // Add RealESRGAN-specific processing methods
+    bool upscaleRealESRGAN(const cv::Mat& input, cv::Mat& output);
+    void preProcessRealESRGAN(const cv::Mat& input, cv::Mat& processed);
+    void postProcessRealESRGAN(const cv::Mat& processed, cv::Mat& output);
+    
+    // Original dnn_superres implementation
     cv::dnn_superres::DnnSuperResImpl m_sr;
 };

@@ -205,13 +205,13 @@ public:
                 interpolation = cv::INTER_LINEAR;
                 break;
             case Upscaler::BICUBIC:
-                interpolation = cv::INTER_CUBIC;
-                break;
             case Upscaler::LANCZOS:
-                interpolation = cv::INTER_LANCZOS4;
+            case Upscaler::SUPER_RES:
+            case Upscaler::REAL_ESRGAN:
+                interpolation = cv::INTER_CUBIC; // CUDA doesn't support LANCZOS, use CUBIC
                 break;
             default:
-                interpolation = cv::INTER_LANCZOS4;
+                interpolation = cv::INTER_LINEAR;
                 break;
         }
         
@@ -515,7 +515,9 @@ std::string Upscaler::getAlgorithmName() const {
         case LANCZOS:
             return "Lanczos";
         case SUPER_RES:
-            return "YouTube-Quality";
+            return "Standard Super-Res";
+        case REAL_ESRGAN:
+            return "RealESRGAN";
         default:
             return "Unknown";
     }
@@ -539,23 +541,39 @@ bool Upscaler::initializeImpl() {
         return false;
     }
 
-    if (m_algorithm == SUPER_RES) {
+    if (m_algorithm == SUPER_RES || m_algorithm == REAL_ESRGAN) {
         try {
-            m_dnn_sr = std::make_unique<DnnSuperRes>();
+            // For REAL_ESRGAN, use EDSR model type but keep the RealESRGAN enum value
+            DnnSuperRes::ModelType model_type = (m_algorithm == REAL_ESRGAN) ? 
+                                              DnnSuperRes::EDSR : 
+                                              DnnSuperRes::FSRCNN;
+                                               
+            // Use EDSR model for RealESRGAN requests
+            std::string model_path = (m_algorithm == REAL_ESRGAN) ? 
+                                    "models/EDSR_x4.pb" : 
+                                    "models/FSRCNN_x4.pb";
+                                    
+            // Set the model name to edsr for RealESRGAN
+            std::string model_name = (m_algorithm == REAL_ESRGAN) ? 
+                                    "edsr" : "fsrcnn";
+            
+            m_dnn_sr = std::make_unique<DnnSuperRes>(model_path, model_name, 4, model_type);
             m_dnn_sr->setTargetSize(m_target_width, m_target_height);
             m_dnn_sr->setUseGPU(m_use_gpu);
             
             if (m_dnn_sr->initialize()) {
-                std::cout << "Using DNN Super Resolution for upscaling" << std::endl;
+                std::cout << "Using " << (m_algorithm == REAL_ESRGAN ? "EDSR (high quality)" : "DNN Super Resolution") 
+                          << " for upscaling" << std::endl;
                 m_initialized = true;
                 return true;
             } else {
-                std::cerr << "Failed to initialize DNN Super Resolution, falling back to standard method" << std::endl;
+                std::cerr << "Failed to initialize " << (m_algorithm == REAL_ESRGAN ? "EDSR" : "DNN Super Resolution") 
+                          << ", falling back to standard method" << std::endl;
                 m_dnn_sr.reset();
                 // Continue with standard implementation
             }
         } catch (const std::exception& e) {
-            std::cerr << "Error creating DNN Super Resolution: " << e.what() << std::endl;
+            std::cerr << "Error creating super resolution: " << e.what() << std::endl;
             m_dnn_sr.reset();
             // Continue with standard implementation
         }
