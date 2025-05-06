@@ -265,8 +265,15 @@
   /usr/local/cuda-12.6/lib64/libcublas.so.12 \
   /usr/local/cuda-12.6/lib64/libcublasLt.so.12 \
   /usr/local/cuda-12.6/lib64/libcudart.so \
+  /usr/local/cuda-12.6/lib64/libcufft.so.11 \
   /usr/local/cuda-12.6/lib64/libnppc.so.12 \
+  /usr/local/cuda-12.6/lib64/libnppial.so.12 \
+  /usr/local/cuda-12.6/lib64/libnppidei.so.12 \
+  /usr/local/cuda-12.6/lib64/libnppif.so.12 \
   /usr/local/cuda-12.6/lib64/libnppig.so.12 \
+  /usr/local/cuda-12.6/lib64/libnppim.so.12 \
+  /usr/local/cuda-12.6/lib64/libnppist.so.12 \
+  /usr/local/cuda-12.6/lib64/libnppitc.so.12 \
   /usr/local/lib/libopencv_core.so.4.12.0 \
   /usr/local/lib/libopencv_cudaarithm.so.4.12.0 \
   /usr/local/lib/libopencv_cudafilters.so.4.12.0 \
@@ -2911,6 +2918,14 @@ CMakeFiles/test_phase2.dir/src/upscaler.cpp.o: /home/skand/video-processor/src/u
 
 /usr/include/x86_64-linux-gnu/bits/types.h:
 
+/usr/include/x86_64-linux-gnu/bits/timesize.h:
+
+/usr/include/x86_64-linux-gnu/bits/time.h:
+
+/usr/include/x86_64-linux-gnu/bits/struct_rwlock.h:
+
+/usr/include/x86_64-linux-gnu/bits/struct_mutex.h:
+
 /usr/local/include/opencv4/opencv2/flann/allocator.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/struct_tm.h:
@@ -2937,6 +2952,10 @@ CMakeFiles/test_phase2.dir/src/upscaler.cpp.o: /home/skand/video-processor/src/u
 
 /lib/x86_64-linux-gnu/libva-x11.so.2:
 
+/usr/include/x86_64-linux-gnu/bits/time64.h:
+
+/usr/include/c++/13/ext/type_traits.h:
+
 /usr/local/include/opencv4/opencv2/imgproc/segmentation.hpp:
 
 /usr/lib/i386-linux-gnu/libelf.so.1:
@@ -2950,8 +2969,6 @@ CMakeFiles/test_phase2.dir/src/upscaler.cpp.o: /home/skand/video-processor/src/u
 /lib/x86_64-linux-gnu/libkeyutils.so.1:
 
 /usr/include/c++/13/bits/locale_classes.h:
-
-/usr/include/x86_64-linux-gnu/bits/timesize.h:
 
 /usr/lib/i386-linux-gnu/libXau.so.6:
 
@@ -3085,8 +3102,6 @@ CMakeFiles/test_phase2.dir/src/upscaler.cpp.o: /home/skand/video-processor/src/u
 
 /lib/x86_64-linux-gnu/libselinux.so.1:
 
-/lib/x86_64-linux-gnu/librist.so.4:
-
 /lib/x86_64-linux-gnu/librabbitmq.so.4:
 
 /lib/x86_64-linux-gnu/libtasn1.so.6:
@@ -3102,6 +3117,10 @@ CMakeFiles/test_phase2.dir/src/upscaler.cpp.o: /home/skand/video-processor/src/u
 /lib/x86_64-linux-gnu/libavformat.so.60:
 
 /usr/include/c++/13/bits/shared_ptr_base.h:
+
+/usr/include/x86_64-linux-gnu/bits/stdlib-float.h:
+
+/usr/include/wchar.h:
 
 /usr/local/include/opencv4/opencv2/stitching/detail/matchers.hpp:
 
@@ -3369,10 +3388,6 @@ CMakeFiles/test_phase2.dir/src/test_phase2.cpp.o:
 
 /usr/local/lib/libopencv_dnn.so.4.12.0:
 
-/usr/include/c++/13/ext/type_traits.h:
-
-/usr/include/x86_64-linux-gnu/bits/time64.h:
-
 /lib/x86_64-linux-gnu/libatspi.so.0:
 
 /lib/x86_64-linux-gnu/libmpg123.so.0:
@@ -3553,6 +3568,8 @@ CMakeFiles/test_phase2.dir/src/test_phase2.cpp.o:
 
 /usr/include/c++/13/queue:
 
+/usr/local/cuda-12.6/lib64/libnppif.so.12:
+
 /lib/x86_64-linux-gnu/libgpg-error.so.0:
 
 /usr/include/c++/13/backward/binders.h:
@@ -3629,7 +3646,21 @@ CMakeFiles/test_phase2.dir/src/test_phase2.cpp.o:
 
 /usr/local/cuda-12.6/lib64/libcudart.so:
 
+/usr/local/cuda-12.6/lib64/libcufft.so.11:
+
+/usr/local/cuda-12.6/lib64/libnppidei.so.12:
+
 /usr/local/cuda-12.6/lib64/libnppig.so.12:
+
+/lib/x86_64-linux-gnu/librist.so.4:
+
+/usr/local/cuda-12.6/lib64/libnppim.so.12:
+
+/usr/local/cuda-12.6/lib64/libnppist.so.12:
+
+/usr/include/c++/13/bits/node_handle.h:
+
+/usr/local/cuda-12.6/lib64/libnppitc.so.12:
 
 /usr/local/lib/libopencv_cudaarithm.so.4.12.0:
 
@@ -3704,6 +3735,8 @@ CMakeFiles/test_phase2.dir/src/upscaler.cpp.o:
 /usr/include/c++/13/bits/std_function.h:
 
 /usr/include/x86_64-linux-gnu/c++/13/bits/atomic_word.h:
+
+/usr/local/cuda-12.6/lib64/libnppial.so.12:
 
 /usr/include/c++/13/bits/charconv.h:
 
@@ -3786,8 +3819,6 @@ CMakeFiles/test_phase2.dir/src/timer.cpp.o:
 /usr/include/c++/13/bits/new_allocator.h:
 
 /usr/include/c++/13/bits/stl_uninitialized.h:
-
-/usr/include/c++/13/bits/node_handle.h:
 
 /usr/include/x86_64-linux-gnu/c++/13/bits/c++locale.h:
 
@@ -4117,8 +4148,6 @@ CMakeFiles/test_phase2.dir/src/timer.cpp.o:
 
 /usr/include/x86_64-linux-gnu/bits/select.h:
 
-/usr/include/x86_64-linux-gnu/bits/time.h:
-
 /usr/include/x86_64-linux-gnu/bits/stdint-least.h:
 
 /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h:
@@ -4126,11 +4155,3 @@ CMakeFiles/test_phase2.dir/src/timer.cpp.o:
 /usr/include/c++/13/bits/locale_conv.h:
 
 /usr/include/x86_64-linux-gnu/bits/stdio_lim.h:
-
-/usr/include/wchar.h:
-
-/usr/include/x86_64-linux-gnu/bits/stdlib-float.h:
-
-/usr/include/x86_64-linux-gnu/bits/struct_mutex.h:
-
-/usr/include/x86_64-linux-gnu/bits/struct_rwlock.h:

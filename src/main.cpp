@@ -727,8 +727,8 @@ int main(int argc, char* argv[]) {
     
     // Create frame buffers with sizes based on algorithm
     // Use much larger buffers for super-res to prevent drops
-    int raw_buffer_size = use_super_res ? 60 : 10;
-    int processed_buffer_size = use_super_res ? 30 : 10;
+    int raw_buffer_size = use_super_res ? 120 : 60;
+    int processed_buffer_size = use_super_res ? 90 : 60;
     
     FrameBuffer raw_buffer(raw_buffer_size);
     FrameBuffer processed_buffer(processed_buffer_size);

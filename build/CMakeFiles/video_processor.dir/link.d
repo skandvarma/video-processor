@@ -86,6 +86,9 @@
   /lib/x86_64-linux-gnu/libtiff.so.6 \
   /lib/x86_64-linux-gnu/libopenjp2.so.7 \
   /lib/x86_64-linux-gnu/libOpenEXR-3_1.so.30 \
+  /usr/local/lib/libopencv_cudaarithm.so.4.12.0 \
+  /usr/local/cuda-12.6/lib64/libnppif.so.12 \
+  /usr/local/cuda-12.6/lib64/libnppim.so.12 \
   /usr/local/cuda-12.6/lib64/libcublas.so.12 \
   /lib/x86_64-linux-gnu/libcudnn.so.9 \
   /lib/x86_64-linux-gnu/libgmodule-2.0.so.0 \
@@ -207,6 +210,11 @@
   /lib/x86_64-linux-gnu/libImath-3_1.so.29 \
   /lib/x86_64-linux-gnu/libIlmThread-3_1.so.30 \
   /lib/x86_64-linux-gnu/libIex-3_1.so.30 \
+  /usr/local/cuda-12.6/lib64/libnppial.so.12 \
+  /usr/local/cuda-12.6/lib64/libnppidei.so.12 \
+  /usr/local/cuda-12.6/lib64/libnppist.so.12 \
+  /usr/local/cuda-12.6/lib64/libnppitc.so.12 \
+  /usr/local/cuda-12.6/lib64/libcufft.so.11 \
   /usr/local/cuda-12.6/lib64/libcublasLt.so.12 \
   /lib/x86_64-linux-gnu/libmount.so.1 \
   /lib/x86_64-linux-gnu/libselinux.so.1 \
@@ -481,6 +489,12 @@ CMakeFiles/video_processor.dir/src/pipeline.cpp.o:
 
 /lib/x86_64-linux-gnu/libOpenEXR-3_1.so.30:
 
+/usr/local/lib/libopencv_cudaarithm.so.4.12.0:
+
+/usr/local/cuda-12.6/lib64/libnppif.so.12:
+
+/usr/local/cuda-12.6/lib64/libnppim.so.12:
+
 /usr/local/cuda-12.6/lib64/libcublas.so.12:
 
 /lib/x86_64-linux-gnu/libcudnn.so.9:
@@ -722,6 +736,16 @@ CMakeFiles/video_processor.dir/src/pipeline.cpp.o:
 /lib/x86_64-linux-gnu/libIlmThread-3_1.so.30:
 
 /lib/x86_64-linux-gnu/libIex-3_1.so.30:
+
+/usr/local/cuda-12.6/lib64/libnppial.so.12:
+
+/usr/local/cuda-12.6/lib64/libnppidei.so.12:
+
+/usr/local/cuda-12.6/lib64/libnppist.so.12:
+
+/usr/local/cuda-12.6/lib64/libnppitc.so.12:
+
+/usr/local/cuda-12.6/lib64/libcufft.so.11:
 
 /usr/local/cuda-12.6/lib64/libcublasLt.so.12:
 

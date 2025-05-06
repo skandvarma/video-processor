@@ -266,8 +266,15 @@
  /usr/local/cuda-12.6/lib64/libcublas.so.12
  /usr/local/cuda-12.6/lib64/libcublasLt.so.12
  /usr/local/cuda-12.6/lib64/libcudart.so
+ /usr/local/cuda-12.6/lib64/libcufft.so.11
  /usr/local/cuda-12.6/lib64/libnppc.so.12
+ /usr/local/cuda-12.6/lib64/libnppial.so.12
+ /usr/local/cuda-12.6/lib64/libnppidei.so.12
+ /usr/local/cuda-12.6/lib64/libnppif.so.12
  /usr/local/cuda-12.6/lib64/libnppig.so.12
+ /usr/local/cuda-12.6/lib64/libnppim.so.12
+ /usr/local/cuda-12.6/lib64/libnppist.so.12
+ /usr/local/cuda-12.6/lib64/libnppitc.so.12
  /usr/local/lib/libopencv_core.so.4.12.0
  /usr/local/lib/libopencv_cudaarithm.so.4.12.0
  /usr/local/lib/libopencv_cudafilters.so.4.12.0

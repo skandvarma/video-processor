@@ -73,6 +73,9 @@
   /usr/local/cuda-12.6/lib64/libnppc.so.12 \
   /usr/local/cuda-12.6/lib64/libnppig.so.12 \
   /lib64/ld-linux-x86-64.so.2 \
+  /usr/local/lib/libopencv_cudaarithm.so.4.12.0 \
+  /usr/local/cuda-12.6/lib64/libnppif.so.12 \
+  /usr/local/cuda-12.6/lib64/libnppim.so.12 \
   /usr/local/cuda-12.6/lib64/libcublas.so.12 \
   /lib/x86_64-linux-gnu/libcudnn.so.9 \
   /lib/i386-linux-gnu/libz.so.1 \
@@ -195,6 +198,11 @@
   /lib/i386-linux-gnu/libdl.so.2 \
   /usr/lib/i386-linux-gnu/libdl.so.2 \
   /lib/x86_64-linux-gnu/libdl.so.2 \
+  /usr/local/cuda-12.6/lib64/libnppial.so.12 \
+  /usr/local/cuda-12.6/lib64/libnppidei.so.12 \
+  /usr/local/cuda-12.6/lib64/libnppist.so.12 \
+  /usr/local/cuda-12.6/lib64/libnppitc.so.12 \
+  /usr/local/cuda-12.6/lib64/libcufft.so.11 \
   /usr/local/cuda-12.6/lib64/libcublasLt.so.12 \
   /lib/x86_64-linux-gnu/libsharpyuv.so.0 \
   /lib/i386-linux-gnu/libzstd.so.1 \
@@ -453,6 +461,12 @@ CMakeFiles/test_phase2.dir/src/dnn_super_res.cpp.o:
 
 /lib64/ld-linux-x86-64.so.2:
 
+/usr/local/lib/libopencv_cudaarithm.so.4.12.0:
+
+/usr/local/cuda-12.6/lib64/libnppif.so.12:
+
+/usr/local/cuda-12.6/lib64/libnppim.so.12:
+
 /usr/local/cuda-12.6/lib64/libcublas.so.12:
 
 /lib/x86_64-linux-gnu/libcudnn.so.9:
@@ -696,6 +710,16 @@ CMakeFiles/test_phase2.dir/src/dnn_super_res.cpp.o:
 /usr/lib/i386-linux-gnu/libdl.so.2:
 
 /lib/x86_64-linux-gnu/libdl.so.2:
+
+/usr/local/cuda-12.6/lib64/libnppial.so.12:
+
+/usr/local/cuda-12.6/lib64/libnppidei.so.12:
+
+/usr/local/cuda-12.6/lib64/libnppist.so.12:
+
+/usr/local/cuda-12.6/lib64/libnppitc.so.12:
+
+/usr/local/cuda-12.6/lib64/libcufft.so.11:
 
 /usr/local/cuda-12.6/lib64/libcublasLt.so.12:
 

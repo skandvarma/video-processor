@@ -66,14 +66,80 @@ public:
                 break;
         }
         
-        cv::resize(input, output, cv::Size(m_target_width, m_target_height), 0, 0, interpolation);
-        
-        // Apply post-processing for better visual quality (except for NEAREST which is meant to be pixelated)
-        if (m_algorithm != Upscaler::NEAREST) {
-            enhanceDetails(output);
+        // For BICUBIC specifically, add enhanced anti-aliasing processing
+        if (m_algorithm == Upscaler::BICUBIC) {
+            // Step 1: Slight Gaussian blur before upscaling to prevent jagged edges
+            cv::Mat preProcessed;
+            cv::GaussianBlur(input, preProcessed, cv::Size(3, 3), 0.5);
+            
+            // Step 2: Upscale with bicubic interpolation
+            cv::resize(preProcessed, output, cv::Size(m_target_width, m_target_height), 0, 0, cv::INTER_CUBIC);
+            
+            // Step 3: Apply enhanced anti-aliasing and edge-aware smoothing
+            enhanceBicubicResult(output);
+        } else {
+            // Standard processing for other algorithms
+            cv::resize(input, output, cv::Size(m_target_width, m_target_height), 0, 0, interpolation);
+            
+            // Apply post-processing for better visual quality (except for NEAREST which is meant to be pixelated)
+            if (m_algorithm != Upscaler::NEAREST) {
+                enhanceDetails(output);
+            }
         }
         
         return true;
+    }
+    
+    void enhanceBicubicResult(cv::Mat& image) {
+        // Simplified approach focused on performance
+        
+        // Step 1: Apply a fast bilateral filter only to smooth areas
+        cv::Mat blurred;
+        cv::bilateralFilter(image, blurred, 5, 30, 30);
+        
+        // Step 2: Fast edge detection
+        cv::Mat gray, edges;
+        cv::cvtColor(image, gray, cv::COLOR_BGR2GRAY);
+        cv::Canny(gray, edges, 50, 150);
+        
+        // Dilate edges slightly
+        cv::Mat edgeMask;
+        cv::dilate(edges, edgeMask, cv::getStructuringElement(cv::MORPH_RECT, cv::Size(2, 2)));
+        
+        // Create binary mask (255 for edges, 0 for non-edges)
+        edgeMask.convertTo(edgeMask, CV_8U, 1.0/255.0);
+        
+        // Step 3: Apply a simple sharpening only to edge areas (much faster than filter2D)
+        cv::Mat sharpened = image.clone();
+        for (int y = 1; y < image.rows-1; y++) {
+            for (int x = 1; x < image.cols-1; x++) {
+                if (edgeMask.at<uchar>(y, x) > 0) {
+                    // Simple 3x3 sharpening directly in the loop (faster than filter2D)
+                    for (int c = 0; c < 3; c++) {
+                        int val = 5 * image.at<cv::Vec3b>(y, x)[c] - 
+                                  image.at<cv::Vec3b>(y-1, x)[c] -
+                                  image.at<cv::Vec3b>(y+1, x)[c] -
+                                  image.at<cv::Vec3b>(y, x-1)[c] -
+                                  image.at<cv::Vec3b>(y, x+1)[c];
+                        sharpened.at<cv::Vec3b>(y, x)[c] = cv::saturate_cast<uchar>(val);
+                    }
+                }
+            }
+        }
+        
+        // Step 4: Blend results (no pixel-by-pixel processing)
+        // - Use sharpened version at edges
+        // - Use blurred version in non-edge areas
+        for (int y = 0; y < image.rows; y++) {
+            for (int x = 0; x < image.cols; x++) {
+                // If it's an edge pixel, use sharpened, otherwise use blurred
+                if (edgeMask.at<uchar>(y, x) > 0) {
+                    image.at<cv::Vec3b>(y, x) = sharpened.at<cv::Vec3b>(y, x);
+                } else {
+                    image.at<cv::Vec3b>(y, x) = blurred.at<cv::Vec3b>(y, x);
+                }
+            }
+        }
     }
     
 private:
@@ -187,7 +253,32 @@ public:
             return upscaleSuperRes(input, output);
         }
         
-        // Upload input to GPU
+        // For BICUBIC, apply specialized processing pipeline
+        if (m_algorithm == Upscaler::BICUBIC) {
+            // Step 1: Slight Gaussian blur before upscaling
+            cv::cuda::GpuMat d_input, d_blurred;
+            d_input.upload(input);
+            
+            // Apply gaussian blur using CUDA
+            cv::Ptr<cv::cuda::Filter> gaussianFilter = cv::cuda::createGaussianFilter(
+                d_input.type(), d_input.type(), cv::Size(3, 3), 0.5);
+            gaussianFilter->apply(d_input, d_blurred);
+            
+            // Step 2: Upscale with bicubic (CUDA uses CUBIC instead of Lanczos)
+            cv::cuda::GpuMat d_output;
+            cv::cuda::resize(d_blurred, d_output, cv::Size(m_target_width, m_target_height), 
+                             0, 0, cv::INTER_CUBIC);
+            
+            // Download for post-processing
+            d_output.download(output);
+            
+            // Step 3: Apply specialized bicubic enhancement
+            enhanceBicubicResult(output);
+            
+            return true;
+        }
+        
+        // Standard processing for other algorithms
         cv::cuda::GpuMat d_input;
         d_input.upload(input);
         
@@ -204,10 +295,7 @@ public:
             case Upscaler::BILINEAR:
                 interpolation = cv::INTER_LINEAR;
                 break;
-            case Upscaler::BICUBIC:
             case Upscaler::LANCZOS:
-            case Upscaler::SUPER_RES:
-            case Upscaler::REAL_ESRGAN:
                 interpolation = cv::INTER_CUBIC; // CUDA doesn't support LANCZOS, use CUBIC
                 break;
             default:
@@ -219,7 +307,7 @@ public:
         
         // Apply post-processing for better quality (except for NEAREST)
         if (m_algorithm != Upscaler::NEAREST) {
-            // Download for post-processing (sharpening isn't always available in CUDA)
+            // Download for post-processing
             d_output.download(output);
             enhanceDetails(output);
         } else {
@@ -229,6 +317,58 @@ public:
         
         return true;
     }
+
+    void enhanceBicubicResult(cv::Mat& image) {
+        // Ultra-optimized approach for real-time performance
+        
+        // Fast adaptive blur that preserves edges - much faster than bilateral filter
+        // and works better for removing pixelation
+        cv::Mat blurred;
+        cv::medianBlur(image, blurred, 3);  // Remove pixelation artifacts while preserving edges
+        
+        // Detect just the significant edges that should remain sharp
+        cv::Mat gray;
+        cv::cvtColor(image, gray, cv::COLOR_BGR2GRAY);
+        
+        // Use a faster method to detect edges
+        cv::Mat edges(gray.size(), CV_8U, cv::Scalar(0));
+        const int threshold = 30; // Adjust based on your content
+        
+        // Process only every other pixel for speed (we'll process the full image in the final blend)
+        for (int y = 1; y < gray.rows-1; y += 2) {
+            for (int x = 1; x < gray.cols-1; x += 2) {
+                // Fast edge detection using horizontal and vertical differences
+                int diff_h = std::abs(gray.at<uchar>(y, x+1) - gray.at<uchar>(y, x-1));
+                int diff_v = std::abs(gray.at<uchar>(y+1, x) - gray.at<uchar>(y-1, x));
+                
+                if (diff_h > threshold || diff_v > threshold) {
+                    edges.at<uchar>(y, x) = 255;
+                }
+            }
+        }
+        
+        // Small dilation to connect edges
+        cv::dilate(edges, edges, cv::getStructuringElement(cv::MORPH_RECT, cv::Size(2, 2)));
+        
+        // Simple blending of original and blurred based on edges
+        // This is the most critical step for fixing pixelation
+        for (int y = 0; y < image.rows; y++) {
+            const uchar* edge_row = edges.ptr<uchar>(y);
+            cv::Vec3b* img_row = image.ptr<cv::Vec3b>(y);
+            cv::Vec3b* blur_row = blurred.ptr<cv::Vec3b>(y);
+            
+            for (int x = 0; x < image.cols; x++) {
+                // If it's an edge pixel, keep original, otherwise use blurred to fix pixelation
+                if (edge_row[x] > 0) {
+                    // Keep original edges sharp (no change needed)
+                } else {
+                    // For non-edge areas, use blurred version to remove pixelation
+                    img_row[x] = blur_row[x];
+                }
+            }
+        }
+    }
+    
     
 private:
     Upscaler::Algorithm m_algorithm;

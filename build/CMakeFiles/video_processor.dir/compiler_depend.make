@@ -265,8 +265,15 @@
   /usr/local/cuda-12.6/lib64/libcublas.so.12 \
   /usr/local/cuda-12.6/lib64/libcublasLt.so.12 \
   /usr/local/cuda-12.6/lib64/libcudart.so \
+  /usr/local/cuda-12.6/lib64/libcufft.so.11 \
   /usr/local/cuda-12.6/lib64/libnppc.so.12 \
+  /usr/local/cuda-12.6/lib64/libnppial.so.12 \
+  /usr/local/cuda-12.6/lib64/libnppidei.so.12 \
+  /usr/local/cuda-12.6/lib64/libnppif.so.12 \
   /usr/local/cuda-12.6/lib64/libnppig.so.12 \
+  /usr/local/cuda-12.6/lib64/libnppim.so.12 \
+  /usr/local/cuda-12.6/lib64/libnppist.so.12 \
+  /usr/local/cuda-12.6/lib64/libnppitc.so.12 \
   /usr/local/lib/libopencv_core.so.4.12.0 \
   /usr/local/lib/libopencv_cudaarithm.so.4.12.0 \
   /usr/local/lib/libopencv_cudafilters.so.4.12.0 \
@@ -4304,6 +4311,14 @@ CMakeFiles/video_processor.dir/src/upscaler.cpp.o: /home/skand/video-processor/s
 
 /usr/include/x86_64-linux-gnu/bits/time.h:
 
+/usr/include/x86_64-linux-gnu/bits/struct_rwlock.h:
+
+/usr/include/x86_64-linux-gnu/bits/struct_mutex.h:
+
+/usr/include/x86_64-linux-gnu/bits/stdint-uintn.h:
+
+/usr/include/x86_64-linux-gnu/bits/stdint-least.h:
+
 /usr/local/include/opencv4/opencv2/flann/allocator.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/struct_tm.h:
@@ -4492,8 +4507,6 @@ CMakeFiles/video_processor.dir/src/frame_buffer.cpp.o:
 
 /lib/x86_64-linux-gnu/libselinux.so.1:
 
-/lib/x86_64-linux-gnu/librist.so.4:
-
 /home/skand/video-processor/src/pipeline.cpp:
 
 /lib/x86_64-linux-gnu/librabbitmq.so.4:
@@ -4511,6 +4524,10 @@ CMakeFiles/video_processor.dir/src/frame_buffer.cpp.o:
 /lib/x86_64-linux-gnu/libavformat.so.60:
 
 /usr/include/c++/13/bits/shared_ptr_base.h:
+
+/usr/include/x86_64-linux-gnu/bits/stdlib-float.h:
+
+/usr/include/wchar.h:
 
 /usr/local/include/opencv4/opencv2/stitching/detail/matchers.hpp:
 
@@ -4966,6 +4983,8 @@ CMakeFiles/video_processor.dir/src/timer.cpp.o:
 
 /usr/include/c++/13/queue:
 
+/usr/local/cuda-12.6/lib64/libnppif.so.12:
+
 /lib/x86_64-linux-gnu/libgpg-error.so.0:
 
 /usr/include/c++/13/backward/binders.h:
@@ -5046,7 +5065,21 @@ CMakeFiles/video_processor.dir/src/pipeline.cpp.o:
 
 /usr/local/cuda-12.6/lib64/libcudart.so:
 
+/usr/local/cuda-12.6/lib64/libcufft.so.11:
+
+/usr/local/cuda-12.6/lib64/libnppidei.so.12:
+
 /usr/local/cuda-12.6/lib64/libnppig.so.12:
+
+/lib/x86_64-linux-gnu/librist.so.4:
+
+/usr/local/cuda-12.6/lib64/libnppim.so.12:
+
+/usr/local/cuda-12.6/lib64/libnppist.so.12:
+
+/usr/include/c++/13/bits/node_handle.h:
+
+/usr/local/cuda-12.6/lib64/libnppitc.so.12:
 
 /usr/local/lib/libopencv_cudaarithm.so.4.12.0:
 
@@ -5122,6 +5155,8 @@ CMakeFiles/video_processor.dir/src/processor.cpp.o:
 
 /usr/include/x86_64-linux-gnu/c++/13/bits/atomic_word.h:
 
+/usr/local/cuda-12.6/lib64/libnppial.so.12:
+
 /usr/include/c++/13/bits/charconv.h:
 
 /usr/include/c++/13/bits/codecvt.h:
@@ -5166,6 +5201,10 @@ CMakeFiles/video_processor.dir/src/processor.cpp.o:
 
 /usr/include/c++/13/bits/istream.tcc:
 
+/usr/include/x86_64-linux-gnu/bits/stdio_lim.h:
+
+/usr/include/c++/13/bits/locale_conv.h:
+
 /usr/local/include/opencv4/opencv2/flann/sampling.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/cookie_io_functions_t.h:
@@ -5199,8 +5238,6 @@ CMakeFiles/video_processor.dir/src/processor.cpp.o:
 /usr/include/c++/13/bits/new_allocator.h:
 
 /usr/include/c++/13/bits/stl_uninitialized.h:
-
-/usr/include/c++/13/bits/node_handle.h:
 
 /usr/include/x86_64-linux-gnu/c++/13/bits/c++locale.h:
 
@@ -5543,19 +5580,3 @@ CMakeFiles/video_processor.dir/src/upscaler.cpp.o:
 /lib/x86_64-linux-gnu/libicudata.so.74:
 
 /usr/include/x86_64-linux-gnu/bits/select.h:
-
-/usr/include/x86_64-linux-gnu/bits/stdint-least.h:
-
-/usr/include/x86_64-linux-gnu/bits/stdint-uintn.h:
-
-/usr/include/c++/13/bits/locale_conv.h:
-
-/usr/include/x86_64-linux-gnu/bits/stdio_lim.h:
-
-/usr/include/wchar.h:
-
-/usr/include/x86_64-linux-gnu/bits/stdlib-float.h:
-
-/usr/include/x86_64-linux-gnu/bits/struct_mutex.h:
-
-/usr/include/x86_64-linux-gnu/bits/struct_rwlock.h:
