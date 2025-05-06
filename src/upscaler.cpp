@@ -439,9 +439,22 @@ bool Upscaler::upscale(const cv::Mat& input, cv::Mat& output) {
         return false;
     }
     
+    // For very large input frames, downscale first for better performance
+    cv::Mat working_input;
+    if (input.cols > 1280 || input.rows > 720) {
+        // Downscale large inputs first
+        double scale_factor = std::min(1280.0 / input.cols, 720.0 / input.rows);
+        cv::resize(input, working_input, cv::Size(), scale_factor, scale_factor, cv::INTER_AREA);
+        std::cout << "Downscaled input from " << input.cols << "x" << input.rows 
+                  << " to " << working_input.cols << "x" << working_input.rows << std::endl;
+    } else {
+        // Use original input
+        working_input = input;
+    }
+    
     // Handle DNN super-resolution if it's initialized
     if (m_algorithm == SUPER_RES && m_dnn_sr && m_dnn_sr->isInitialized()) {
-        return m_dnn_sr->upscale(input, output);
+        return m_dnn_sr->upscale(working_input, output);
     }
     
     // Check if the standard implementation is initialized
@@ -450,7 +463,7 @@ bool Upscaler::upscale(const cv::Mat& input, cv::Mat& output) {
         
         // Fall back to a simple resize if all else fails
         try {
-            cv::resize(input, output, cv::Size(m_target_width, m_target_height), 0, 0, cv::INTER_LINEAR);
+            cv::resize(working_input, output, cv::Size(m_target_width, m_target_height), 0, 0, cv::INTER_LINEAR);
             return true;
         } catch (const cv::Exception& e) {
             std::cerr << "Basic resize failed: " << e.what() << std::endl;
@@ -458,7 +471,7 @@ bool Upscaler::upscale(const cv::Mat& input, cv::Mat& output) {
         }
     }
     
-    return m_impl->upscale(input, output);
+    return m_impl->upscale(working_input, output);
 }
 
 void Upscaler::setAlgorithm(Algorithm algorithm) {
@@ -568,4 +581,15 @@ bool Upscaler::initializeImpl() {
     
     m_initialized = (m_impl != nullptr);
     return m_initialized;
+}
+
+bool Upscaler::adjustQualityForPerformance(double processing_time, double target_time) {
+    if (m_algorithm == SUPER_RES && processing_time > target_time * 1.5) {
+        std::cout << "Performance warning: Super-resolution taking too long (" 
+                  << processing_time << "ms). Switching to Bicubic upscaling." << std::endl;
+        m_algorithm = BICUBIC;
+        initializeImpl();
+        return true;
+    }
+    return false;
 }

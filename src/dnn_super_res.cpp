@@ -38,6 +38,7 @@ bool DnnSuperRes::initialize() {
     }
 }
 
+
 bool DnnSuperRes::upscale(const cv::Mat& input, cv::Mat& output) {
     if (!m_initialized) {
         std::cerr << "Super-resolution model not initialized" << std::endl;

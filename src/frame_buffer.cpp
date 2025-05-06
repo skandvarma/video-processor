@@ -27,9 +27,14 @@ bool FrameBuffer::pushFrame(const cv::Mat& frame, bool blocking) {
         m_not_full.wait(lock, [this]() { return !full(); });
     }
     
-    // If the frame at head position is currently being used elsewhere,
-    // create a new Mat to avoid modifying it
-    frame.copyTo(m_frames[m_head]);
+    // If the buffer is getting full, optimize memory usage
+    if (m_size > m_capacity * 0.8) {
+        // Use existing memory when possible to reduce allocations
+        frame.copyTo(m_frames[m_head], cv::noArray());
+    } else {
+        // Otherwise use standard copy
+        frame.copyTo(m_frames[m_head]);
+    }
     
     // Update head position
     m_head = nextIndex(m_head);

@@ -85,6 +85,9 @@ public:
      * @return true if GPU acceleration is available
      */
     static bool isGPUAvailable();
+
+    bool adjustQualityForPerformance(double processing_time, double target_time);
+
     
 private:
     Algorithm m_algorithm;             // Selected upscaling algorithm
