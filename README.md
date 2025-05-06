@@ -161,11 +161,4 @@ This design ensures non-blocking operation and smooth real-time performance.
 | Codec errors     | Try different format or check OpenCV codec support         |
 | Slow performance | Enable CUDA, reduce resolution, or avoid super-res in live |
 
----
-
-## 📃 License
-
-[MIT License](LICENSE)
-
----
 
