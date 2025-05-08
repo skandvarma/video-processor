@@ -17,19 +17,28 @@ DnnSuperRes::DnnSuperRes(const std::string& model_path,
 bool DnnSuperRes::initialize() {
     try {
         if (m_model_type == REAL_ESRGAN) {
-            // Use EDSR model instead of trying to load RealESRGAN
-            m_sr.readModel(m_model_path);
-            m_sr.setModel(m_model_name, m_scale);
+            // Load ONNX model
+            std::cout << "Loading ONNX model: " << m_model_path << std::endl;
+            m_net = cv::dnn::readNetFromONNX(m_model_path);
+            
+            if (m_net.empty()) {
+                std::cerr << "Failed to load ONNX model: " << m_model_path << std::endl;
+                m_initialized = false;
+                return false;
+            }
             
             if (m_use_gpu && cv::cuda::getCudaEnabledDeviceCount() > 0) {
-                std::cout << "Using CUDA backend for EDSR super-resolution" << std::endl;
-                m_sr.setPreferableBackend(cv::dnn::DNN_BACKEND_CUDA);
-                m_sr.setPreferableTarget(cv::dnn::DNN_TARGET_CUDA);
+                std::cout << "Using CUDA backend for ONNX super-resolution" << std::endl;
+                m_net.setPreferableBackend(cv::dnn::DNN_BACKEND_CUDA);
+                m_net.setPreferableTarget(cv::dnn::DNN_TARGET_CUDA);
             } else {
-                std::cout << "Using CPU backend for EDSR super-resolution" << std::endl;
-                m_sr.setPreferableBackend(cv::dnn::DNN_BACKEND_OPENCV);
-                m_sr.setPreferableTarget(cv::dnn::DNN_TARGET_CPU);
+                std::cout << "Using CPU backend for ONNX super-resolution" << std::endl;
+                m_net.setPreferableBackend(cv::dnn::DNN_BACKEND_OPENCV);
+                m_net.setPreferableTarget(cv::dnn::DNN_TARGET_CPU);
             }
+            
+            // Very important - explicitly set initialized flag
+            m_initialized = true;
         } else {
             // Original code for other model types
             m_sr.readModel(m_model_path);
@@ -40,11 +49,12 @@ bool DnnSuperRes::initialize() {
                 m_sr.setPreferableBackend(cv::dnn::DNN_BACKEND_CUDA);
                 m_sr.setPreferableTarget(cv::dnn::DNN_TARGET_CUDA);
             }
+            
+            m_initialized = true;
         }
         
-        m_initialized = true;
         std::cout << "Super-resolution model loaded successfully" << std::endl;
-        return true;
+        return m_initialized;
     }
     catch (const cv::Exception& e) {
         std::cerr << "Failed to initialize SR: " << e.what() << std::endl;
@@ -68,10 +78,10 @@ bool DnnSuperRes::upscale(const cv::Mat& input, cv::Mat& output) {
         // Start timing
         auto start = std::chrono::high_resolution_clock::now();
         
-        // Use the appropriate model for upscaling - treat REAL_ESRGAN same as EDSR
-        if (m_model_type == REAL_ESRGAN || m_model_type == EDSR) {
-            // Use the OpenCV DNN Super Resolution implementation
-            m_sr.upsample(input, output);
+        // Use the appropriate model for upscaling
+        if (m_model_type == REAL_ESRGAN) {
+            // Use ONNX-based upscaling for RealESRGAN
+            return upscaleRealESRGAN(input, output);
         } else {
             // Original upscaling code for other models
             m_sr.upsample(input, output);
@@ -106,62 +116,100 @@ bool DnnSuperRes::upscale(const cv::Mat& input, cv::Mat& output) {
 
 bool DnnSuperRes::upscaleRealESRGAN(const cv::Mat& input, cv::Mat& output) {
     try {
-        // Pre-process input for RealESRGAN
-        cv::Mat processed;
-        preProcessRealESRGAN(input, processed);
+        // Print input size for debugging
+        std::cout << "Input size: " << input.cols << "x" << input.rows << " channels: " << input.channels() << std::endl;
         
-        // Forward pass through the network
-        m_net.setInput(processed);
-        cv::Mat result = m_net.forward();
+        // 1. Pre-process: Convert BGR to RGB and normalize
+        cv::Mat rgb;
+        cv::cvtColor(input, rgb, cv::COLOR_BGR2RGB);
         
-        // Post-process the result
-        postProcessRealESRGAN(result, output);
+        // Convert to float and normalize to 0-1 range
+        cv::Mat floatImg;
+        rgb.convertTo(floatImg, CV_32F, 1.0/255.0);
         
-        // Apply unified pixel enhancement
-        cv::Mat enhanced;
+        // Create blob in NCHW format (batch, channels, height, width)
+        cv::Mat inputBlob = cv::dnn::blobFromImage(floatImg);
+        std::cout << "Input blob shape: ";
+        for (int i = 0; i < inputBlob.dims; i++) {
+            std::cout << inputBlob.size[i] << " ";
+        }
+        std::cout << std::endl;
         
-        // First, create a blurred version that will unify the flat areas
-        cv::Mat blurred;
-        cv::bilateralFilter(output, blurred, 5, 15, 15); // Preserve edges, smooth flat areas
+        // 2. Run inference
+        m_net.setInput(inputBlob);
+        cv::Mat outBlob = m_net.forward();
         
-        // Create an edge mask to identify detailed areas
-        cv::Mat gray, edges, edge_mask;
-        cv::cvtColor(output, gray, cv::COLOR_BGR2GRAY);
-        cv::Canny(gray, edges, 50, 150);
-        cv::dilate(edges, edge_mask, cv::getStructuringElement(cv::MORPH_ELLIPSE, cv::Size(3,3)));
+        // 3. Post-process: Convert back to image format
+        std::cout << "Output blob shape: ";
+        for (int i = 0; i < outBlob.dims; i++) {
+            std::cout << outBlob.size[i] << " ";
+        }
+        std::cout << std::endl;
         
-        // Smooth the mask
-        cv::GaussianBlur(edge_mask, edge_mask, cv::Size(5,5), 0);
-        
-        // Convert mask to floating point 0-1 range
-        edge_mask.convertTo(edge_mask, CV_32F, 1.0/255.0);
-        
-        // Blend original with smoothed version based on edge mask
-        // Keep details at edges, smooth flat areas for unified appearance
-        output.convertTo(enhanced, CV_32F);
-        blurred.convertTo(blurred, CV_32F);
-        
-        cv::Mat result_float;
-        for (int i = 0; i < enhanced.rows; i++) {
-            for (int j = 0; j < enhanced.cols; j++) {
-                float mask_value = edge_mask.at<float>(i, j);
-                enhanced.at<cv::Vec3f>(i, j) = 
-                    enhanced.at<cv::Vec3f>(i, j) * mask_value + 
-                    blurred.at<cv::Vec3f>(i, j) * (1.0f - mask_value);
-            }
+        // Extract dimensions - expected 4D: [1, 3, H*4, W*4]
+        if (outBlob.dims != 4) {
+            std::cerr << "Unexpected model output format" << std::endl;
+            return false;
         }
         
-        enhanced.convertTo(output, CV_8U);
+        int channels = outBlob.size[1];
+        int height = outBlob.size[2];
+        int width = outBlob.size[3];
+        
+        // Create a Mat object from the blob
+        std::vector<cv::Mat> outputChannels;
+        
+        // For each channel in the output
+        for (int c = 0; c < channels; c++) {
+            // Get pointer to this channel's data
+            cv::Mat channel(height, width, CV_32F, (float*)outBlob.ptr(0, c));
+            outputChannels.push_back(channel);
+        }
+        
+        // Merge the channels back into a color image
+        cv::Mat processedRgb;
+        cv::merge(outputChannels, processedRgb);
+        
+        // Convert back to 0-255 range and to 8-bit
+        processedRgb = processedRgb * 255.0;
+        processedRgb.convertTo(processedRgb, CV_8U);
+        
+        // Convert back to BGR
+        cv::cvtColor(processedRgb, output, cv::COLOR_RGB2BGR);
+        
+        std::cout << "Final output size: " << output.cols << "x" << output.rows << std::endl;
+        
+        // Resize to target dimensions if needed
+        if (m_target_width > 0 && m_target_height > 0 && 
+            (output.cols != m_target_width || output.rows != m_target_height)) {
+            cv::resize(output, output, cv::Size(m_target_width, m_target_height), 
+                       0, 0, cv::INTER_LANCZOS4);
+        }
         
         return true;
     }
     catch (const cv::Exception& e) {
         std::cerr << "Error in RealESRGAN upscaling: " << e.what() << std::endl;
         
-        // Fallback to standard resizing
-        cv::resize(input, output, cv::Size(input.cols * m_scale, input.rows * m_scale), 
-                  0, 0, cv::INTER_LANCZOS4);
-        return true;
+        // Create a visible error image
+        output = cv::Mat(input.rows * 4, input.cols * 4, CV_8UC3, cv::Scalar(255, 0, 0));
+        
+        // Try falling back to standard resize - this should work
+        try {
+            cv::resize(input, output, cv::Size(input.cols * 4, input.rows * 4), 
+                      0, 0, cv::INTER_LANCZOS4);
+                      
+            // Add error text to the image
+            cv::putText(output, "ESRGAN Error - Using standard resize", 
+                      cv::Point(30, 30), cv::FONT_HERSHEY_SIMPLEX, 1.0,
+                      cv::Scalar(0, 0, 255), 2);
+        } 
+        catch (...) {
+            // Last resort
+            std::cerr << "Even fallback resize failed!" << std::endl;
+        }
+        
+        return true; // Return true so processing continues with fallback image
     }
 }
 

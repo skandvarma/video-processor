@@ -579,22 +579,19 @@ bool Upscaler::upscale(const cv::Mat& input, cv::Mat& output) {
         return false;
     }
     
-    // For very large input frames, downscale first for better performance
-    cv::Mat working_input;
-    if (input.cols > 1280 || input.rows > 720) {
-        // Downscale large inputs first
-        double scale_factor = std::min(1280.0 / input.cols, 720.0 / input.rows);
-        cv::resize(input, working_input, cv::Size(), scale_factor, scale_factor, cv::INTER_AREA);
-        std::cout << "Downscaled input from " << input.cols << "x" << input.rows 
-                  << " to " << working_input.cols << "x" << working_input.rows << std::endl;
-    } else {
-        // Use original input
-        working_input = input;
+    // Debug prints
+    if (m_algorithm == REAL_ESRGAN) {
+        std::cout << "Using REAL_ESRGAN algorithm" << std::endl;
+        if (m_dnn_sr) {
+            std::cout << "DNN SR is initialized: " << (m_dnn_sr->isInitialized() ? "Yes" : "No") << std::endl;
+        } else {
+            std::cout << "DNN SR object is NULL" << std::endl;
+        }
     }
     
     // Handle DNN super-resolution if it's initialized
-    if (m_algorithm == SUPER_RES && m_dnn_sr && m_dnn_sr->isInitialized()) {
-        return m_dnn_sr->upscale(working_input, output);
+    if ((m_algorithm == SUPER_RES || m_algorithm == REAL_ESRGAN) && m_dnn_sr && m_dnn_sr->isInitialized()) {
+        return m_dnn_sr->upscale(input, output);
     }
     
     // Check if the standard implementation is initialized
@@ -603,7 +600,7 @@ bool Upscaler::upscale(const cv::Mat& input, cv::Mat& output) {
         
         // Fall back to a simple resize if all else fails
         try {
-            cv::resize(working_input, output, cv::Size(m_target_width, m_target_height), 0, 0, cv::INTER_LINEAR);
+            cv::resize(input, output, cv::Size(m_target_width, m_target_height), 0, 0, cv::INTER_LINEAR);
             return true;
         } catch (const cv::Exception& e) {
             std::cerr << "Basic resize failed: " << e.what() << std::endl;
@@ -611,7 +608,7 @@ bool Upscaler::upscale(const cv::Mat& input, cv::Mat& output) {
         }
     }
     
-    return m_impl->upscale(working_input, output);
+    return m_impl->upscale(input, output);
 }
 
 void Upscaler::setAlgorithm(Algorithm algorithm) {
@@ -683,31 +680,35 @@ bool Upscaler::initializeImpl() {
 
     if (m_algorithm == SUPER_RES || m_algorithm == REAL_ESRGAN) {
         try {
-            // For REAL_ESRGAN, use EDSR model type but keep the RealESRGAN enum value
+            // For REAL_ESRGAN, use REAL_ESRGAN model type
             DnnSuperRes::ModelType model_type = (m_algorithm == REAL_ESRGAN) ? 
-                                              DnnSuperRes::EDSR : 
+                                              DnnSuperRes::REAL_ESRGAN : 
                                               DnnSuperRes::FSRCNN;
                                                
-            // Use EDSR model for RealESRGAN requests
-            std::string model_path = (m_algorithm == REAL_ESRGAN) ? 
-                                    "models/EDSR_x4.pb" : 
-                                    "models/FSRCNN_x4.pb";
-                                    
-            // Set the model name to edsr for RealESRGAN
-            std::string model_name = (m_algorithm == REAL_ESRGAN) ? 
-                                    "edsr" : "fsrcnn";
+            // Use RRDB_ESRGAN.onnx model for RealESRGAN
+            std::string model_path;
+            std::string model_name;
+            
+            if (m_algorithm == REAL_ESRGAN) {
+                model_path = "models/RRDB_ESRGAN_x4.onnx";
+                model_name = "esrgan";
+            } else {
+                // Default FSRCNN model
+                model_path = "models/FSRCNN_x4.pb";
+                model_name = "fsrcnn";
+            }
             
             m_dnn_sr = std::make_unique<DnnSuperRes>(model_path, model_name, 4, model_type);
             m_dnn_sr->setTargetSize(m_target_width, m_target_height);
             m_dnn_sr->setUseGPU(m_use_gpu);
             
             if (m_dnn_sr->initialize()) {
-                std::cout << "Using " << (m_algorithm == REAL_ESRGAN ? "EDSR (high quality)" : "DNN Super Resolution") 
+                std::cout << "Using " << (m_algorithm == REAL_ESRGAN ? "RealESRGAN" : "DNN Super Resolution") 
                           << " for upscaling" << std::endl;
                 m_initialized = true;
                 return true;
             } else {
-                std::cerr << "Failed to initialize " << (m_algorithm == REAL_ESRGAN ? "EDSR" : "DNN Super Resolution") 
+                std::cerr << "Failed to initialize " << (m_algorithm == REAL_ESRGAN ? "RealESRGAN" : "DNN Super Resolution") 
                           << ", falling back to standard method" << std::endl;
                 m_dnn_sr.reset();
                 // Continue with standard implementation

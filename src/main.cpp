@@ -349,7 +349,7 @@ void display_thread(FrameBuffer& buffer, Timer& timer,
     
     // Create window with a consistent size
     cv::namedWindow("Video Feed", cv::WINDOW_NORMAL);
-    cv::resizeWindow("Video Feed", 1920, 1080);
+    cv::resizeWindow("Video Feed", 640, 480);
 
     // Default video parameters
     int codec = cv::VideoWriter::fourcc('m', 'p', '4', 'v'); // Default MP4V codec
