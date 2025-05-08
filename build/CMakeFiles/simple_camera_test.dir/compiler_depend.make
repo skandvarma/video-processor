@@ -236,20 +236,29 @@
   /usr/lib/x86_64-linux-gnu/libc_nonshared.a \
   /usr/lib/x86_64-linux-gnu/libcairo-gobject.so.2 \
   /usr/local/cuda-12.6/lib64/libOpenCL.so.1 \
+  /usr/local/lib/libopencv_calib3d.so.4.12.0 \
   /usr/local/lib/libopencv_core.so.4.12.0 \
   /usr/local/lib/libopencv_cudaarithm.so.4.12.0 \
   /usr/local/lib/libopencv_cudafilters.so.4.12.0 \
   /usr/local/lib/libopencv_cudaimgproc.so.4.12.0 \
+  /usr/local/lib/libopencv_cudalegacy.so.4.12.0 \
+  /usr/local/lib/libopencv_cudaoptflow.so.4.12.0 \
   /usr/local/lib/libopencv_cudawarping.so.4.12.0 \
   /usr/local/lib/libopencv_cudev.so.4.12.0 \
   /usr/local/lib/libopencv_dnn.so.4.12.0 \
   /usr/local/lib/libopencv_dnn_superres.so.4.12.0 \
+  /usr/local/lib/libopencv_features2d.so.4.12.0 \
+  /usr/local/lib/libopencv_flann.so.4.12.0 \
   /usr/local/lib/libopencv_highgui.so.4.12.0 \
   /usr/local/lib/libopencv_imgcodecs.so.4.12.0 \
   /usr/local/lib/libopencv_imgproc.so.4.12.0 \
   /usr/local/lib/libopencv_ml.so.4.12.0 \
+  /usr/local/lib/libopencv_objdetect.so.4.12.0 \
+  /usr/local/lib/libopencv_optflow.so.4.12.0 \
   /usr/local/lib/libopencv_quality.so.4.12.0 \
+  /usr/local/lib/libopencv_video.so.4.12.0 \
   /usr/local/lib/libopencv_videoio.so.4.12.0 \
+  /usr/local/lib/libopencv_ximgproc.so.4.12.0 \
   CMakeFiles/simple_camera_test.dir/src/simple_camera_test.cpp.o
 
 CMakeFiles/simple_camera_test.dir/src/simple_camera_test.cpp.o: /home/skand/video-processor/src/simple_camera_test.cpp \
@@ -749,8 +758,6 @@ CMakeFiles/simple_camera_test.dir/src/simple_camera_test.cpp.o: /home/skand/vide
 
 /usr/local/include/opencv4/opencv2/flann/kdtree_single_index.h:
 
-/usr/local/include/opencv4/opencv2/flann/kdtree_index.h:
-
 /usr/local/include/opencv4/opencv2/flann/index_testing.h:
 
 /usr/local/include/opencv4/opencv2/flann/hierarchical_clustering_index.h:
@@ -758,8 +765,6 @@ CMakeFiles/simple_camera_test.dir/src/simple_camera_test.cpp.o: /home/skand/vide
 /usr/local/include/opencv4/opencv2/flann/flann_base.hpp:
 
 /usr/local/include/opencv4/opencv2/flann/dynamic_bitset.h:
-
-/usr/local/include/opencv4/opencv2/flann/config.h:
 
 /usr/local/include/opencv4/opencv2/flann/autotuned_index.h:
 
@@ -843,15 +848,29 @@ CMakeFiles/simple_camera_test.dir/src/simple_camera_test.cpp.o: /home/skand/vide
 
 /usr/include/x86_64-linux-gnu/c++/13/bits/messages_members.h:
 
-/usr/lib/gcc/x86_64-linux-gnu/13/include/mm_malloc.h:
+/usr/include/x86_64-linux-gnu/c++/13/bits/ctype_base.h:
 
-/usr/include/c++/13/algorithm:
+/usr/lib/gcc/x86_64-linux-gnu/13/include/stdarg.h:
 
-/usr/include/alloca.h:
+/usr/include/x86_64-linux-gnu/c++/13/bits/cpu_defines.h:
 
-/home/skand/video-processor/src/simple_camera_test.cpp:
+/usr/include/x86_64-linux-gnu/bits/xopen_lim.h:
+
+/usr/include/x86_64-linux-gnu/bits/wordsize.h:
+
+/usr/include/x86_64-linux-gnu/bits/wctype-wchar.h:
+
+/usr/local/lib/libopencv_video.so.4.12.0:
+
+/lib/x86_64-linux-gnu/librav1e.so.0:
+
+/usr/local/lib/libopencv_optflow.so.4.12.0:
+
+/usr/include/c++/13/sstream:
 
 /usr/local/lib/libopencv_imgcodecs.so.4.12.0:
+
+/usr/local/lib/libopencv_flann.so.4.12.0:
 
 /usr/local/lib/libopencv_dnn_superres.so.4.12.0:
 
@@ -955,7 +974,17 @@ CMakeFiles/simple_camera_test.dir/src/simple_camera_test.cpp.o: /home/skand/vide
 
 /usr/local/lib/libopencv_cudawarping.so.4.12.0:
 
+/usr/local/include/opencv4/opencv2/flann/kdtree_index.h:
+
+/usr/local/lib/libopencv_objdetect.so.4.12.0:
+
+/usr/include/c++/13/bits/streambuf_iterator.h:
+
+/usr/include/x86_64-linux-gnu/bits/flt-eval-method.h:
+
 /lib/x86_64-linux-gnu/libx264.so.164:
+
+/usr/local/lib/libopencv_cudalegacy.so.4.12.0:
 
 /usr/lib/x86_64-linux-gnu/crti.o:
 
@@ -1057,9 +1086,9 @@ CMakeFiles/simple_camera_test.dir/src/simple_camera_test.cpp.o: /home/skand/vide
 
 /lib/x86_64-linux-gnu/librist.so.4:
 
-/lib/x86_64-linux-gnu/librav1e.so.0:
-
 /lib/x86_64-linux-gnu/librabbitmq.so.4:
+
+/usr/local/lib/libopencv_calib3d.so.4.12.0:
 
 /lib/x86_64-linux-gnu/libtasn1.so.6:
 
@@ -1096,12 +1125,6 @@ CMakeFiles/simple_camera_test.dir/src/simple_camera_test.cpp.o: /home/skand/vide
 /lib/x86_64-linux-gnu/libblkid.so.1:
 
 /usr/include/c++/13/limits:
-
-CMakeFiles/simple_camera_test.dir/src/simple_camera_test.cpp.o:
-
-/lib/x86_64-linux-gnu/libaom.so.3:
-
-/usr/include/c++/13/bits/cxxabi_init_exception.h:
 
 /lib/x86_64-linux-gnu/libssl.so.3:
 
@@ -1175,6 +1198,8 @@ CMakeFiles/simple_camera_test.dir/src/simple_camera_test.cpp.o:
 
 /usr/include/c++/13/bits/cxxabi_forced.h:
 
+/usr/local/lib/libopencv_features2d.so.4.12.0:
+
 /lib/x86_64-linux-gnu/libopenmpt.so.0:
 
 /usr/local/include/opencv4/opencv2/core/mat.hpp:
@@ -1183,17 +1208,9 @@ CMakeFiles/simple_camera_test.dir/src/simple_camera_test.cpp.o:
 
 /lib/x86_64-linux-gnu/libXfixes.so.3:
 
-/usr/include/assert.h:
-
-/lib/i386-linux-gnu/libxml2.so.2:
-
-/lib/x86_64-linux-gnu/libdeflate.so.0:
-
 /usr/local/lib/libopencv_cudaimgproc.so.4.12.0:
 
 /lib/x86_64-linux-gnu/libgstbase-1.0.so.0:
-
-/usr/include/x86_64-linux-gnu/bits/wordsize.h:
 
 /usr/local/include/opencv4/opencv2/core/mat.inl.hpp:
 
@@ -1210,10 +1227,6 @@ CMakeFiles/simple_camera_test.dir/src/simple_camera_test.cpp.o:
 /usr/include/c++/13/iomanip:
 
 /usr/include/strings.h:
-
-/lib/i386-linux-gnu/liblzma.so.5:
-
-/lib/i386-linux-gnu/libmd.so.0:
 
 /lib/x86_64-linux-gnu/libnuma.so.1:
 
@@ -1248,8 +1261,6 @@ CMakeFiles/simple_camera_test.dir/src/simple_camera_test.cpp.o:
 /lib/x86_64-linux-gnu/libX11-xcb.so.1:
 
 /usr/include/c++/13/list:
-
-/usr/include/x86_64-linux-gnu/bits/types/struct_sched_param.h:
 
 /lib/i386-linux-gnu/libdrm.so.2:
 
@@ -1301,15 +1312,29 @@ CMakeFiles/simple_camera_test.dir/src/simple_camera_test.cpp.o:
 
 /usr/include/x86_64-linux-gnu/bits/types/mbstate_t.h:
 
-/usr/lib/i386-linux-gnu/libicudata.so.74:
+/lib/x86_64-linux-gnu/libaom.so.3:
 
-/usr/include/x86_64-linux-gnu/bits/wctype-wchar.h:
+CMakeFiles/simple_camera_test.dir/src/simple_camera_test.cpp.o:
+
+/usr/include/c++/13/bits/cxxabi_init_exception.h:
+
+/usr/local/lib/libopencv_cudaoptflow.so.4.12.0:
+
+/usr/include/c++/13/bits/functexcept.h:
+
+/usr/lib/i386-linux-gnu/libicudata.so.74:
 
 /lib/i386-linux-gnu/libXdmcp.so.6:
 
 /usr/include/c++/13/bits/stl_function.h:
 
 /lib/i386-linux-gnu/libXau.so.6:
+
+/lib/i386-linux-gnu/libxml2.so.2:
+
+/lib/x86_64-linux-gnu/libdeflate.so.0:
+
+/usr/include/assert.h:
 
 /lib/i386-linux-gnu/libresolv.so.2:
 
@@ -1325,6 +1350,12 @@ CMakeFiles/simple_camera_test.dir/src/simple_camera_test.cpp.o:
 
 /usr/include/c++/13/bits/stl_set.h:
 
+/lib/i386-linux-gnu/libmd.so.0:
+
+/lib/i386-linux-gnu/liblzma.so.5:
+
+/home/skand/video-processor/src/simple_camera_test.cpp:
+
 /lib/x86_64-linux-gnu/libelf.so.1:
 
 /usr/local/include/opencv4/opencv2/highgui.hpp:
@@ -1339,19 +1370,15 @@ CMakeFiles/simple_camera_test.dir/src/simple_camera_test.cpp.o:
 
 /lib/x86_64-linux-gnu/libpcre2-8.so.0:
 
+/usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h:
+
+/usr/include/x86_64-linux-gnu/bits/wchar.h:
+
 /lib/x86_64-linux-gnu/libmp3lame.so.0:
 
 /usr/include/c++/13/set:
 
 /lib/x86_64-linux-gnu/libgdk_pixbuf-2.0.so.0:
-
-/usr/include/asm-generic/errno-base.h:
-
-/lib/i386-linux-gnu/libgssapi_krb5.so.2:
-
-/lib/x86_64-linux-gnu/libjbig.so.0:
-
-/usr/include/c++/13/bits/stl_iterator_base_funcs.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/wint_t.h:
 
@@ -1384,10 +1411,6 @@ CMakeFiles/simple_camera_test.dir/src/simple_camera_test.cpp.o:
 /lib/x86_64-linux-gnu/libfreetype.so.6:
 
 /lib/x86_64-linux-gnu/liblcms2.so.2:
-
-/usr/lib/gcc/x86_64-linux-gnu/13/include/stdarg.h:
-
-/usr/include/x86_64-linux-gnu/c++/13/bits/cpu_defines.h:
 
 /lib/x86_64-linux-gnu/libgssapi_krb5.so.2:
 
@@ -1485,6 +1508,14 @@ CMakeFiles/simple_camera_test.dir/src/simple_camera_test.cpp.o:
 
 /usr/include/features.h:
 
+/lib/i386-linux-gnu/libgssapi_krb5.so.2:
+
+/lib/x86_64-linux-gnu/libjbig.so.0:
+
+/usr/include/asm-generic/errno-base.h:
+
+/usr/include/c++/13/bits/stl_iterator_base_funcs.h:
+
 /lib/x86_64-linux-gnu/libjpeg.so.8:
 
 /usr/local/include/opencv4/opencv2/core/vsx_utils.hpp:
@@ -1512,6 +1543,18 @@ CMakeFiles/simple_camera_test.dir/src/simple_camera_test.cpp.o:
 /lib/x86_64-linux-gnu/libmd.so.0:
 
 /lib/x86_64-linux-gnu/libnorm.so.1:
+
+/usr/local/include/opencv4/opencv2/flann/config.h:
+
+/usr/local/lib/libopencv_ximgproc.so.4.12.0:
+
+/usr/include/alloca.h:
+
+/usr/include/x86_64-linux-gnu/bits/types/struct_sched_param.h:
+
+/usr/lib/gcc/x86_64-linux-gnu/13/include/mm_malloc.h:
+
+/usr/include/c++/13/algorithm:
 
 /usr/include/c++/13/backward/auto_ptr.h:
 
@@ -1581,8 +1624,6 @@ CMakeFiles/simple_camera_test.dir/src/simple_camera_test.cpp.o:
 
 /usr/include/c++/13/bits/exception_ptr.h:
 
-/usr/include/c++/13/bits/functexcept.h:
-
 /lib/x86_64-linux-gnu/libhwy.so.1:
 
 /usr/include/c++/13/bits/functional_hash.h:
@@ -1600,6 +1641,14 @@ CMakeFiles/simple_camera_test.dir/src/simple_camera_test.cpp.o:
 /usr/include/c++/13/bits/ios_base.h:
 
 /usr/include/c++/13/bits/istream.tcc:
+
+/usr/local/include/opencv4/opencv2/flann/sampling.h:
+
+/usr/include/x86_64-linux-gnu/bits/types/cookie_io_functions_t.h:
+
+/lib/x86_64-linux-gnu/libx265.so.199:
+
+/usr/include/c++/13/bits/nested_exception.h:
 
 /usr/include/c++/13/bits/locale_classes.tcc:
 
@@ -1626,6 +1675,10 @@ CMakeFiles/simple_camera_test.dir/src/simple_camera_test.cpp.o:
 /usr/include/c++/13/bits/stl_uninitialized.h:
 
 /usr/include/c++/13/bits/node_handle.h:
+
+/usr/include/x86_64-linux-gnu/c++/13/bits/c++locale.h:
+
+/usr/include/c++/13/bits/ostream.tcc:
 
 /usr/include/x86_64-linux-gnu/c++/13/bits/error_constants.h:
 
@@ -1693,10 +1746,6 @@ CMakeFiles/simple_camera_test.dir/src/simple_camera_test.cpp.o:
 
 /usr/include/c++/13/bits/stl_vector.h:
 
-/usr/include/c++/13/bits/streambuf_iterator.h:
-
-/usr/include/x86_64-linux-gnu/bits/flt-eval-method.h:
-
 /usr/include/c++/13/bits/unique_lock.h:
 
 /usr/include/c++/13/bits/unordered_map.h:
@@ -1761,6 +1810,10 @@ CMakeFiles/simple_camera_test.dir/src/simple_camera_test.cpp.o:
 
 /usr/include/linux/errno.h:
 
+/usr/include/x86_64-linux-gnu/c++/13/bits/c++allocator.h:
+
+/usr/include/c++/13/ext/aligned_buffer.h:
+
 /usr/include/c++/13/ext/atomicity.h:
 
 /usr/local/include/opencv4/opencv2/flann/allocator.h:
@@ -1818,16 +1871,6 @@ CMakeFiles/simple_camera_test.dir/src/simple_camera_test.cpp.o:
 /usr/include/c++/13/ratio:
 
 /usr/include/linux/limits.h:
-
-/usr/include/c++/13/sstream:
-
-/usr/local/include/opencv4/opencv2/flann/sampling.h:
-
-/lib/x86_64-linux-gnu/libx265.so.199:
-
-/usr/include/c++/13/bits/nested_exception.h:
-
-/usr/include/x86_64-linux-gnu/bits/types/cookie_io_functions_t.h:
 
 /usr/lib/i386-linux-gnu/libxml2.so.2:
 
@@ -2006,19 +2049,3 @@ CMakeFiles/simple_camera_test.dir/src/simple_camera_test.cpp.o:
 /usr/include/x86_64-linux-gnu/bits/types/timer_t.h:
 
 /usr/include/x86_64-linux-gnu/bits/uintn-identity.h:
-
-/usr/include/x86_64-linux-gnu/bits/xopen_lim.h:
-
-/usr/include/c++/13/ext/aligned_buffer.h:
-
-/usr/include/x86_64-linux-gnu/c++/13/bits/c++allocator.h:
-
-/usr/include/x86_64-linux-gnu/bits/wchar.h:
-
-/usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h:
-
-/usr/include/c++/13/bits/ostream.tcc:
-
-/usr/include/x86_64-linux-gnu/c++/13/bits/c++locale.h:
-
-/usr/include/x86_64-linux-gnu/c++/13/bits/ctype_base.h:

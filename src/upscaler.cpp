@@ -1,5 +1,6 @@
 #include "upscaler.h"
 #include <iostream>
+#include <algorithm>
 
 // Check if OpenCV was built with CUDA support
 #ifdef WITH_CUDA
@@ -10,6 +11,10 @@
 #endif
 
 #include "dnn_super_res.h"
+#include "temporal_consistency.h"
+#include "adaptive_sharpening.h"
+#include "selective_bilateral.h"
+
 
 
 // Forward declaration of implementation classes
@@ -570,45 +575,289 @@ bool Upscaler::initialize(int target_width, int target_height) {
     m_target_width = target_width;
     m_target_height = target_height;
     
-    return initializeImpl();
+    // Clean up existing implementation
+    m_impl.reset();
+    m_dnn_sr.reset();
+    
+    // Reset enhancement modules
+    m_bilateral_pre.reset();
+    m_sharpening.reset();
+    m_bilateral_post.reset();
+    m_temporal_consistency.reset();
+    
+    // Initialize common flags
+    m_use_selective_bilateral = true;
+    m_use_adaptive_sharpening = true;
+    m_use_temporal_consistency = true;
+    
+    if (m_algorithm == SUPER_RES || m_algorithm == REAL_ESRGAN) {
+        try {
+            // For REAL_ESRGAN, use REAL_ESRGAN model type
+            DnnSuperRes::ModelType model_type = (m_algorithm == REAL_ESRGAN) ? 
+                                              DnnSuperRes::REAL_ESRGAN : 
+                                              DnnSuperRes::FSRCNN;
+                                               
+            // Select appropriate model based on algorithm
+            std::string model_path;
+            std::string model_name;
+            
+            if (m_algorithm == REAL_ESRGAN) {
+                model_path = "models/RRDB_ESRGAN_x4.onnx";
+                model_name = "esrgan";
+            } else {
+                // Default FSRCNN model
+                model_path = "models/FSRCNN_x4.pb";
+                model_name = "fsrcnn";
+            }
+            
+            // Create and initialize super-resolution model
+            m_dnn_sr = std::make_unique<DnnSuperRes>(model_path, model_name, 4, model_type);
+            m_dnn_sr->setTargetSize(m_target_width, m_target_height);
+            m_dnn_sr->setUseGPU(m_use_gpu);
+            
+            if (m_dnn_sr->initialize()) {
+                std::cout << "Using " << (m_algorithm == REAL_ESRGAN ? "RealESRGAN" : "DNN Super Resolution") 
+                          << " for upscaling" << std::endl;
+                m_initialized = true;
+                
+                // Initialize enhancement modules when using RealESRGAN
+                if (m_algorithm == REAL_ESRGAN) {
+                    initializeEnhancements();
+                }
+                
+                return true;
+            } else {
+                std::cerr << "Failed to initialize " << (m_algorithm == REAL_ESRGAN ? "RealESRGAN" : "DNN Super Resolution") 
+                         << ", falling back to standard method" << std::endl;
+                m_dnn_sr.reset();
+                // Continue with standard implementation
+            }
+        } catch (const std::exception& e) {
+            std::cerr << "Error creating super resolution: " << e.what() << std::endl;
+            m_dnn_sr.reset();
+            // Continue with standard implementation
+        }
+    }
+    
+    // Standard upscaling implementation if neural network upscaling is not being used
+#ifdef WITH_CUDA
+    if (m_use_gpu) {
+        try {
+            m_impl = std::make_unique<GPUImpl>(m_algorithm, m_target_width, m_target_height);
+            std::cout << "Using GPU-accelerated upscaling with " << getAlgorithmName() << std::endl;
+        } catch (const std::exception& e) {
+            std::cerr << "Failed to initialize GPU implementation: " << e.what() << std::endl;
+            m_use_gpu = false; // Fall back to CPU
+        }
+    }
+#endif
+    
+    // Create CPU implementation if GPU is not being used
+    if (!m_impl) {
+        m_impl = std::make_unique<CPUImpl>(m_algorithm, m_target_width, m_target_height);
+        std::cout << "Using CPU upscaling with " << getAlgorithmName() << std::endl;
+    }
+    
+    m_initialized = (m_impl != nullptr);
+    return m_initialized;
 }
 
+// Private helper method to initialize enhancement modules
+bool Upscaler::initializeEnhancements() {
+    // Initialize selective bilateral pre-processing
+    m_bilateral_pre = std::make_unique<SelectiveBilateral>(
+        SelectiveBilateral::Config{
+            SelectiveBilateral::PRE_PROCESSING,  // Stage
+            m_use_gpu,                          // Use GPU if available
+            true,                               // Use adaptive parameters
+            7,                                  // Diameter
+            30.0,                               // Sigma color
+            30.0,                               // Sigma space
+            true,                               // Apply selectively
+            30.0,                               // Detail threshold
+            1.5,                                // Texture boost
+            2.0,                                // Edge preservation
+            true,                               // Use multi-scale
+            3                                   // Number of scales
+        });
+    
+    if (!m_bilateral_pre->initialize()) {
+        std::cerr << "Warning: Failed to initialize bilateral pre-processor" << std::endl;
+        m_bilateral_pre.reset();
+        return false;
+    }
+    
+    // Initialize adaptive sharpening
+    m_sharpening = std::make_unique<AdaptiveSharpening>(
+        AdaptiveSharpening::Config{
+            0.8f,                               // Overall strength
+            1.2f,                               // Edge strength
+            0.4f,                               // Smooth area strength
+            30.0f,                              // Edge threshold
+            1.5f,                               // Gaussian sigma
+            5,                                  // Kernel size
+            true,                               // Preserve tone
+            m_use_gpu,                          // Use GPU if available
+            true                                // Use adaptive sigma
+        });
+    
+    if (!m_sharpening->initialize()) {
+        std::cerr << "Warning: Failed to initialize adaptive sharpening" << std::endl;
+        m_sharpening.reset();
+        return false;
+    }
+    
+    // Initialize selective bilateral post-processing
+    m_bilateral_post = std::make_unique<SelectiveBilateral>(
+        SelectiveBilateral::Config{
+            SelectiveBilateral::POST_PROCESSING, // Stage
+            m_use_gpu,                          // Use GPU if available
+            true,                               // Use adaptive parameters
+            5,                                  // Diameter (smaller for post-processing)
+            20.0,                               // Sigma color (reduced for post)
+            20.0,                               // Sigma space (reduced for post)
+            true,                               // Apply selectively
+            30.0,                               // Detail threshold
+            1.2,                                // Texture boost
+            1.5,                                // Edge preservation
+            true,                               // Use multi-scale
+            2                                   // Number of scales (fewer for post)
+        });
+    
+    if (!m_bilateral_post->initialize()) {
+        std::cerr << "Warning: Failed to initialize bilateral post-processor" << std::endl;
+        m_bilateral_post.reset();
+        return false;
+    }
+    
+    // Initialize temporal consistency
+    m_temporal_consistency = std::make_unique<TemporalConsistency>(
+        TemporalConsistency::Config{
+            3,                                  // Buffer size
+            0.6f,                               // Blend strength
+            15.0f,                              // Motion threshold
+            100.0f,                             // Scene change threshold
+            m_use_gpu,                          // Use GPU if available
+            0.5,                                // Pyramid scale
+            3,                                  // Pyramid levels
+            15,                                 // Window size
+            3,                                  // Iterations
+            5,                                  // Poly N
+            1.2,                                // Poly Sigma
+            0                                   // Flags
+        });
+    
+    if (!m_temporal_consistency->initialize()) {
+        std::cerr << "Warning: Failed to initialize temporal consistency" << std::endl;
+        m_temporal_consistency.reset();
+        return false;
+    }
+    
+    std::cout << "Enhancement modules initialized successfully!" << std::endl;
+    return true;
+}  
+
 bool Upscaler::upscale(const cv::Mat& input, cv::Mat& output) {
+    if (!m_initialized) {
+        std::cerr << "Upscaler not initialized" << std::endl;
+        return false;
+    }
+    
     if (input.empty()) {
         std::cerr << "Input frame is empty" << std::endl;
         return false;
     }
     
-    // Debug prints
-    if (m_algorithm == REAL_ESRGAN) {
-        std::cout << "Using REAL_ESRGAN algorithm" << std::endl;
-        if (m_dnn_sr) {
-            std::cout << "DNN SR is initialized: " << (m_dnn_sr->isInitialized() ? "Yes" : "No") << std::endl;
-        } else {
-            std::cout << "DNN SR object is NULL" << std::endl;
-        }
-    }
-    
-    // Handle DNN super-resolution if it's initialized
-    if ((m_algorithm == SUPER_RES || m_algorithm == REAL_ESRGAN) && m_dnn_sr && m_dnn_sr->isInitialized()) {
-        return m_dnn_sr->upscale(input, output);
-    }
-    
-    // Check if the standard implementation is initialized
-    if (!m_impl) {
-        std::cerr << "Upscaler not initialized" << std::endl;
-        
-        // Fall back to a simple resize if all else fails
+    // For RealESRGAN algorithm with enhancements
+    if (m_algorithm == REAL_ESRGAN && m_dnn_sr && m_dnn_sr->isInitialized()) {
         try {
-            cv::resize(input, output, cv::Size(m_target_width, m_target_height), 0, 0, cv::INTER_LINEAR);
+            cv::Mat preprocessed, upscaled, sharpened, postprocessed;
+            
+            // Step 1: Pre-processing with selective bilateral filtering
+            if (m_use_selective_bilateral && m_bilateral_pre) {
+                if (!m_bilateral_pre->process(input, preprocessed)) {
+                    std::cerr << "Pre-processing failed, using original input" << std::endl;
+                    input.copyTo(preprocessed);
+                }
+            } else {
+                input.copyTo(preprocessed);
+            }
+            
+            // Step 2: Super-resolution upscaling
+            if (!m_dnn_sr->upscale(preprocessed, upscaled)) {
+                std::cerr << "Super-resolution failed" << std::endl;
+                
+                // Fall back to standard resize if super-resolution fails
+                cv::resize(preprocessed, upscaled, cv::Size(m_target_width, m_target_height), 
+                          0, 0, cv::INTER_LANCZOS4);
+                
+                if (upscaled.empty()) {
+                    return false;
+                }
+            }
+            
+            // Step 3: Adaptive sharpening
+            if (m_use_adaptive_sharpening && m_sharpening) {
+                if (!m_sharpening->process(upscaled, sharpened)) {
+                    std::cerr << "Sharpening failed, using upscaled result" << std::endl;
+                    upscaled.copyTo(sharpened);
+                }
+            } else {
+                upscaled.copyTo(sharpened);
+            }
+            
+            // Step 4: Post-processing with selective bilateral filtering
+            if (m_use_selective_bilateral && m_bilateral_post) {
+                if (!m_bilateral_post->process(sharpened, postprocessed)) {
+                    std::cerr << "Post-processing failed, using sharpened result" << std::endl;
+                    sharpened.copyTo(postprocessed);
+                }
+            } else {
+                sharpened.copyTo(postprocessed);
+            }
+            
+            // Step 5: Temporal consistency
+            if (m_use_temporal_consistency && m_temporal_consistency) {
+                if (!m_temporal_consistency->process(postprocessed, output)) {
+                    std::cerr << "Temporal consistency failed, using post-processed result" << std::endl;
+                    postprocessed.copyTo(output);
+                }
+            } else {
+                postprocessed.copyTo(output);
+            }
+            
             return true;
         } catch (const cv::Exception& e) {
-            std::cerr << "Basic resize failed: " << e.what() << std::endl;
+            std::cerr << "Error in enhanced upscaling: " << e.what() << std::endl;
+            
+            // Fall back to standard super-resolution without enhancements
+            if (!m_dnn_sr->upscale(input, output)) {
+                // If even basic super-resolution fails, use standard resize
+                cv::resize(input, output, cv::Size(m_target_width, m_target_height), 
+                          0, 0, cv::INTER_LANCZOS4);
+            }
+            
+            return !output.empty();
+        }
+    } 
+    // For other upscaling algorithms or if DNN isn't available/initialized
+    else if (m_dnn_sr && m_dnn_sr->isInitialized()) {
+        return m_dnn_sr->upscale(input, output);
+    }
+    else if (m_impl) {
+        return m_impl->upscale(input, output);
+    }
+    else {
+        // Last resort fallback
+        try {
+            cv::resize(input, output, cv::Size(m_target_width, m_target_height), 
+                      0, 0, cv::INTER_LANCZOS4);
+            return true;
+        } catch (const cv::Exception& e) {
+            std::cerr << "Error in basic resize: " << e.what() << std::endl;
             return false;
         }
     }
-    
-    return m_impl->upscale(input, output);
 }
 
 void Upscaler::setAlgorithm(Algorithm algorithm) {

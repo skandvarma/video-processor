@@ -181,6 +181,52 @@ test_phase4/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_phase4.dir/build.make CMakeFiles/test_phase4.dir/build
 .PHONY : test_phase4/fast
 
+#=============================================================================
+# Target rules for targets named test_enhancements
+
+# Build rule for target.
+test_enhancements: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test_enhancements
+.PHONY : test_enhancements
+
+# fast build rule for target.
+test_enhancements/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_enhancements.dir/build.make CMakeFiles/test_enhancements.dir/build
+.PHONY : test_enhancements/fast
+
+src/adaptive_sharpening.o: src/adaptive_sharpening.cpp.o
+.PHONY : src/adaptive_sharpening.o
+
+# target to build an object file
+src/adaptive_sharpening.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/video_processor.dir/build.make CMakeFiles/video_processor.dir/src/adaptive_sharpening.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_phase2.dir/build.make CMakeFiles/test_phase2.dir/src/adaptive_sharpening.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_phase4.dir/build.make CMakeFiles/test_phase4.dir/src/adaptive_sharpening.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_enhancements.dir/build.make CMakeFiles/test_enhancements.dir/src/adaptive_sharpening.cpp.o
+.PHONY : src/adaptive_sharpening.cpp.o
+
+src/adaptive_sharpening.i: src/adaptive_sharpening.cpp.i
+.PHONY : src/adaptive_sharpening.i
+
+# target to preprocess a source file
+src/adaptive_sharpening.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/video_processor.dir/build.make CMakeFiles/video_processor.dir/src/adaptive_sharpening.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_phase2.dir/build.make CMakeFiles/test_phase2.dir/src/adaptive_sharpening.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_phase4.dir/build.make CMakeFiles/test_phase4.dir/src/adaptive_sharpening.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_enhancements.dir/build.make CMakeFiles/test_enhancements.dir/src/adaptive_sharpening.cpp.i
+.PHONY : src/adaptive_sharpening.cpp.i
+
+src/adaptive_sharpening.s: src/adaptive_sharpening.cpp.s
+.PHONY : src/adaptive_sharpening.s
+
+# target to generate assembly for a file
+src/adaptive_sharpening.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/video_processor.dir/build.make CMakeFiles/video_processor.dir/src/adaptive_sharpening.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_phase2.dir/build.make CMakeFiles/test_phase2.dir/src/adaptive_sharpening.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_phase4.dir/build.make CMakeFiles/test_phase4.dir/src/adaptive_sharpening.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_enhancements.dir/build.make CMakeFiles/test_enhancements.dir/src/adaptive_sharpening.cpp.s
+.PHONY : src/adaptive_sharpening.cpp.s
+
 src/camera.o: src/camera.cpp.o
 .PHONY : src/camera.o
 
@@ -189,6 +235,7 @@ src/camera.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/video_processor.dir/build.make CMakeFiles/video_processor.dir/src/camera.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_phase2.dir/build.make CMakeFiles/test_phase2.dir/src/camera.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_phase4.dir/build.make CMakeFiles/test_phase4.dir/src/camera.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_enhancements.dir/build.make CMakeFiles/test_enhancements.dir/src/camera.cpp.o
 .PHONY : src/camera.cpp.o
 
 src/camera.i: src/camera.cpp.i
@@ -199,6 +246,7 @@ src/camera.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/video_processor.dir/build.make CMakeFiles/video_processor.dir/src/camera.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_phase2.dir/build.make CMakeFiles/test_phase2.dir/src/camera.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_phase4.dir/build.make CMakeFiles/test_phase4.dir/src/camera.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_enhancements.dir/build.make CMakeFiles/test_enhancements.dir/src/camera.cpp.i
 .PHONY : src/camera.cpp.i
 
 src/camera.s: src/camera.cpp.s
@@ -209,6 +257,7 @@ src/camera.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/video_processor.dir/build.make CMakeFiles/video_processor.dir/src/camera.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_phase2.dir/build.make CMakeFiles/test_phase2.dir/src/camera.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_phase4.dir/build.make CMakeFiles/test_phase4.dir/src/camera.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_enhancements.dir/build.make CMakeFiles/test_enhancements.dir/src/camera.cpp.s
 .PHONY : src/camera.cpp.s
 
 src/display.o: src/display.cpp.o
@@ -246,6 +295,7 @@ src/dnn_super_res.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/video_processor.dir/build.make CMakeFiles/video_processor.dir/src/dnn_super_res.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_phase2.dir/build.make CMakeFiles/test_phase2.dir/src/dnn_super_res.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_phase4.dir/build.make CMakeFiles/test_phase4.dir/src/dnn_super_res.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_enhancements.dir/build.make CMakeFiles/test_enhancements.dir/src/dnn_super_res.cpp.o
 .PHONY : src/dnn_super_res.cpp.o
 
 src/dnn_super_res.i: src/dnn_super_res.cpp.i
@@ -256,6 +306,7 @@ src/dnn_super_res.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/video_processor.dir/build.make CMakeFiles/video_processor.dir/src/dnn_super_res.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_phase2.dir/build.make CMakeFiles/test_phase2.dir/src/dnn_super_res.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_phase4.dir/build.make CMakeFiles/test_phase4.dir/src/dnn_super_res.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_enhancements.dir/build.make CMakeFiles/test_enhancements.dir/src/dnn_super_res.cpp.i
 .PHONY : src/dnn_super_res.cpp.i
 
 src/dnn_super_res.s: src/dnn_super_res.cpp.s
@@ -266,6 +317,7 @@ src/dnn_super_res.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/video_processor.dir/build.make CMakeFiles/video_processor.dir/src/dnn_super_res.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_phase2.dir/build.make CMakeFiles/test_phase2.dir/src/dnn_super_res.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_phase4.dir/build.make CMakeFiles/test_phase4.dir/src/dnn_super_res.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_enhancements.dir/build.make CMakeFiles/test_enhancements.dir/src/dnn_super_res.cpp.s
 .PHONY : src/dnn_super_res.cpp.s
 
 src/frame_buffer.o: src/frame_buffer.cpp.o
@@ -276,6 +328,7 @@ src/frame_buffer.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/video_processor.dir/build.make CMakeFiles/video_processor.dir/src/frame_buffer.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_phase2.dir/build.make CMakeFiles/test_phase2.dir/src/frame_buffer.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_phase4.dir/build.make CMakeFiles/test_phase4.dir/src/frame_buffer.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_enhancements.dir/build.make CMakeFiles/test_enhancements.dir/src/frame_buffer.cpp.o
 .PHONY : src/frame_buffer.cpp.o
 
 src/frame_buffer.i: src/frame_buffer.cpp.i
@@ -286,6 +339,7 @@ src/frame_buffer.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/video_processor.dir/build.make CMakeFiles/video_processor.dir/src/frame_buffer.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_phase2.dir/build.make CMakeFiles/test_phase2.dir/src/frame_buffer.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_phase4.dir/build.make CMakeFiles/test_phase4.dir/src/frame_buffer.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_enhancements.dir/build.make CMakeFiles/test_enhancements.dir/src/frame_buffer.cpp.i
 .PHONY : src/frame_buffer.cpp.i
 
 src/frame_buffer.s: src/frame_buffer.cpp.s
@@ -296,6 +350,7 @@ src/frame_buffer.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/video_processor.dir/build.make CMakeFiles/video_processor.dir/src/frame_buffer.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_phase2.dir/build.make CMakeFiles/test_phase2.dir/src/frame_buffer.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_phase4.dir/build.make CMakeFiles/test_phase4.dir/src/frame_buffer.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_enhancements.dir/build.make CMakeFiles/test_enhancements.dir/src/frame_buffer.cpp.s
 .PHONY : src/frame_buffer.cpp.s
 
 src/main.o: src/main.cpp.o
@@ -400,6 +455,39 @@ src/processor.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_phase4.dir/build.make CMakeFiles/test_phase4.dir/src/processor.cpp.s
 .PHONY : src/processor.cpp.s
 
+src/selective_bilateral.o: src/selective_bilateral.cpp.o
+.PHONY : src/selective_bilateral.o
+
+# target to build an object file
+src/selective_bilateral.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/video_processor.dir/build.make CMakeFiles/video_processor.dir/src/selective_bilateral.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_phase2.dir/build.make CMakeFiles/test_phase2.dir/src/selective_bilateral.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_phase4.dir/build.make CMakeFiles/test_phase4.dir/src/selective_bilateral.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_enhancements.dir/build.make CMakeFiles/test_enhancements.dir/src/selective_bilateral.cpp.o
+.PHONY : src/selective_bilateral.cpp.o
+
+src/selective_bilateral.i: src/selective_bilateral.cpp.i
+.PHONY : src/selective_bilateral.i
+
+# target to preprocess a source file
+src/selective_bilateral.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/video_processor.dir/build.make CMakeFiles/video_processor.dir/src/selective_bilateral.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_phase2.dir/build.make CMakeFiles/test_phase2.dir/src/selective_bilateral.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_phase4.dir/build.make CMakeFiles/test_phase4.dir/src/selective_bilateral.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_enhancements.dir/build.make CMakeFiles/test_enhancements.dir/src/selective_bilateral.cpp.i
+.PHONY : src/selective_bilateral.cpp.i
+
+src/selective_bilateral.s: src/selective_bilateral.cpp.s
+.PHONY : src/selective_bilateral.s
+
+# target to generate assembly for a file
+src/selective_bilateral.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/video_processor.dir/build.make CMakeFiles/video_processor.dir/src/selective_bilateral.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_phase2.dir/build.make CMakeFiles/test_phase2.dir/src/selective_bilateral.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_phase4.dir/build.make CMakeFiles/test_phase4.dir/src/selective_bilateral.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_enhancements.dir/build.make CMakeFiles/test_enhancements.dir/src/selective_bilateral.cpp.s
+.PHONY : src/selective_bilateral.cpp.s
+
 src/simple_camera_test.o: src/simple_camera_test.cpp.o
 .PHONY : src/simple_camera_test.o
 
@@ -423,6 +511,63 @@ src/simple_camera_test.s: src/simple_camera_test.cpp.s
 src/simple_camera_test.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/simple_camera_test.dir/build.make CMakeFiles/simple_camera_test.dir/src/simple_camera_test.cpp.s
 .PHONY : src/simple_camera_test.cpp.s
+
+src/temporal_consistency.o: src/temporal_consistency.cpp.o
+.PHONY : src/temporal_consistency.o
+
+# target to build an object file
+src/temporal_consistency.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/video_processor.dir/build.make CMakeFiles/video_processor.dir/src/temporal_consistency.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_phase2.dir/build.make CMakeFiles/test_phase2.dir/src/temporal_consistency.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_phase4.dir/build.make CMakeFiles/test_phase4.dir/src/temporal_consistency.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_enhancements.dir/build.make CMakeFiles/test_enhancements.dir/src/temporal_consistency.cpp.o
+.PHONY : src/temporal_consistency.cpp.o
+
+src/temporal_consistency.i: src/temporal_consistency.cpp.i
+.PHONY : src/temporal_consistency.i
+
+# target to preprocess a source file
+src/temporal_consistency.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/video_processor.dir/build.make CMakeFiles/video_processor.dir/src/temporal_consistency.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_phase2.dir/build.make CMakeFiles/test_phase2.dir/src/temporal_consistency.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_phase4.dir/build.make CMakeFiles/test_phase4.dir/src/temporal_consistency.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_enhancements.dir/build.make CMakeFiles/test_enhancements.dir/src/temporal_consistency.cpp.i
+.PHONY : src/temporal_consistency.cpp.i
+
+src/temporal_consistency.s: src/temporal_consistency.cpp.s
+.PHONY : src/temporal_consistency.s
+
+# target to generate assembly for a file
+src/temporal_consistency.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/video_processor.dir/build.make CMakeFiles/video_processor.dir/src/temporal_consistency.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_phase2.dir/build.make CMakeFiles/test_phase2.dir/src/temporal_consistency.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_phase4.dir/build.make CMakeFiles/test_phase4.dir/src/temporal_consistency.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_enhancements.dir/build.make CMakeFiles/test_enhancements.dir/src/temporal_consistency.cpp.s
+.PHONY : src/temporal_consistency.cpp.s
+
+src/test_enhancements.o: src/test_enhancements.cpp.o
+.PHONY : src/test_enhancements.o
+
+# target to build an object file
+src/test_enhancements.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_enhancements.dir/build.make CMakeFiles/test_enhancements.dir/src/test_enhancements.cpp.o
+.PHONY : src/test_enhancements.cpp.o
+
+src/test_enhancements.i: src/test_enhancements.cpp.i
+.PHONY : src/test_enhancements.i
+
+# target to preprocess a source file
+src/test_enhancements.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_enhancements.dir/build.make CMakeFiles/test_enhancements.dir/src/test_enhancements.cpp.i
+.PHONY : src/test_enhancements.cpp.i
+
+src/test_enhancements.s: src/test_enhancements.cpp.s
+.PHONY : src/test_enhancements.s
+
+# target to generate assembly for a file
+src/test_enhancements.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_enhancements.dir/build.make CMakeFiles/test_enhancements.dir/src/test_enhancements.cpp.s
+.PHONY : src/test_enhancements.cpp.s
 
 src/test_phase2.o: src/test_phase2.cpp.o
 .PHONY : src/test_phase2.o
@@ -480,6 +625,7 @@ src/timer.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/video_processor.dir/build.make CMakeFiles/video_processor.dir/src/timer.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_phase2.dir/build.make CMakeFiles/test_phase2.dir/src/timer.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_phase4.dir/build.make CMakeFiles/test_phase4.dir/src/timer.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_enhancements.dir/build.make CMakeFiles/test_enhancements.dir/src/timer.cpp.o
 .PHONY : src/timer.cpp.o
 
 src/timer.i: src/timer.cpp.i
@@ -490,6 +636,7 @@ src/timer.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/video_processor.dir/build.make CMakeFiles/video_processor.dir/src/timer.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_phase2.dir/build.make CMakeFiles/test_phase2.dir/src/timer.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_phase4.dir/build.make CMakeFiles/test_phase4.dir/src/timer.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_enhancements.dir/build.make CMakeFiles/test_enhancements.dir/src/timer.cpp.i
 .PHONY : src/timer.cpp.i
 
 src/timer.s: src/timer.cpp.s
@@ -500,6 +647,7 @@ src/timer.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/video_processor.dir/build.make CMakeFiles/video_processor.dir/src/timer.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_phase2.dir/build.make CMakeFiles/test_phase2.dir/src/timer.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_phase4.dir/build.make CMakeFiles/test_phase4.dir/src/timer.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_enhancements.dir/build.make CMakeFiles/test_enhancements.dir/src/timer.cpp.s
 .PHONY : src/timer.cpp.s
 
 src/upscaler.o: src/upscaler.cpp.o
@@ -510,6 +658,7 @@ src/upscaler.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/video_processor.dir/build.make CMakeFiles/video_processor.dir/src/upscaler.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_phase2.dir/build.make CMakeFiles/test_phase2.dir/src/upscaler.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_phase4.dir/build.make CMakeFiles/test_phase4.dir/src/upscaler.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_enhancements.dir/build.make CMakeFiles/test_enhancements.dir/src/upscaler.cpp.o
 .PHONY : src/upscaler.cpp.o
 
 src/upscaler.i: src/upscaler.cpp.i
@@ -520,6 +669,7 @@ src/upscaler.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/video_processor.dir/build.make CMakeFiles/video_processor.dir/src/upscaler.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_phase2.dir/build.make CMakeFiles/test_phase2.dir/src/upscaler.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_phase4.dir/build.make CMakeFiles/test_phase4.dir/src/upscaler.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_enhancements.dir/build.make CMakeFiles/test_enhancements.dir/src/upscaler.cpp.i
 .PHONY : src/upscaler.cpp.i
 
 src/upscaler.s: src/upscaler.cpp.s
@@ -530,6 +680,7 @@ src/upscaler.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/video_processor.dir/build.make CMakeFiles/video_processor.dir/src/upscaler.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_phase2.dir/build.make CMakeFiles/test_phase2.dir/src/upscaler.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_phase4.dir/build.make CMakeFiles/test_phase4.dir/src/upscaler.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_enhancements.dir/build.make CMakeFiles/test_enhancements.dir/src/upscaler.cpp.s
 .PHONY : src/upscaler.cpp.s
 
 # Help Target
@@ -542,9 +693,13 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... opencv_test"
 	@echo "... simple_camera_test"
+	@echo "... test_enhancements"
 	@echo "... test_phase2"
 	@echo "... test_phase4"
 	@echo "... video_processor"
+	@echo "... src/adaptive_sharpening.o"
+	@echo "... src/adaptive_sharpening.i"
+	@echo "... src/adaptive_sharpening.s"
 	@echo "... src/camera.o"
 	@echo "... src/camera.i"
 	@echo "... src/camera.s"
@@ -569,9 +724,18 @@ help:
 	@echo "... src/processor.o"
 	@echo "... src/processor.i"
 	@echo "... src/processor.s"
+	@echo "... src/selective_bilateral.o"
+	@echo "... src/selective_bilateral.i"
+	@echo "... src/selective_bilateral.s"
 	@echo "... src/simple_camera_test.o"
 	@echo "... src/simple_camera_test.i"
 	@echo "... src/simple_camera_test.s"
+	@echo "... src/temporal_consistency.o"
+	@echo "... src/temporal_consistency.i"
+	@echo "... src/temporal_consistency.s"
+	@echo "... src/test_enhancements.o"
+	@echo "... src/test_enhancements.i"
+	@echo "... src/test_enhancements.s"
 	@echo "... src/test_phase2.o"
 	@echo "... src/test_phase2.i"
 	@echo "... src/test_phase2.s"

@@ -239,20 +239,29 @@
   /usr/lib/x86_64-linux-gnu/librt.a \
   /usr/local/cuda-12.6/lib64/libOpenCL.so.1 \
   /usr/local/cuda-12.6/lib64/libcudart.so \
+  /usr/local/lib/libopencv_calib3d.so.4.12.0 \
   /usr/local/lib/libopencv_core.so.4.12.0 \
   /usr/local/lib/libopencv_cudaarithm.so.4.12.0 \
   /usr/local/lib/libopencv_cudafilters.so.4.12.0 \
   /usr/local/lib/libopencv_cudaimgproc.so.4.12.0 \
+  /usr/local/lib/libopencv_cudalegacy.so.4.12.0 \
+  /usr/local/lib/libopencv_cudaoptflow.so.4.12.0 \
   /usr/local/lib/libopencv_cudawarping.so.4.12.0 \
   /usr/local/lib/libopencv_cudev.so.4.12.0 \
   /usr/local/lib/libopencv_dnn.so.4.12.0 \
   /usr/local/lib/libopencv_dnn_superres.so.4.12.0 \
+  /usr/local/lib/libopencv_features2d.so.4.12.0 \
+  /usr/local/lib/libopencv_flann.so.4.12.0 \
   /usr/local/lib/libopencv_highgui.so.4.12.0 \
   /usr/local/lib/libopencv_imgcodecs.so.4.12.0 \
   /usr/local/lib/libopencv_imgproc.so.4.12.0 \
   /usr/local/lib/libopencv_ml.so.4.12.0 \
+  /usr/local/lib/libopencv_objdetect.so.4.12.0 \
+  /usr/local/lib/libopencv_optflow.so.4.12.0 \
   /usr/local/lib/libopencv_quality.so.4.12.0 \
+  /usr/local/lib/libopencv_video.so.4.12.0 \
   /usr/local/lib/libopencv_videoio.so.4.12.0 \
+  /usr/local/lib/libopencv_ximgproc.so.4.12.0 \
   CMakeFiles/opencv_test.dir/src/opencv_test.cpp.o
 
 CMakeFiles/opencv_test.dir/src/opencv_test.cpp.o: /home/skand/video-processor/src/opencv_test.cpp \
@@ -760,8 +769,6 @@ CMakeFiles/opencv_test.dir/src/opencv_test.cpp.o: /home/skand/video-processor/sr
 
 /usr/local/include/opencv4/opencv2/flann/kdtree_single_index.h:
 
-/usr/local/include/opencv4/opencv2/flann/kdtree_index.h:
-
 /usr/local/include/opencv4/opencv2/flann/index_testing.h:
 
 /usr/local/include/opencv4/opencv2/flann/hierarchical_clustering_index.h:
@@ -769,8 +776,6 @@ CMakeFiles/opencv_test.dir/src/opencv_test.cpp.o: /home/skand/video-processor/sr
 /usr/local/include/opencv4/opencv2/flann/flann_base.hpp:
 
 /usr/local/include/opencv4/opencv2/flann/dynamic_bitset.h:
-
-/usr/local/include/opencv4/opencv2/flann/config.h:
 
 /usr/local/include/opencv4/opencv2/flann/autotuned_index.h:
 
@@ -870,11 +875,27 @@ CMakeFiles/opencv_test.dir/src/opencv_test.cpp.o: /home/skand/video-processor/sr
 
 /usr/include/x86_64-linux-gnu/bits/wchar.h:
 
-/usr/include/alloca.h:
+/usr/include/x86_64-linux-gnu/bits/waitflags.h:
+
+/usr/include/x86_64-linux-gnu/bits/unistd_ext.h:
+
+/usr/include/x86_64-linux-gnu/bits/uio_lim.h:
+
+/usr/include/x86_64-linux-gnu/bits/uintn-identity.h:
+
+/usr/local/include/opencv4/opencv2/highgui.hpp:
+
+/usr/include/x86_64-linux-gnu/bits/typesizes.h:
+
+/usr/local/lib/libopencv_optflow.so.4.12.0:
+
+/usr/include/c++/13/sstream:
 
 /usr/include/linux/close_range.h:
 
 /usr/local/lib/libopencv_imgcodecs.so.4.12.0:
+
+/usr/local/lib/libopencv_flann.so.4.12.0:
 
 /usr/local/lib/libopencv_dnn_superres.so.4.12.0:
 
@@ -896,9 +917,11 @@ CMakeFiles/opencv_test.dir/src/opencv_test.cpp.o: /home/skand/video-processor/sr
 
 /usr/lib/x86_64-linux-gnu/libcairo-gobject.so.2:
 
-/usr/local/lib/libopencv_videoio.so.4.12.0:
+/usr/local/include/opencv4/opencv2/flann/allocator.h:
 
-/usr/lib/i386-linux-gnu/libxcb-dri3.so.0:
+/usr/include/x86_64-linux-gnu/bits/types/struct_tm.h:
+
+/usr/include/c++/13/deque:
 
 /usr/local/lib/libopencv_cudafilters.so.4.12.0:
 
@@ -950,13 +973,17 @@ CMakeFiles/opencv_test.dir/src/opencv_test.cpp.o: /home/skand/video-processor/sr
 
 /lib/x86_64-linux-gnu/libcjson.so.1:
 
+/usr/local/include/opencv4/opencv2/core/affine.hpp:
+
+/usr/include/x86_64-linux-gnu/bits/types/timer_t.h:
+
+/usr/include/c++/13/tr1/poly_hermite.tcc:
+
 /usr/lib/x86_64-linux-gnu/libm.so:
 
 /usr/lib/gcc/x86_64-linux-gnu/13/libgcc.a:
 
 /lib/x86_64-linux-gnu/libnettle.so.8:
-
-/usr/include/x86_64-linux-gnu/bits/waitflags.h:
 
 /usr/lib/i386-linux-gnu/libmd.so.0:
 
@@ -982,7 +1009,17 @@ CMakeFiles/opencv_test.dir/src/opencv_test.cpp.o: /home/skand/video-processor/sr
 
 /usr/local/lib/libopencv_cudawarping.so.4.12.0:
 
+/usr/local/include/opencv4/opencv2/flann/kdtree_index.h:
+
+/usr/local/lib/libopencv_objdetect.so.4.12.0:
+
+/usr/include/c++/13/bits/streambuf_iterator.h:
+
+/usr/include/x86_64-linux-gnu/bits/flt-eval-method.h:
+
 /lib/x86_64-linux-gnu/libx264.so.164:
+
+/usr/local/lib/libopencv_cudalegacy.so.4.12.0:
 
 /usr/lib/x86_64-linux-gnu/crti.o:
 
@@ -1080,7 +1117,11 @@ CMakeFiles/opencv_test.dir/src/opencv_test.cpp.o: /home/skand/video-processor/sr
 
 /lib/x86_64-linux-gnu/librav1e.so.0:
 
+/usr/local/lib/libopencv_video.so.4.12.0:
+
 /lib/x86_64-linux-gnu/librabbitmq.so.4:
+
+/usr/local/lib/libopencv_calib3d.so.4.12.0:
 
 /lib/x86_64-linux-gnu/libtasn1.so.6:
 
@@ -1107,10 +1148,6 @@ CMakeFiles/opencv_test.dir/src/opencv_test.cpp.o: /home/skand/video-processor/sr
 /lib/x86_64-linux-gnu/libgmp.so.10:
 
 /usr/include/c++/13/bits/alloc_traits.h:
-
-/usr/include/c++/13/bits/stl_relops.h:
-
-/lib/x86_64-linux-gnu/libpangocairo-1.0.so.0:
 
 /lib/x86_64-linux-gnu/libunistring.so.5:
 
@@ -1204,6 +1241,8 @@ CMakeFiles/opencv_test.dir/src/opencv_test.cpp.o:
 
 /usr/include/c++/13/bits/cxxabi_forced.h:
 
+/usr/local/lib/libopencv_features2d.so.4.12.0:
+
 /lib/x86_64-linux-gnu/libopenmpt.so.0:
 
 /usr/local/include/opencv4/opencv2/core/mat.hpp:
@@ -1266,8 +1305,6 @@ CMakeFiles/opencv_test.dir/src/opencv_test.cpp.o:
 
 /usr/include/c++/13/list:
 
-/usr/include/x86_64-linux-gnu/bits/types/struct_sched_param.h:
-
 /lib/i386-linux-gnu/libdrm.so.2:
 
 /lib/x86_64-linux-gnu/libudfread.so.0:
@@ -1322,6 +1359,10 @@ CMakeFiles/opencv_test.dir/src/opencv_test.cpp.o:
 
 /usr/include/c++/13/bits/cxxabi_init_exception.h:
 
+/usr/local/lib/libopencv_cudaoptflow.so.4.12.0:
+
+/usr/include/c++/13/bits/functexcept.h:
+
 /usr/lib/i386-linux-gnu/libicudata.so.74:
 
 /lib/i386-linux-gnu/libXdmcp.so.6:
@@ -1354,13 +1395,7 @@ CMakeFiles/opencv_test.dir/src/opencv_test.cpp.o:
 
 /lib/i386-linux-gnu/liblzma.so.5:
 
-/usr/include/x86_64-linux-gnu/bits/unistd_ext.h:
-
 /lib/x86_64-linux-gnu/libelf.so.1:
-
-/usr/local/include/opencv4/opencv2/highgui.hpp:
-
-/usr/include/x86_64-linux-gnu/bits/typesizes.h:
 
 /lib/i386-linux-gnu/libxcb-dri3.so.0:
 
@@ -1375,14 +1410,6 @@ CMakeFiles/opencv_test.dir/src/opencv_test.cpp.o:
 /usr/include/c++/13/set:
 
 /lib/x86_64-linux-gnu/libgdk_pixbuf-2.0.so.0:
-
-/usr/include/asm-generic/errno-base.h:
-
-/lib/i386-linux-gnu/libgssapi_krb5.so.2:
-
-/lib/x86_64-linux-gnu/libjbig.so.0:
-
-/usr/include/c++/13/bits/stl_iterator_base_funcs.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/wint_t.h:
 
@@ -1447,8 +1474,6 @@ CMakeFiles/opencv_test.dir/src/opencv_test.cpp.o:
 /lib/i386-linux-gnu/libdl.so.2:
 
 /lib/x86_64-linux-gnu/libharfbuzz.so.0:
-
-/usr/include/x86_64-linux-gnu/bits/uio_lim.h:
 
 /lib/x86_64-linux-gnu/libglib-2.0.so.0:
 
@@ -1520,6 +1545,14 @@ CMakeFiles/opencv_test.dir/src/opencv_test.cpp.o:
 
 /usr/include/features.h:
 
+/lib/i386-linux-gnu/libgssapi_krb5.so.2:
+
+/lib/x86_64-linux-gnu/libjbig.so.0:
+
+/usr/include/asm-generic/errno-base.h:
+
+/usr/include/c++/13/bits/stl_iterator_base_funcs.h:
+
 /lib/x86_64-linux-gnu/libjpeg.so.8:
 
 /usr/local/include/opencv4/opencv2/core/vsx_utils.hpp:
@@ -1549,6 +1582,22 @@ CMakeFiles/opencv_test.dir/src/opencv_test.cpp.o:
 /lib/x86_64-linux-gnu/libmd.so.0:
 
 /lib/x86_64-linux-gnu/libnorm.so.1:
+
+/usr/local/include/opencv4/opencv2/flann/config.h:
+
+/usr/local/lib/libopencv_ximgproc.so.4.12.0:
+
+/usr/lib/i386-linux-gnu/libxcb-dri3.so.0:
+
+/usr/local/lib/libopencv_videoio.so.4.12.0:
+
+/lib/x86_64-linux-gnu/libpangocairo-1.0.so.0:
+
+/usr/include/c++/13/bits/stl_relops.h:
+
+/usr/include/alloca.h:
+
+/usr/include/x86_64-linux-gnu/bits/types/struct_sched_param.h:
 
 /usr/lib/gcc/x86_64-linux-gnu/13/include/mm_malloc.h:
 
@@ -1622,8 +1671,6 @@ CMakeFiles/opencv_test.dir/src/opencv_test.cpp.o:
 
 /usr/include/c++/13/bits/exception_ptr.h:
 
-/usr/include/c++/13/bits/functexcept.h:
-
 /lib/x86_64-linux-gnu/libhwy.so.1:
 
 /usr/include/c++/13/bits/functional_hash.h:
@@ -1641,6 +1688,14 @@ CMakeFiles/opencv_test.dir/src/opencv_test.cpp.o:
 /usr/include/c++/13/bits/ios_base.h:
 
 /usr/include/c++/13/bits/istream.tcc:
+
+/usr/local/include/opencv4/opencv2/flann/sampling.h:
+
+/usr/include/x86_64-linux-gnu/bits/types/cookie_io_functions_t.h:
+
+/lib/x86_64-linux-gnu/libx265.so.199:
+
+/usr/include/c++/13/bits/nested_exception.h:
 
 /usr/include/c++/13/bits/locale_classes.tcc:
 
@@ -1736,10 +1791,6 @@ CMakeFiles/opencv_test.dir/src/opencv_test.cpp.o:
 
 /usr/include/c++/13/bits/stl_vector.h:
 
-/usr/include/c++/13/bits/streambuf_iterator.h:
-
-/usr/include/x86_64-linux-gnu/bits/flt-eval-method.h:
-
 /usr/include/c++/13/bits/unique_lock.h:
 
 /usr/include/c++/13/bits/unordered_map.h:
@@ -1810,12 +1861,6 @@ CMakeFiles/opencv_test.dir/src/opencv_test.cpp.o:
 
 /usr/include/c++/13/ext/atomicity.h:
 
-/usr/local/include/opencv4/opencv2/flann/allocator.h:
-
-/usr/include/c++/13/deque:
-
-/usr/include/x86_64-linux-gnu/bits/types/struct_tm.h:
-
 /usr/local/include/opencv4/opencv2/core/matx.hpp:
 
 /usr/include/c++/13/ext/concurrence.h:
@@ -1865,16 +1910,6 @@ CMakeFiles/opencv_test.dir/src/opencv_test.cpp.o:
 /usr/include/c++/13/ratio:
 
 /usr/include/linux/limits.h:
-
-/usr/include/c++/13/sstream:
-
-/usr/local/include/opencv4/opencv2/flann/sampling.h:
-
-/lib/x86_64-linux-gnu/libx265.so.199:
-
-/usr/include/c++/13/bits/nested_exception.h:
-
-/usr/include/x86_64-linux-gnu/bits/types/cookie_io_functions_t.h:
 
 /usr/lib/i386-linux-gnu/libxml2.so.2:
 
@@ -2012,6 +2047,12 @@ CMakeFiles/opencv_test.dir/src/opencv_test.cpp.o:
 
 /usr/include/x86_64-linux-gnu/bits/struct_rwlock.h:
 
+/usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h:
+
+/usr/include/x86_64-linux-gnu/bits/types/time_t.h:
+
+/usr/include/x86_64-linux-gnu/bits/types/FILE.h:
+
 /usr/include/c++/13/bits/basic_string.tcc:
 
 /usr/include/x86_64-linux-gnu/bits/types/__fpos_t.h:
@@ -2041,17 +2082,3 @@ CMakeFiles/opencv_test.dir/src/opencv_test.cpp.o:
 /usr/include/c++/13/ios:
 
 /usr/include/x86_64-linux-gnu/bits/types/struct_itimerspec.h:
-
-/usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h:
-
-/usr/include/x86_64-linux-gnu/bits/types/FILE.h:
-
-/usr/include/x86_64-linux-gnu/bits/types/time_t.h:
-
-/usr/local/include/opencv4/opencv2/core/affine.hpp:
-
-/usr/include/c++/13/tr1/poly_hermite.tcc:
-
-/usr/include/x86_64-linux-gnu/bits/types/timer_t.h:
-
-/usr/include/x86_64-linux-gnu/bits/uintn-identity.h:

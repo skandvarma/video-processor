@@ -156,6 +156,48 @@ CMakeFiles/test_phase2.dir/src/dnn_super_res.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/test_phase2.dir/src/dnn_super_res.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/skand/video-processor/src/dnn_super_res.cpp -o CMakeFiles/test_phase2.dir/src/dnn_super_res.cpp.s
 
+CMakeFiles/test_phase2.dir/src/temporal_consistency.cpp.o: CMakeFiles/test_phase2.dir/flags.make
+CMakeFiles/test_phase2.dir/src/temporal_consistency.cpp.o: /home/skand/video-processor/src/temporal_consistency.cpp
+CMakeFiles/test_phase2.dir/src/temporal_consistency.cpp.o: CMakeFiles/test_phase2.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/skand/video-processor/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/test_phase2.dir/src/temporal_consistency.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/test_phase2.dir/src/temporal_consistency.cpp.o -MF CMakeFiles/test_phase2.dir/src/temporal_consistency.cpp.o.d -o CMakeFiles/test_phase2.dir/src/temporal_consistency.cpp.o -c /home/skand/video-processor/src/temporal_consistency.cpp
+
+CMakeFiles/test_phase2.dir/src/temporal_consistency.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/test_phase2.dir/src/temporal_consistency.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/skand/video-processor/src/temporal_consistency.cpp > CMakeFiles/test_phase2.dir/src/temporal_consistency.cpp.i
+
+CMakeFiles/test_phase2.dir/src/temporal_consistency.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/test_phase2.dir/src/temporal_consistency.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/skand/video-processor/src/temporal_consistency.cpp -o CMakeFiles/test_phase2.dir/src/temporal_consistency.cpp.s
+
+CMakeFiles/test_phase2.dir/src/adaptive_sharpening.cpp.o: CMakeFiles/test_phase2.dir/flags.make
+CMakeFiles/test_phase2.dir/src/adaptive_sharpening.cpp.o: /home/skand/video-processor/src/adaptive_sharpening.cpp
+CMakeFiles/test_phase2.dir/src/adaptive_sharpening.cpp.o: CMakeFiles/test_phase2.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/skand/video-processor/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/test_phase2.dir/src/adaptive_sharpening.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/test_phase2.dir/src/adaptive_sharpening.cpp.o -MF CMakeFiles/test_phase2.dir/src/adaptive_sharpening.cpp.o.d -o CMakeFiles/test_phase2.dir/src/adaptive_sharpening.cpp.o -c /home/skand/video-processor/src/adaptive_sharpening.cpp
+
+CMakeFiles/test_phase2.dir/src/adaptive_sharpening.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/test_phase2.dir/src/adaptive_sharpening.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/skand/video-processor/src/adaptive_sharpening.cpp > CMakeFiles/test_phase2.dir/src/adaptive_sharpening.cpp.i
+
+CMakeFiles/test_phase2.dir/src/adaptive_sharpening.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/test_phase2.dir/src/adaptive_sharpening.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/skand/video-processor/src/adaptive_sharpening.cpp -o CMakeFiles/test_phase2.dir/src/adaptive_sharpening.cpp.s
+
+CMakeFiles/test_phase2.dir/src/selective_bilateral.cpp.o: CMakeFiles/test_phase2.dir/flags.make
+CMakeFiles/test_phase2.dir/src/selective_bilateral.cpp.o: /home/skand/video-processor/src/selective_bilateral.cpp
+CMakeFiles/test_phase2.dir/src/selective_bilateral.cpp.o: CMakeFiles/test_phase2.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/skand/video-processor/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/test_phase2.dir/src/selective_bilateral.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/test_phase2.dir/src/selective_bilateral.cpp.o -MF CMakeFiles/test_phase2.dir/src/selective_bilateral.cpp.o.d -o CMakeFiles/test_phase2.dir/src/selective_bilateral.cpp.o -c /home/skand/video-processor/src/selective_bilateral.cpp
+
+CMakeFiles/test_phase2.dir/src/selective_bilateral.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/test_phase2.dir/src/selective_bilateral.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/skand/video-processor/src/selective_bilateral.cpp > CMakeFiles/test_phase2.dir/src/selective_bilateral.cpp.i
+
+CMakeFiles/test_phase2.dir/src/selective_bilateral.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/test_phase2.dir/src/selective_bilateral.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/skand/video-processor/src/selective_bilateral.cpp -o CMakeFiles/test_phase2.dir/src/selective_bilateral.cpp.s
+
 # Object files for target test_phase2
 test_phase2_OBJECTS = \
 "CMakeFiles/test_phase2.dir/src/test_phase2.cpp.o" \
@@ -163,7 +205,10 @@ test_phase2_OBJECTS = \
 "CMakeFiles/test_phase2.dir/src/timer.cpp.o" \
 "CMakeFiles/test_phase2.dir/src/frame_buffer.cpp.o" \
 "CMakeFiles/test_phase2.dir/src/upscaler.cpp.o" \
-"CMakeFiles/test_phase2.dir/src/dnn_super_res.cpp.o"
+"CMakeFiles/test_phase2.dir/src/dnn_super_res.cpp.o" \
+"CMakeFiles/test_phase2.dir/src/temporal_consistency.cpp.o" \
+"CMakeFiles/test_phase2.dir/src/adaptive_sharpening.cpp.o" \
+"CMakeFiles/test_phase2.dir/src/selective_bilateral.cpp.o"
 
 # External object files for target test_phase2
 test_phase2_EXTERNAL_OBJECTS =
@@ -174,17 +219,29 @@ test_phase2_EXTERNAL_OBJECTS =
 /home/skand/video-processor/bin/test_phase2: CMakeFiles/test_phase2.dir/src/frame_buffer.cpp.o
 /home/skand/video-processor/bin/test_phase2: CMakeFiles/test_phase2.dir/src/upscaler.cpp.o
 /home/skand/video-processor/bin/test_phase2: CMakeFiles/test_phase2.dir/src/dnn_super_res.cpp.o
+/home/skand/video-processor/bin/test_phase2: CMakeFiles/test_phase2.dir/src/temporal_consistency.cpp.o
+/home/skand/video-processor/bin/test_phase2: CMakeFiles/test_phase2.dir/src/adaptive_sharpening.cpp.o
+/home/skand/video-processor/bin/test_phase2: CMakeFiles/test_phase2.dir/src/selective_bilateral.cpp.o
 /home/skand/video-processor/bin/test_phase2: CMakeFiles/test_phase2.dir/build.make
 /home/skand/video-processor/bin/test_phase2: CMakeFiles/test_phase2.dir/compiler_depend.ts
 /home/skand/video-processor/bin/test_phase2: /usr/local/lib/libopencv_highgui.so.4.12.0
 /home/skand/video-processor/bin/test_phase2: /usr/local/lib/libopencv_videoio.so.4.12.0
+/home/skand/video-processor/bin/test_phase2: /usr/local/lib/libopencv_cudaoptflow.so.4.12.0
+/home/skand/video-processor/bin/test_phase2: /usr/local/lib/libopencv_optflow.so.4.12.0
 /home/skand/video-processor/bin/test_phase2: /usr/local/lib/libopencv_cudawarping.so.4.12.0
-/home/skand/video-processor/bin/test_phase2: /usr/local/lib/libopencv_cudaimgproc.so.4.12.0
 /home/skand/video-processor/bin/test_phase2: /usr/local/lib/libopencv_dnn_superres.so.4.12.0
 /home/skand/video-processor/bin/test_phase2: /usr/local/cuda-12.6/lib64/libcudart.so
+/home/skand/video-processor/bin/test_phase2: /usr/local/lib/libopencv_ximgproc.so.4.12.0
 /home/skand/video-processor/bin/test_phase2: /usr/local/lib/libopencv_imgcodecs.so.4.12.0
+/home/skand/video-processor/bin/test_phase2: /usr/local/lib/libopencv_cudalegacy.so.4.12.0
+/home/skand/video-processor/bin/test_phase2: /usr/local/lib/libopencv_cudaimgproc.so.4.12.0
 /home/skand/video-processor/bin/test_phase2: /usr/local/lib/libopencv_cudafilters.so.4.12.0
 /home/skand/video-processor/bin/test_phase2: /usr/local/lib/libopencv_cudaarithm.so.4.12.0
+/home/skand/video-processor/bin/test_phase2: /usr/local/lib/libopencv_objdetect.so.4.12.0
+/home/skand/video-processor/bin/test_phase2: /usr/local/lib/libopencv_video.so.4.12.0
+/home/skand/video-processor/bin/test_phase2: /usr/local/lib/libopencv_calib3d.so.4.12.0
+/home/skand/video-processor/bin/test_phase2: /usr/local/lib/libopencv_features2d.so.4.12.0
+/home/skand/video-processor/bin/test_phase2: /usr/local/lib/libopencv_flann.so.4.12.0
 /home/skand/video-processor/bin/test_phase2: /usr/local/lib/libopencv_dnn.so.4.12.0
 /home/skand/video-processor/bin/test_phase2: /usr/local/lib/libopencv_quality.so.4.12.0
 /home/skand/video-processor/bin/test_phase2: /usr/local/lib/libopencv_imgproc.so.4.12.0
@@ -193,7 +250,7 @@ test_phase2_EXTERNAL_OBJECTS =
 /home/skand/video-processor/bin/test_phase2: /usr/local/lib/libopencv_cudev.so.4.12.0
 /home/skand/video-processor/bin/test_phase2: /usr/lib/x86_64-linux-gnu/librt.a
 /home/skand/video-processor/bin/test_phase2: CMakeFiles/test_phase2.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/skand/video-processor/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Linking CXX executable /home/skand/video-processor/bin/test_phase2"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/skand/video-processor/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Linking CXX executable /home/skand/video-processor/bin/test_phase2"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/test_phase2.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

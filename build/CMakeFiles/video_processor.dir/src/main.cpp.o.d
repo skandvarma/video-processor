@@ -374,6 +374,9 @@ CMakeFiles/video_processor.dir/src/main.cpp.o: \
  /home/skand/video-processor/include/upscaler.h \
  /home/skand/video-processor/include/dnn_super_res.h \
  /usr/local/include/opencv4/opencv2/dnn_superres.hpp \
+ /home/skand/video-processor/include/temporal_consistency.h \
+ /home/skand/video-processor/include/adaptive_sharpening.h \
+ /home/skand/video-processor/include/selective_bilateral.h \
  /home/skand/video-processor/include/timer.h \
  /usr/include/c++/13/filesystem /usr/include/c++/13/bits/fs_fwd.h \
  /usr/include/c++/13/bits/fs_path.h /usr/include/c++/13/codecvt \

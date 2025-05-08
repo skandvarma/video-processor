@@ -8,15 +8,27 @@
   CMakeFiles/test_phase2.dir/src/frame_buffer.cpp.o \
   CMakeFiles/test_phase2.dir/src/upscaler.cpp.o \
   CMakeFiles/test_phase2.dir/src/dnn_super_res.cpp.o \
+  CMakeFiles/test_phase2.dir/src/temporal_consistency.cpp.o \
+  CMakeFiles/test_phase2.dir/src/adaptive_sharpening.cpp.o \
+  CMakeFiles/test_phase2.dir/src/selective_bilateral.cpp.o \
   /usr/local/lib/libopencv_highgui.so.4.12.0 \
   /usr/local/lib/libopencv_videoio.so.4.12.0 \
+  /usr/local/lib/libopencv_cudaoptflow.so.4.12.0 \
+  /usr/local/lib/libopencv_optflow.so.4.12.0 \
   /usr/local/lib/libopencv_cudawarping.so.4.12.0 \
-  /usr/local/lib/libopencv_cudaimgproc.so.4.12.0 \
   /usr/local/lib/libopencv_dnn_superres.so.4.12.0 \
   /usr/local/cuda-12.6/lib64/libcudart.so \
+  /usr/local/lib/libopencv_ximgproc.so.4.12.0 \
   /usr/local/lib/libopencv_imgcodecs.so.4.12.0 \
+  /usr/local/lib/libopencv_cudalegacy.so.4.12.0 \
+  /usr/local/lib/libopencv_cudaimgproc.so.4.12.0 \
   /usr/local/lib/libopencv_cudafilters.so.4.12.0 \
   /usr/local/lib/libopencv_cudaarithm.so.4.12.0 \
+  /usr/local/lib/libopencv_objdetect.so.4.12.0 \
+  /usr/local/lib/libopencv_video.so.4.12.0 \
+  /usr/local/lib/libopencv_calib3d.so.4.12.0 \
+  /usr/local/lib/libopencv_features2d.so.4.12.0 \
+  /usr/local/lib/libopencv_flann.so.4.12.0 \
   /usr/local/lib/libopencv_dnn.so.4.12.0 \
   /usr/local/lib/libopencv_quality.so.4.12.0 \
   /usr/local/lib/libopencv_imgproc.so.4.12.0 \
@@ -58,7 +70,6 @@
   /lib/x86_64-linux-gnu/libgdk_pixbuf-2.0.so.0 \
   /lib/x86_64-linux-gnu/libgobject-2.0.so.0 \
   /lib/x86_64-linux-gnu/libglib-2.0.so.0 \
-  /lib/x86_64-linux-gnu/libm.so.6 \
   /lib/x86_64-linux-gnu/libgstbase-1.0.so.0 \
   /lib/x86_64-linux-gnu/libgstreamer-1.0.so.0 \
   /lib/x86_64-linux-gnu/libgstapp-1.0.so.0 \
@@ -70,13 +81,20 @@
   /lib/x86_64-linux-gnu/libavformat.so.60 \
   /lib/x86_64-linux-gnu/libavutil.so.58 \
   /lib/x86_64-linux-gnu/libswscale.so.7 \
+  /usr/local/lib/libopencv_cudalegacy.so.4.12.0 \
+  /lib64/ld-linux-x86-64.so.2 \
   /usr/local/cuda-12.6/lib64/libnppc.so.12 \
   /usr/local/cuda-12.6/lib64/libnppig.so.12 \
-  /lib64/ld-linux-x86-64.so.2 \
-  /usr/local/lib/libopencv_cudaarithm.so.4.12.0 \
+  /usr/local/cuda-12.6/lib64/libnppial.so.12 \
+  /usr/local/cuda-12.6/lib64/libnppicc.so.12 \
+  /usr/local/cuda-12.6/lib64/libnppidei.so.12 \
+  /usr/local/cuda-12.6/lib64/libnppist.so.12 \
   /usr/local/cuda-12.6/lib64/libnppif.so.12 \
   /usr/local/cuda-12.6/lib64/libnppim.so.12 \
+  /usr/local/cuda-12.6/lib64/libnppitc.so.12 \
   /usr/local/cuda-12.6/lib64/libcublas.so.12 \
+  /usr/local/cuda-12.6/lib64/libcufft.so.11 \
+  /usr/local/lib/libopencv_calib3d.so.4.12.0 \
   /lib/x86_64-linux-gnu/libcudnn.so.9 \
   /lib/i386-linux-gnu/libz.so.1 \
   /usr/lib/i386-linux-gnu/libz.so.1 \
@@ -189,6 +207,7 @@
   /usr/lib/i386-linux-gnu/libdrm.so.2 \
   /lib/x86_64-linux-gnu/libdrm.so.2 \
   /usr/local/cuda-12.6/lib64/libOpenCL.so.1 \
+  /usr/local/lib/libopencv_objdetect.so.4.12.0 \
   /lib/i386-linux-gnu/libpthread.so.0 \
   /usr/lib/i386-linux-gnu/libpthread.so.0 \
   /lib/x86_64-linux-gnu/libpthread.so.0 \
@@ -198,12 +217,9 @@
   /lib/i386-linux-gnu/libdl.so.2 \
   /usr/lib/i386-linux-gnu/libdl.so.2 \
   /lib/x86_64-linux-gnu/libdl.so.2 \
-  /usr/local/cuda-12.6/lib64/libnppial.so.12 \
-  /usr/local/cuda-12.6/lib64/libnppidei.so.12 \
-  /usr/local/cuda-12.6/lib64/libnppist.so.12 \
-  /usr/local/cuda-12.6/lib64/libnppitc.so.12 \
-  /usr/local/cuda-12.6/lib64/libcufft.so.11 \
   /usr/local/cuda-12.6/lib64/libcublasLt.so.12 \
+  /usr/local/lib/libopencv_features2d.so.4.12.0 \
+  /usr/local/lib/libopencv_flann.so.4.12.0 \
   /lib/x86_64-linux-gnu/libsharpyuv.so.0 \
   /lib/i386-linux-gnu/libzstd.so.1 \
   /usr/lib/i386-linux-gnu/libzstd.so.1 \
@@ -331,23 +347,47 @@ CMakeFiles/test_phase2.dir/src/upscaler.cpp.o:
 
 CMakeFiles/test_phase2.dir/src/dnn_super_res.cpp.o:
 
+CMakeFiles/test_phase2.dir/src/temporal_consistency.cpp.o:
+
+CMakeFiles/test_phase2.dir/src/adaptive_sharpening.cpp.o:
+
+CMakeFiles/test_phase2.dir/src/selective_bilateral.cpp.o:
+
 /usr/local/lib/libopencv_highgui.so.4.12.0:
 
 /usr/local/lib/libopencv_videoio.so.4.12.0:
 
-/usr/local/lib/libopencv_cudawarping.so.4.12.0:
+/usr/local/lib/libopencv_cudaoptflow.so.4.12.0:
 
-/usr/local/lib/libopencv_cudaimgproc.so.4.12.0:
+/usr/local/lib/libopencv_optflow.so.4.12.0:
+
+/usr/local/lib/libopencv_cudawarping.so.4.12.0:
 
 /usr/local/lib/libopencv_dnn_superres.so.4.12.0:
 
 /usr/local/cuda-12.6/lib64/libcudart.so:
 
+/usr/local/lib/libopencv_ximgproc.so.4.12.0:
+
 /usr/local/lib/libopencv_imgcodecs.so.4.12.0:
+
+/usr/local/lib/libopencv_cudalegacy.so.4.12.0:
+
+/usr/local/lib/libopencv_cudaimgproc.so.4.12.0:
 
 /usr/local/lib/libopencv_cudafilters.so.4.12.0:
 
 /usr/local/lib/libopencv_cudaarithm.so.4.12.0:
+
+/usr/local/lib/libopencv_objdetect.so.4.12.0:
+
+/usr/local/lib/libopencv_video.so.4.12.0:
+
+/usr/local/lib/libopencv_calib3d.so.4.12.0:
+
+/usr/local/lib/libopencv_features2d.so.4.12.0:
+
+/usr/local/lib/libopencv_flann.so.4.12.0:
 
 /usr/local/lib/libopencv_dnn.so.4.12.0:
 
@@ -431,8 +471,6 @@ CMakeFiles/test_phase2.dir/src/dnn_super_res.cpp.o:
 
 /lib/x86_64-linux-gnu/libglib-2.0.so.0:
 
-/lib/x86_64-linux-gnu/libm.so.6:
-
 /lib/x86_64-linux-gnu/libgstbase-1.0.so.0:
 
 /lib/x86_64-linux-gnu/libgstreamer-1.0.so.0:
@@ -455,19 +493,33 @@ CMakeFiles/test_phase2.dir/src/dnn_super_res.cpp.o:
 
 /lib/x86_64-linux-gnu/libswscale.so.7:
 
+/usr/local/lib/libopencv_cudalegacy.so.4.12.0:
+
+/lib64/ld-linux-x86-64.so.2:
+
 /usr/local/cuda-12.6/lib64/libnppc.so.12:
 
 /usr/local/cuda-12.6/lib64/libnppig.so.12:
 
-/lib64/ld-linux-x86-64.so.2:
+/usr/local/cuda-12.6/lib64/libnppial.so.12:
 
-/usr/local/lib/libopencv_cudaarithm.so.4.12.0:
+/usr/local/cuda-12.6/lib64/libnppicc.so.12:
+
+/usr/local/cuda-12.6/lib64/libnppidei.so.12:
+
+/usr/local/cuda-12.6/lib64/libnppist.so.12:
 
 /usr/local/cuda-12.6/lib64/libnppif.so.12:
 
 /usr/local/cuda-12.6/lib64/libnppim.so.12:
 
+/usr/local/cuda-12.6/lib64/libnppitc.so.12:
+
 /usr/local/cuda-12.6/lib64/libcublas.so.12:
+
+/usr/local/cuda-12.6/lib64/libcufft.so.11:
+
+/usr/local/lib/libopencv_calib3d.so.4.12.0:
 
 /lib/x86_64-linux-gnu/libcudnn.so.9:
 
@@ -693,6 +745,8 @@ CMakeFiles/test_phase2.dir/src/dnn_super_res.cpp.o:
 
 /usr/local/cuda-12.6/lib64/libOpenCL.so.1:
 
+/usr/local/lib/libopencv_objdetect.so.4.12.0:
+
 /lib/i386-linux-gnu/libpthread.so.0:
 
 /usr/lib/i386-linux-gnu/libpthread.so.0:
@@ -711,17 +765,11 @@ CMakeFiles/test_phase2.dir/src/dnn_super_res.cpp.o:
 
 /lib/x86_64-linux-gnu/libdl.so.2:
 
-/usr/local/cuda-12.6/lib64/libnppial.so.12:
-
-/usr/local/cuda-12.6/lib64/libnppidei.so.12:
-
-/usr/local/cuda-12.6/lib64/libnppist.so.12:
-
-/usr/local/cuda-12.6/lib64/libnppitc.so.12:
-
-/usr/local/cuda-12.6/lib64/libcufft.so.11:
-
 /usr/local/cuda-12.6/lib64/libcublasLt.so.12:
+
+/usr/local/lib/libopencv_features2d.so.4.12.0:
+
+/usr/local/lib/libopencv_flann.so.4.12.0:
 
 /lib/x86_64-linux-gnu/libsharpyuv.so.0:
 

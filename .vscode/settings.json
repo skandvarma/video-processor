@@ -57,7 +57,18 @@
         "cwctype": "cpp",
         "numeric": "cpp",
         "numbers": "cpp",
-        "__nullptr": "cpp"
+        "__nullptr": "cpp",
+        "charconv": "cpp",
+        "codecvt": "cpp",
+        "deque": "cpp",
+        "list": "cpp",
+        "map": "cpp",
+        "set": "cpp",
+        "format": "cpp",
+        "source_location": "cpp",
+        "span": "cpp",
+        "typeindex": "cpp",
+        "variant": "cpp"
     },
     "C_Cpp.errorSquiggles": "disabled"
 }

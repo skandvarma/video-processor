@@ -5,13 +5,22 @@
   CMakeFiles/opencv_test.dir/src/opencv_test.cpp.o \
   /usr/local/lib/libopencv_highgui.so.4.12.0 \
   /usr/local/lib/libopencv_videoio.so.4.12.0 \
+  /usr/local/lib/libopencv_cudaoptflow.so.4.12.0 \
+  /usr/local/lib/libopencv_optflow.so.4.12.0 \
   /usr/local/lib/libopencv_cudawarping.so.4.12.0 \
-  /usr/local/lib/libopencv_cudaimgproc.so.4.12.0 \
   /usr/local/lib/libopencv_dnn_superres.so.4.12.0 \
   /usr/local/cuda-12.6/lib64/libcudart.so \
+  /usr/local/lib/libopencv_ximgproc.so.4.12.0 \
   /usr/local/lib/libopencv_imgcodecs.so.4.12.0 \
+  /usr/local/lib/libopencv_cudalegacy.so.4.12.0 \
+  /usr/local/lib/libopencv_cudaimgproc.so.4.12.0 \
   /usr/local/lib/libopencv_cudafilters.so.4.12.0 \
   /usr/local/lib/libopencv_cudaarithm.so.4.12.0 \
+  /usr/local/lib/libopencv_objdetect.so.4.12.0 \
+  /usr/local/lib/libopencv_video.so.4.12.0 \
+  /usr/local/lib/libopencv_calib3d.so.4.12.0 \
+  /usr/local/lib/libopencv_features2d.so.4.12.0 \
+  /usr/local/lib/libopencv_flann.so.4.12.0 \
   /usr/local/lib/libopencv_dnn.so.4.12.0 \
   /usr/local/lib/libopencv_quality.so.4.12.0 \
   /usr/local/lib/libopencv_imgproc.so.4.12.0 \
@@ -285,19 +294,37 @@ CMakeFiles/opencv_test.dir/src/opencv_test.cpp.o:
 
 /usr/local/lib/libopencv_videoio.so.4.12.0:
 
-/usr/local/lib/libopencv_cudawarping.so.4.12.0:
+/usr/local/lib/libopencv_cudaoptflow.so.4.12.0:
 
-/usr/local/lib/libopencv_cudaimgproc.so.4.12.0:
+/usr/local/lib/libopencv_optflow.so.4.12.0:
+
+/usr/local/lib/libopencv_cudawarping.so.4.12.0:
 
 /usr/local/lib/libopencv_dnn_superres.so.4.12.0:
 
 /usr/local/cuda-12.6/lib64/libcudart.so:
 
+/usr/local/lib/libopencv_ximgproc.so.4.12.0:
+
 /usr/local/lib/libopencv_imgcodecs.so.4.12.0:
+
+/usr/local/lib/libopencv_cudalegacy.so.4.12.0:
+
+/usr/local/lib/libopencv_cudaimgproc.so.4.12.0:
 
 /usr/local/lib/libopencv_cudafilters.so.4.12.0:
 
 /usr/local/lib/libopencv_cudaarithm.so.4.12.0:
+
+/usr/local/lib/libopencv_objdetect.so.4.12.0:
+
+/usr/local/lib/libopencv_video.so.4.12.0:
+
+/usr/local/lib/libopencv_calib3d.so.4.12.0:
+
+/usr/local/lib/libopencv_features2d.so.4.12.0:
+
+/usr/local/lib/libopencv_flann.so.4.12.0:
 
 /usr/local/lib/libopencv_dnn.so.4.12.0:
 

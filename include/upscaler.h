@@ -2,11 +2,21 @@
 
 #include <opencv2/opencv.hpp>
 #include "dnn_super_res.h"
+
 #include <memory>
 #include <string>
 
-// Forward declaration of implementation class
+// Forward declarations for enhancement modules
+class SelectiveBilateral;
+class AdaptiveSharpening;
+class TemporalConsistency;
+
+// Forward declaration of implementation classes
 class UpscalerImpl;
+class CPUImpl;
+#ifdef WITH_CUDA
+class GPUImpl;
+#endif
 
 /**
  * @brief Class for video frame upscaling with GPU acceleration when available
@@ -87,8 +97,28 @@ public:
      */
     static bool isGPUAvailable();
 
+    /**
+     * @brief Adaptively adjust quality based on performance
+     * @param processing_time Current processing time
+     * @param target_time Target processing time
+     * @return true if quality was adjusted
+     */
     bool adjustQualityForPerformance(double processing_time, double target_time);
 
+    // Enhancement control methods
+    void setUseSelectiveBilateral(bool enable) { m_use_selective_bilateral = enable; }
+    void setUseAdaptiveSharpening(bool enable) { m_use_adaptive_sharpening = enable; }
+    void setUseTemporalConsistency(bool enable) { m_use_temporal_consistency = enable; }
+    
+    bool isUsingSelectiveBilateral() const { return m_use_selective_bilateral; }
+    bool isUsingAdaptiveSharpening() const { return m_use_adaptive_sharpening; }
+    bool isUsingTemporalConsistency() const { return m_use_temporal_consistency; }
+    
+    // Methods to access enhancement modules for parameter tuning
+    SelectiveBilateral* getBilateralPreProcessor() { return m_bilateral_pre.get(); }
+    AdaptiveSharpening* getAdaptiveSharpening() { return m_sharpening.get(); }
+    SelectiveBilateral* getBilateralPostProcessor() { return m_bilateral_post.get(); }
+    TemporalConsistency* getTemporalConsistency() { return m_temporal_consistency.get(); }
     
 private:
     Algorithm m_algorithm;             // Selected upscaling algorithm
@@ -103,4 +133,18 @@ private:
     
     // Initialize the implementation based on current settings
     bool initializeImpl();
+    
+    // Helper method to initialize enhancements
+    bool initializeEnhancements();
+    
+    // Enhancement modules
+    std::unique_ptr<SelectiveBilateral> m_bilateral_pre;
+    std::unique_ptr<AdaptiveSharpening> m_sharpening;
+    std::unique_ptr<SelectiveBilateral> m_bilateral_post;
+    std::unique_ptr<TemporalConsistency> m_temporal_consistency;
+    
+    // Enhancement flags
+    bool m_use_selective_bilateral;
+    bool m_use_adaptive_sharpening;
+    bool m_use_temporal_consistency;
 };

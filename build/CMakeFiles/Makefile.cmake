@@ -75,4 +75,5 @@ set(CMAKE_DEPEND_INFO_FILES
   "CMakeFiles/simple_camera_test.dir/DependInfo.cmake"
   "CMakeFiles/test_phase2.dir/DependInfo.cmake"
   "CMakeFiles/test_phase4.dir/DependInfo.cmake"
+  "CMakeFiles/test_enhancements.dir/DependInfo.cmake"
   )

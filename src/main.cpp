@@ -1,6 +1,9 @@
 #include "camera.h"
 #include "frame_buffer.h"
 #include "upscaler.h"
+#include "temporal_consistency.h"
+#include "adaptive_sharpening.h"
+#include "selective_bilateral.h"
 #include "timer.h"
 #include <iostream>
 #include <thread>
@@ -626,6 +629,65 @@ int main(int argc, char* argv[]) {
                 target_height = std::stoi(argv[++i]);
                 std::cout << "Output resolution set to " << target_width << "x" << target_height << std::endl;
             }
+        // }else if (arg == "--no-temporal") {
+        //     upscaler.setUseTemporalConsistency(false);
+        //     std::cout << "Temporal consistency disabled" << std::endl;
+        // }
+        // else if (arg == "--no-sharpening") {
+        //     upscaler.setUseAdaptiveSharpening(false);
+        //     std::cout << "Adaptive sharpening disabled" << std::endl;
+        // }
+        // else if (arg == "--no-bilateral") {
+        //     upscaler.setUseSelectiveBilateral(false);
+        //     std::cout << "Selective bilateral filtering disabled" << std::endl;
+        // }
+        // else if (arg == "--animation-mode") {
+        //     // Optimize parameters for animation content
+        //     if (upscaler.getBilateralPreProcessor()) {
+        //         auto config = upscaler.getBilateralPreProcessor()->getConfig();
+        //         config.detail_threshold = 20.0; // Lower threshold to preserve more details
+        //         config.edge_preserve = 2.5;     // Stronger edge preservation
+        //         upscaler.getBilateralPreProcessor()->setConfig(config);
+        //     }
+            
+        //     if (upscaler.getAdaptiveSharpening()) {
+        //         auto config = upscaler.getAdaptiveSharpening()->getConfig();
+        //         config.strength = 0.6f;         // Reduced overall sharpening
+        //         config.edge_strength = 1.0f;    // Standard edge sharpening
+        //         upscaler.getAdaptiveSharpening()->setConfig(config);
+        //     }
+            
+        //     if (upscaler.getTemporalConsistency()) {
+        //         auto config = upscaler.getTemporalConsistency()->getConfig();
+        //         config.blend_strength = 0.8f;   // Stronger temporal blending
+        //         config.scene_change_threshold = 80.0f; // Lower threshold for scene changes
+        //         upscaler.getTemporalConsistency()->setConfig(config);
+        //     }
+            
+        //     std::cout << "Animation mode enabled with optimized parameters" << std::endl;
+        // }
+        // else if (arg == "--live-action-mode") {
+        //     // Optimize parameters for live-action content
+        //     if (upscaler.getBilateralPreProcessor()) {
+        //         auto config = upscaler.getBilateralPreProcessor()->getConfig();
+        //         config.detail_threshold = 35.0; // Higher threshold to reduce noise
+        //         config.sigma_color = 35.0;      // Stronger color smoothing
+        //         upscaler.getBilateralPreProcessor()->setConfig(config);
+        //     }
+            
+        //     if (upscaler.getAdaptiveSharpening()) {
+        //         auto config = upscaler.getAdaptiveSharpening()->getConfig();
+        //         config.strength = 0.9f;         // Stronger overall sharpening
+        //         config.edge_strength = 1.3f;    // Stronger edge sharpening
+        //         upscaler.getAdaptiveSharpening()->setConfig(config);
+        //     }
+            
+        //     if (upscaler.getTemporalConsistency()) {
+        //         auto config = upscaler.getTemporalConsistency()->getConfig();
+        //         config.blend_strength = 0.5f;   // Moderate temporal blending
+        //         config.motion_threshold = 20.0f; // Higher motion threshold
+        //         upscaler.getTemporalConsistency()->setConfig(config);
+        //     }
         } else if (arg == "--format" || arg == "-fmt") {
             if (i + 1 < argc) {
                 g_output_format = argv[++i];

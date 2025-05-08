@@ -372,4 +372,7 @@ CMakeFiles/video_processor.dir/src/upscaler.cpp.o: \
  /usr/local/include/opencv4/opencv2/cudawarping.hpp \
  /usr/local/include/opencv4/opencv2/cudaarithm.hpp \
  /usr/local/include/opencv4/opencv2/cudaimgproc.hpp \
- /usr/local/include/opencv4/opencv2/cudafilters.hpp
+ /usr/local/include/opencv4/opencv2/cudafilters.hpp \
+ /home/skand/video-processor/include/temporal_consistency.h \
+ /home/skand/video-processor/include/adaptive_sharpening.h \
+ /home/skand/video-processor/include/selective_bilateral.h

@@ -3,5 +3,6 @@
 /home/skand/video-processor/build/CMakeFiles/simple_camera_test.dir
 /home/skand/video-processor/build/CMakeFiles/test_phase2.dir
 /home/skand/video-processor/build/CMakeFiles/test_phase4.dir
+/home/skand/video-processor/build/CMakeFiles/test_enhancements.dir
 /home/skand/video-processor/build/CMakeFiles/edit_cache.dir
 /home/skand/video-processor/build/CMakeFiles/rebuild_cache.dir
