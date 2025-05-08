@@ -220,133 +220,144 @@ void capture_thread(Camera& camera, FrameBuffer& buffer, Timer& timer,
 }
 
 void processing_thread(FrameBuffer& input_buffer, FrameBuffer& output_buffer, 
-    Upscaler& upscaler, Timer& timer) {
-std::cout << "Processing thread started" << std::endl;
-cv::Mat input_frame, processed_frame;
+                          Upscaler& upscaler, Timer& timer) {
+    std::cout << "Processing thread started" << std::endl;
+    cv::Mat input_frame, processed_frame;
 
-// For tracking performance
-double avg_processing_time = 0.0;
+    // For tracking performance
+    double avg_processing_time = 0.0;
 
-// Get the algorithm from the upscaler and respect the user's choice
-g_using_super_res = (upscaler.getAlgorithmName() == "YouTube-Quality");
-std::cout << "Processing with " << (g_using_super_res ? "Super-Resolution" : "Bicubic") 
-<< " algorithm" << std::endl;
+    // FIXED: Properly check if using super-resolution based on algorithm
+    bool g_using_super_res = (upscaler.getAlgorithmName() == "RealESRGAN" || 
+                             upscaler.getAlgorithmName() == "Standard Super-Res");
+    
+    std::cout << "Processing with " << (g_using_super_res ? "Super-Resolution" : "Bicubic") 
+             << " algorithm" << std::endl;
 
-while (g_running) {
-// Get frame from input buffer - use blocking mode to avoid busy waiting
-timer.start("buffer_pop");
-bool success = input_buffer.popFrame(input_frame, true);
-timer.stop("buffer_pop");
+    while (g_running) {
+        // Get frame from input buffer - use blocking mode to avoid busy waiting
+        timer.start("buffer_pop");
+        bool success = input_buffer.popFrame(input_frame, true);
+        timer.stop("buffer_pop");
 
-if (!success || input_frame.empty()) {
-// This should rarely happen with blocking mode, but just in case
-std::this_thread::sleep_for(std::chrono::milliseconds(1));
-continue;
+        if (!success || input_frame.empty()) {
+            // This should rarely happen with blocking mode, but just in case
+            std::this_thread::sleep_for(std::chrono::milliseconds(1));
+            continue;
+        }
+
+        // Reduce input resolution if it's too high, especially for super-res
+        if (g_using_super_res && (input_frame.cols > 480 || input_frame.rows > 270)) {
+            cv::Mat resized_input;
+            double scale = std::min(480.0 / input_frame.cols, 270.0 / input_frame.rows);
+            cv::resize(input_frame, resized_input, cv::Size(), scale, scale, cv::INTER_AREA);
+            input_frame = resized_input;
+        }
+
+        // Process the frame with the upscaler
+        timer.start("upscale");
+        bool upscale_success = upscaler.upscale(input_frame, processed_frame);
+        timer.stop("upscale");
+
+        if (!upscale_success || processed_frame.empty()) {
+            std::cerr << "Upscaling failed, using original input" << std::endl;
+            // If upscaling fails, resize the input to target size as fallback
+            cv::resize(input_frame, processed_frame, cv::Size(upscaler.getTargetWidth(), upscaler.getTargetHeight()), 
+                      0, 0, cv::INTER_CUBIC);
+        }
+
+        // Apply temporal blending for smoother transitions
+        {
+            std::lock_guard<std::mutex> lock(g_history_mutex);
+
+            // Add current frame to history
+            if (g_frame_history.size() >= HISTORY_SIZE) {
+                g_frame_history.pop_front();
+            }
+            g_frame_history.push_back(processed_frame.clone());
+
+            // Create a smooth transition by blending frames
+            if (g_frame_history.size() >= 2) {
+                // Get weights for blending based on whether we're using SR
+                float current_weight = g_using_super_res ? 0.7f : 0.6f;
+                float prev_weight = 1.0f - current_weight;
+
+                // Blend current frame with previous frame
+                cv::addWeighted(
+                  g_frame_history.back(), current_weight, 
+                  g_frame_history[g_frame_history.size() - 2], prev_weight, 
+                  0, processed_frame
+                );
+            }
+        }
+
+        // Track processing time with exponential moving average
+        double current_processing_time = timer.getDuration("upscale");
+        avg_processing_time = (avg_processing_time * 0.9) + (current_processing_time * 0.1);
+
+        // Add performance metrics text
+        timer.start("text_overlay");
+        std::string fps_text = "FPS: " + std::to_string(static_cast<int>(1000.0 / 
+                  (avg_processing_time + 
+                   timer.getAverageDuration("buffer_pop") + 
+                   timer.getAverageDuration("output_push"))));
+
+        std::string buffer_text = "Buffer: " + std::to_string(input_buffer.size()) + 
+                      "/" + std::to_string(input_buffer.capacity());
+
+        std::string proc_text = "Process: " + std::to_string(static_cast<int>(avg_processing_time)) + " ms";
+
+        std::string mode_text = "Mode: " + (g_using_super_res ? upscaler.getAlgorithmName() : "Bicubic") + 
+                     " + Temporal Smoothing";
+
+        // Add text overlay - green for bicubic, orange for super-res
+        cv::Scalar text_color = g_using_super_res ? cv::Scalar(0, 165, 255) : cv::Scalar(0, 255, 0);
+
+        cv::putText(processed_frame, fps_text, cv::Point(20, 30), 
+          cv::FONT_HERSHEY_SIMPLEX, 0.7, text_color, 2);
+        cv::putText(processed_frame, buffer_text, cv::Point(20, 60), 
+          cv::FONT_HERSHEY_SIMPLEX, 0.7, text_color, 2);
+        cv::putText(processed_frame, proc_text, cv::Point(20, 90), 
+          cv::FONT_HERSHEY_SIMPLEX, 0.7, text_color, 2);
+        cv::putText(processed_frame, mode_text, cv::Point(20, 120), 
+          cv::FONT_HERSHEY_SIMPLEX, 0.7, text_color, 2);
+
+        timer.stop("text_overlay");
+
+        // Push to output buffer - use non-blocking and handle potential failure
+        timer.start("output_push");
+        // Check output buffer fullness before pushing
+        if (output_buffer.size() >= output_buffer.capacity() * 0.9) {
+            // Wait briefly to allow display thread to consume frames
+            std::this_thread::sleep_for(std::chrono::milliseconds(5));
+        }
+
+        bool pushed = output_buffer.pushFrame(processed_frame, false);
+        timer.stop("output_push");
+
+        if (pushed) {
+            g_frames_processed++;
+        } else {
+            // If push failed, wait for display thread to catch up
+            std::this_thread::sleep_for(std::chrono::milliseconds(10));
+        }
+
+        // Print detailed stats periodically
+        if (g_frames_processed % 100 == 0) {
+            std::cout << "\nProcessed " << g_frames_processed << " frames" << std::endl;
+            std::cout << "Current processing time: " << avg_processing_time << " ms" << std::endl;
+            std::cout << "Buffer utilization: " << input_buffer.size() << "/" << input_buffer.capacity() << std::endl;
+            timer.printStats();
+        }
+    }
+
+    std::cout << "Processing thread finished" << std::endl;
 }
 
-// Reduce input resolution if it's too high, especially for super-res
-if (g_using_super_res && (input_frame.cols > 480 || input_frame.rows > 270)) {
-cv::Mat resized_input;
-double scale = std::min(480.0 / input_frame.cols, 270.0 / input_frame.rows);
-cv::resize(input_frame, resized_input, cv::Size(), scale, scale, cv::INTER_AREA);
-input_frame = resized_input;
-}
+// Add this display thread function to your main.cpp file just before the main() function
 
-// Process the frame with the selected algorithm
-timer.start("upscale");
-upscaler.upscale(input_frame, processed_frame);
-timer.stop("upscale");
-
-// Apply temporal blending for smoother transitions
-{
-std::lock_guard<std::mutex> lock(g_history_mutex);
-
-// Add current frame to history
-if (g_frame_history.size() >= HISTORY_SIZE) {
-g_frame_history.pop_front();
-}
-g_frame_history.push_back(processed_frame.clone());
-
-// Create a smooth transition by blending frames
-if (g_frame_history.size() >= 2) {
-// Get weights for blending based on whether we're using SR
-float current_weight = g_using_super_res ? 0.7f : 0.6f;
-float prev_weight = 1.0f - current_weight;
-
-// Blend current frame with previous frame
-cv::addWeighted(
-  g_frame_history.back(), current_weight, 
-  g_frame_history[g_frame_history.size() - 2], prev_weight, 
-  0, processed_frame
-);
-}
-}
-
-// Track processing time with exponential moving average
-double current_processing_time = timer.getDuration("upscale");
-avg_processing_time = (avg_processing_time * 0.9) + (current_processing_time * 0.1);
-
-// Add performance metrics text
-timer.start("text_overlay");
-std::string fps_text = "FPS: " + std::to_string(static_cast<int>(1000.0 / 
-          (avg_processing_time + 
-           timer.getAverageDuration("buffer_pop") + 
-           timer.getAverageDuration("output_push"))));
-
-std::string buffer_text = "Buffer: " + std::to_string(input_buffer.size()) + 
-              "/" + std::to_string(input_buffer.capacity());
-
-std::string proc_text = "Process: " + std::to_string(static_cast<int>(avg_processing_time)) + " ms";
-
-std::string mode_text = "Mode: " + std::string(g_using_super_res ? "Super-Res" : "Bicubic") + 
-             " + Temporal Smoothing";
-
-// Add text overlay - green for bicubic, orange for super-res
-cv::Scalar text_color = g_using_super_res ? cv::Scalar(0, 165, 255) : cv::Scalar(0, 255, 0);
-
-cv::putText(processed_frame, fps_text, cv::Point(20, 30), 
-  cv::FONT_HERSHEY_SIMPLEX, 0.7, text_color, 2);
-cv::putText(processed_frame, buffer_text, cv::Point(20, 60), 
-  cv::FONT_HERSHEY_SIMPLEX, 0.7, text_color, 2);
-cv::putText(processed_frame, proc_text, cv::Point(20, 90), 
-  cv::FONT_HERSHEY_SIMPLEX, 0.7, text_color, 2);
-cv::putText(processed_frame, mode_text, cv::Point(20, 120), 
-  cv::FONT_HERSHEY_SIMPLEX, 0.7, text_color, 2);
-
-timer.stop("text_overlay");
-
-// Push to output buffer - use non-blocking and handle potential failure
-timer.start("output_push");
-// Check output buffer fullness before pushing
-if (output_buffer.size() >= output_buffer.capacity() * 0.9) {
-// Wait briefly to allow display thread to consume frames
-std::this_thread::sleep_for(std::chrono::milliseconds(5));
-}
-
-bool pushed = output_buffer.pushFrame(processed_frame, false);
-timer.stop("output_push");
-
-if (pushed) {
-g_frames_processed++;
-} else {
-// If push failed, wait for display thread to catch up
-std::this_thread::sleep_for(std::chrono::milliseconds(10));
-}
-
-// Print detailed stats periodically
-if (g_frames_processed % 100 == 0) {
-std::cout << "\nProcessed " << g_frames_processed << " frames" << std::endl;
-std::cout << "Current processing time: " << avg_processing_time << " ms" << std::endl;
-std::cout << "Buffer utilization: " << input_buffer.size() << "/" << input_buffer.capacity() << std::endl;
-timer.printStats();
-}
-}
-
-std::cout << "Processing thread finished" << std::endl;
-}
-
-void display_thread(FrameBuffer& buffer, Timer& timer,
-                    double fps, int width, int height) {
+void displayLoop(FrameBuffer& buffer, Timer& timer,
+                 double fps, int width, int height) {
     std::cout << "Display thread started" << std::endl;
     cv::Mat frame;
     
@@ -528,6 +539,7 @@ void display_thread(FrameBuffer& buffer, Timer& timer,
     cv::destroyAllWindows();
     std::cout << "Display thread finished" << std::endl;
 }
+
 // Super-resolution background thread function
 void sr_thread_function(std::shared_ptr<DnnSuperRes> dnn_sr, int target_width, int target_height) {
     std::cout << "Super-resolution background thread started" << std::endl;
@@ -805,7 +817,7 @@ int main(int argc, char* argv[]) {
     double playback_rate = 1.0;
     if (use_video_file && use_super_res) {
         // Slow down playback for super-res to avoid frame drops
-        playback_rate = 0.5;
+        playback_rate = 0.25;
         std::cout << "Video playback rate set to " << playback_rate 
                   << "x due to super-resolution processing" << std::endl;
     }
@@ -821,8 +833,8 @@ int main(int argc, char* argv[]) {
                          std::ref(timer), use_video_file, target_fps, use_super_res);
     std::thread processor(processing_thread, std::ref(raw_buffer), std::ref(processed_buffer), 
                          std::ref(upscaler), std::ref(timer));
-    std::thread display(display_thread, std::ref(processed_buffer), std::ref(timer), 
-                        source_fps, source_width, source_height);
+    std::thread display(displayLoop, std::ref(processed_buffer), std::ref(timer), 
+                    source_fps, source_width, source_height);
     
     std::cout << "Pipeline running. Press 'q' in the video window to quit." << std::endl;
     std::cout << "Press 'r' to toggle recording, 's' to take a snapshot." << std::endl;

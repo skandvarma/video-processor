@@ -2,7 +2,6 @@
 
 #include <opencv2/opencv.hpp>
 #include "dnn_super_res.h"
-
 #include <memory>
 #include <string>
 
@@ -104,6 +103,18 @@ public:
      * @return true if quality was adjusted
      */
     bool adjustQualityForPerformance(double processing_time, double target_time);
+    
+    /**
+     * @brief Get the target width for upscaling
+     * @return Target width in pixels
+     */
+    int getTargetWidth() const { return m_target_width; }
+
+    /**
+     * @brief Get the target height for upscaling
+     * @return Target height in pixels
+     */
+    int getTargetHeight() const { return m_target_height; }
 
     // Enhancement control methods
     void setUseSelectiveBilateral(bool enable) { m_use_selective_bilateral = enable; }
